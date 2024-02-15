@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/self-closing-comp": "warn",
+    "react/prop-types": "off"
+  }
+}
