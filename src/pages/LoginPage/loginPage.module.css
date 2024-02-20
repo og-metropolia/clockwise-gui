@@ -1,0 +1,90 @@
+@import '../../colors.css';
+
+/* loginPage.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+.logo {
+  width: 120px; /* Voit säätää tämän kuvan todellisen koon mukaan */
+  margin-bottom: 32px;
+}
+
+.header {
+  color: #000;
+  font-size: 24px;
+  margin-bottom: 32px;
+}
+
+.wave {
+  color: var(--clockwise-blue);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 400px;
+}
+
+.field {
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.field:last-child {
+  margin-bottom: 32px;
+}
+
+.button {
+  background-color: var(--clockwise-blue);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.linkContainer {
+  text-align: center;
+}
+
+.link {
+  color: var(--clockwise-blue);
+  text-decoration: none;
+  margin-bottom: 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.footer {
+  font-size: 14px;
+  text-align: center;
+}
+
+.highlight {
+  color: var(--clockwise-blue);
+}
+
+/* Lisää tarvittaessa responsiivisia tyylejä */
+@media (max-width: 600px) {
+  .header {
+    font-size: 20px;
+  }
+
+  .logo {
+    width: 150px; /* Pienennä kuvaa mobiilinäkymässä */
+  }
+}
+
