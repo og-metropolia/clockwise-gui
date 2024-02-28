@@ -1,0 +1,51 @@
+/* Tämä CSS-määrittely olettaa, että käytät base.css-tiedostossa määriteltyjä tyylejä */
+@import './base.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background-color: #F0F2F5; /* Säädä väriä tarpeen mukaan */
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar {
+  /* Kalenterikomponentin tyylit tulee lisätä tähän */
+}
+
+.form {
+  width: 100%;
+  max-width: 400px; /* Säädä leveyttä tarpeen mukaan */
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.select,
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px; /* Varmista, että tämä on synkronissa base.css kanssa */
+  border-radius: 5px;
+  border: 1px solid #ccc; /* Säädä väriä tarpeen mukaan */
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--clockwise-blue); /* Varmista, että tämä väri on määritelty colors.css:ssä */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}

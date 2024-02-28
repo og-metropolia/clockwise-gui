@@ -1,8 +1,9 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import styles from './loginPage.module.css'; // Oleta, että tämä on oikea polku CSS-moduuliisi
-import logo from '../../assets/clockwise.png'; // Oleta, että tämä on oikea polku logollesi
+import styles from './loginPage.module.css';
+import ROUTES from '@/constants/routes';
+import Logo from '@/components/Logo';
 
 // Kirjautumislomakkeen validointisäännöt Yup-kirjastolla
 const LoginSchema = Yup.object().shape({
@@ -10,24 +11,19 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Required'),
 });
 
-// Kirjautumislomakkeen tyypit TypeScriptille
 interface LoginFormValues {
   email: string;
   password: string;
 }
 
-// Komponentti, joka renderöi kirjautumissivun
 const LoginPage: React.FC = () => {
   const initialValues: LoginFormValues = { email: '', password: '' };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.logoWrapper}>
-        <img src={logo} alt="ClockWise Logo" className={styles.logo} />
-      </div>
-      <h1 className={styles.header}>
-        Welcome Back <span className={styles.wave}>👋</span> to{' '}
-        <span className={styles.highlight}>ClockWise</span>
+    <div className={styles.basePage}>
+      <Logo />
+      <h1 className={styles.baseHeader}>
+        Welcome Back 👋 to <span className={styles.highlight}>ClockWise</span>
       </h1>
       <Formik
         initialValues={initialValues}
@@ -38,37 +34,37 @@ const LoginPage: React.FC = () => {
         }}
       >
         {({ errors, touched }) => (
-          <Form className={styles.form}>
+          <Form className={styles.baseForm}>
             <Field
               name="email"
               type="email"
               placeholder="Email Address"
-              className={styles.field}
+              className={styles.baseField}
             />
-            {errors.email && touched.email ? (
-              <div className={styles.error}>{errors.email}</div>
-            ) : null}
             <Field
               name="password"
               type="password"
               placeholder="Password"
-              className={styles.field}
+              className={styles.baseField}
             />
-            {errors.password && touched.password ? (
-              <div className={styles.error}>{errors.password}</div>
-            ) : null}
             <button type="submit" className={styles.button}>
               Login
             </button>
+            {errors && touched ? (
+              // TODO
+              <div className={styles.error}>
+                {JSON.stringify(errors) + JSON.stringify(touched)}
+              </div>
+            ) : null}
             <div className={styles.linkContainer}>
-              <a href="#" className={styles.link}>
+              <a href={ROUTES.resetPassword} className={styles.link}>
                 Forgot Password?
               </a>
             </div>
             <div className={styles.footer}>
               <p>
                 Don't have an account?{' '}
-                <a href="#" className={styles.link}>
+                <a href={ROUTES.signup} className={styles.link}>
                   Register
                 </a>
               </p>
