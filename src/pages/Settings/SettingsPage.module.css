@@ -1,0 +1,47 @@
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFFFFF;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profilePicture {
+  border-radius: 50%;
+  width: 80px; /* Säädä kuvan kokoa */
+  height: 80px; /* Säädä kuvan kokoa */
+  margin-bottom: 1rem;
+  object-fit: cover;
+  background-color: #DDD; /* Väliaikainen taustaväri, kunnes kuva ladataan */
+}
+
+.profileName, .designation {
+  margin: 0;
+}
+
+.settingsOptions {
+  width: 100%;
+}
+
+.additionalLinks {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.link {
+  display: block;
+  color: var(--clockwise-blue);
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  padding: 1rem;
+  background-color: #FFFFFF;
+}

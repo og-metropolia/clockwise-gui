@@ -1,8 +1,9 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import styles from './SignInPage.module.css'; // Oleta, että tämä on oikea polku CSS-moduuliisi
-import logo from '../../assets/clockwise.png';
+import styles from './SignupPage.module.css';
+import ROUTES from '@/constants/routes';
+import Logo from '@/components/Logo';
 
 // Rekisteröintilomakkeen validointisäännöt Yup-kirjastolla
 const RegisterSchema = Yup.object().shape({
@@ -17,7 +18,6 @@ const RegisterSchema = Yup.object().shape({
   ),
 });
 
-// Rekisteröintilomakkeen tyypit TypeScriptille
 interface RegisterFormValues {
   email: string;
   password: string;
@@ -25,8 +25,7 @@ interface RegisterFormValues {
   termsAndConditions: boolean;
 }
 
-// Komponentti, joka renderöi rekisteröintisivun
-const SignInPage: React.FC = () => {
+const SignupPage: React.FC = () => {
   const initialValues: RegisterFormValues = {
     email: '',
     password: '',
@@ -35,9 +34,9 @@ const SignInPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <img src={logo} alt="ClockWise Logo" className={styles.logo} />
-      <h1 className={styles.header}>Welcome to ClockWise</h1>
+    <div className={styles.basePage}>
+      <Logo />
+      <h1 className={styles.baseHeader}>Welcome to ClockWise</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={RegisterSchema}
@@ -48,12 +47,12 @@ const SignInPage: React.FC = () => {
         }}
       >
         {({ errors, touched }) => (
-          <Form className={styles.form}>
+          <Form className={styles.baseForm}>
             <Field
               name="email"
               type="email"
-              placeholder="Email Address"
-              className={styles.field}
+              placeholder="Email"
+              className={styles.baseField}
             />
             {errors.email && touched.email ? (
               <div className={styles.error}>{errors.email}</div>
@@ -63,7 +62,7 @@ const SignInPage: React.FC = () => {
               name="password"
               type="password"
               placeholder="Password"
-              className={styles.field}
+              className={styles.baseField}
             />
             {errors.password && touched.password ? (
               <div className={styles.error}>{errors.password}</div>
@@ -73,20 +72,26 @@ const SignInPage: React.FC = () => {
               name="confirmPassword"
               type="password"
               placeholder="Confirm Password"
-              className={styles.field}
+              className={styles.baseField}
             />
             {errors.confirmPassword && touched.confirmPassword ? (
               <div className={styles.error}>{errors.confirmPassword}</div>
             ) : null}
 
             <label className={styles.checkboxContainer}>
-              <Field type="checkbox" name="termsAndConditions" />I agree to the
-              Terms & Conditions & Privacy Policy set out by this site.
+              <Field
+                type="checkbox"
+                name="termsAndConditions"
+                className={styles.checkbox}
+              />
+              <span>
+                I agree to the Terms & Conditions & Privacy Policy set out by
+                this site.
+              </span>
             </label>
             {errors.termsAndConditions && touched.termsAndConditions ? (
               <div className={styles.error}>{errors.termsAndConditions}</div>
             ) : null}
-
             <button type="submit" className={styles.button}>
               Register
             </button>
@@ -95,7 +100,7 @@ const SignInPage: React.FC = () => {
       </Formik>
       <div className={styles.footer}>
         Already have an account?{' '}
-        <a href="#" className={styles.link}>
+        <a href={ROUTES.login} className={styles.link}>
           Login
         </a>
       </div>
@@ -103,4 +108,4 @@ const SignInPage: React.FC = () => {
   );
 };
 
-export default SignInPage;
+export default SignupPage;
