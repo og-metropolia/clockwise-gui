@@ -1,4 +1,3 @@
-import './base.css'; // Tuo yleiset tyylit
 import styles from './SettingsPage.module.css'; // Tuo sivukohtaiset tyylit
 
 const SettingsPage = () => {
@@ -18,31 +17,31 @@ const SettingsPage = () => {
       {/* Asetusvaihtoehdot */}
       <div className={styles.settingsOptions}>
         <button
-          onClick={/* Käsittelijä kirjautumiselle */}
+          // onClick={/* Käsittelijä kirjautumiselle */}
           className="baseField"
         >
           Sign out
         </button>
         <button
-          onClick={/* Käsittelijä salasanan vaihdolle */}
+          // onClick={/* Käsittelijä salasanan vaihdolle */}
           className="baseField"
         >
           Change password
         </button>
         <button
-          onClick={/* Käsittelijä profiilikuvan vaihdolle */}
+          // onClick={/* Käsittelijä profiilikuvan vaihdolle */}
           className="baseField"
         >
           Change profile picture
         </button>
         <button
-          onClick={/* Käsittelijä puhelinnumeron vaihdolle */}
+          // onClick={/* Käsittelijä puhelinnumeron vaihdolle */}
           className="baseField"
         >
           Change phone number
         </button>
         <button
-          onClick={/* Käsittelijä kielen vaihdolle */}
+          // onClick={/* Käsittelijä kielen vaihdolle */}
           className="baseField"
         >
           Change Language
