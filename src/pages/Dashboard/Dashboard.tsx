@@ -1,8 +1,14 @@
 import React from 'react';
 import styles from './Dashboard.module.css';
 import ProfileCard from '@/components/ProfileCard';
+import { useUser } from '@/components/UserContext';
 
 const Dashboard: React.FC = () => {
+  const { getUser } = useUser();
+  const user = getUser();
+
+  
+
   // Tähän voi lisätä logiikkaa, kuten tilan hallintaa tai tapahtumankäsittelijöitä
 
   return (
@@ -17,6 +23,8 @@ const Dashboard: React.FC = () => {
         </div>
         {/* Lisää aktiviteettejä... */}
       </section>
+
+      {JSON.stringify(user, null, 2)}
 
       {/* Footer, jossa navigointi (oletetaan, että tämä on yhteinen kaikille sivuille) */}
       <footer className={styles.footer}>

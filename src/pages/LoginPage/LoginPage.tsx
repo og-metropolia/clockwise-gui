@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import styles from './loginPage.module.css';
 import ROUTES from '@/constants/routes';
 import Logo from '@/components/Logo';
+import { fetchGraphql } from '@/graphql/fetch';
+import { loginQuery } from '@/graphql/queries';
+import { UserContext, useUser } from '@/components/UserContext';
+import { useNavigate } from 'react-router-dom';
+
+function setCookie(name: string, value: string, expireDays: number) {
+  let expires = '';
+  if (expireDays) {
+    const date = new Date();
+    date.setTime(date.getTime() + expireDays * 24 * 60 * 60 * 1000);
+    expires = '; expires=' + date.toUTCString();
+  }
+  document.cookie = name + '=' + (value || '') + expires + '; path=/';
+}
 
 // Kirjautumislomakkeen validointisäännöt Yup-kirjastolla
 const LoginSchema = Yup.object().shape({
@@ -14,10 +28,14 @@ const LoginSchema = Yup.object().shape({
 interface LoginFormValues {
   email: string;
   password: string;
+  auth: string;
 }
 
 const LoginPage: React.FC = () => {
-  const initialValues: LoginFormValues = { email: '', password: '' };
+  const { login } = useUser();
+  const navigate = useNavigate();
+
+  const initialValues: LoginFormValues = { email: '', password: '', auth: '' };
 
   return (
     <div className={styles.basePage}>
@@ -28,9 +46,16 @@ const LoginPage: React.FC = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        onSubmit={(values, actions) => {
-          console.log(values);
+        onSubmit={async (values, actions) => {
+          const data = await fetchGraphql(loginQuery, values);
           actions.setSubmitting(false);
+          if (!data?.login) {
+            actions.setErrors({ auth: 'Invalid email or password' });
+            return;
+          }
+          login(data.login.user);
+          setCookie('token', data.login.token, 7);
+          navigate(ROUTES.dashboard);
         }}
       >
         {({ errors, touched }) => (
@@ -51,10 +76,7 @@ const LoginPage: React.FC = () => {
               Login
             </button>
             {errors && touched ? (
-              // TODO
-              <div className={styles.error}>
-                {JSON.stringify(errors) + JSON.stringify(touched)}
-              </div>
+              <div className={styles.error}>{errors.auth}</div>
             ) : null}
             <div className={styles.linkContainer}>
               <a href={ROUTES.resetPassword} className={styles.link}>
