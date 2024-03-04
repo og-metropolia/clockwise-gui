@@ -1,6 +1,13 @@
+import { useUser } from '@/components/UserContext';
 import styles from './SettingsPage.module.css'; // Tuo sivukohtaiset tyylit
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '@/constants/routes';
+import Footer from '../../components/Footer';
 
 const SettingsPage = () => {
+  const { logout } = useUser();
+  const navigate = useNavigate();
+
   return (
     <div className={styles.basePage}>
       {/* Profiilin otsikko ja kuva */}
@@ -17,7 +24,10 @@ const SettingsPage = () => {
       {/* Asetusvaihtoehdot */}
       <div className={styles.settingsOptions}>
         <button
-          // onClick={/* Käsittelijä kirjautumiselle */}
+          onClick={async () => {
+            logout();
+            navigate(ROUTES.dashboard);
+          }}
           className="baseField"
         >
           Sign out
@@ -50,8 +60,8 @@ const SettingsPage = () => {
 
       {/* Linkkejä lisätietoihin */}
       <div className={styles.additionalLinks}>
-        <a href="/report-problem" className={styles.link}>
-          Report Problem
+        <a href="mailto:support@clockwise.com" className={styles.link}>
+          Report Problem via Email
         </a>
         <a href="/terms" className={styles.link}>
           Terms of Use
@@ -63,6 +73,7 @@ const SettingsPage = () => {
 
       {/* Footer, oletetaan että tämä on yhteinen komponentti koko sovellukselle */}
       <footer className={styles.footer}>© ClockWise Corp 2024</footer>
+      <Footer />
     </div>
   );
 };

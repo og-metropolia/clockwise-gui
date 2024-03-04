@@ -1,16 +1,17 @@
-import LoginPage from '@/pages/LoginPage/LoginPage';
-import SignupPage from '@/pages/SignupPage/SignupPage';
-import Dashboard from '@/pages/Dashboard/Dashboard';
-
 import {
   createBrowserRouter,
   RouterProvider,
   redirect,
 } from 'react-router-dom';
 import ROUTES from './constants/routes';
+import { UserProvider } from './components/UserContext';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import SettingsPage from './pages/Settings/SettingsPage';
-import { UserProvider } from './components/UserContext';
+import ReportPage from './pages/ReportPage/ReportPage';
+import VacationPage from './pages/Vacation/VacationPage';
+import LoginPage from '@/pages/LoginPage/LoginPage';
+import SignupPage from '@/pages/SignupPage/SignupPage';
+import Dashboard from '@/pages/Dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
     path: ROUTES.settings,
     element: <SettingsPage />,
   },
+  {
+    path: ROUTES.report,
+    element: <ReportPage />,
+  },
+  {
+    path: ROUTES.vacation,
+    element: <VacationPage />,
+  },
 ]);
 
 function App() {
@@ -60,39 +69,3 @@ function isAuth() {
     .split(';')
     .some((item) => item.trim().startsWith('token='));
 }
-
-// // Luo funktio, joka lähettää pyynnön palvelimelle tokenin tarkistamiseksi.
-
-// async function verifyToken() {
-//   try {
-//     const response = await fetch('/api/verifyToken', {
-//       method: 'GET',
-//       credentials: 'include' // Varmistaa, että evästeet lähetetään pyynnön mukana
-//     });
-//     if (response.ok) {
-//       const data = await response.json();
-//       return data.isValid; // Palvelimen tulisi palauttaa, onko tokeni voimassa vai ei
-//     }
-//     return false;
-//   } catch (error) {
-//     console.error('Verification failed', error);
-//     return false;
-//   }
-// }
-
-// // Käytä luotua funktiota reitittimesi loader-funktiossa.
-
-// const router = createBrowserRouter([
-//   // ...
-//   {
-//     path: ROUTES.dashboard,
-//     element: <Dashboard />,
-//     loader: async () => {
-//       const isAuthTokenValid = await verifyToken();
-//       if (!isAuthTokenValid) {
-//         return redirect(ROUTES.login);
-//       }
-//     },
-//   },
-//   // ...
-// ]);

@@ -1,9 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import './base.css'; // Tuo yleiset tyylit
-import styles from './reportPage.module.css'; // Tuo sivukohtaiset tyylit
+import { useState, useEffect } from 'react';
+import '../../base.css';
+import styles from './ReportPage.module.css'; // Tuo sivukohtaiset tyylit
+import Footer from '@/components/Footer';
 
 // Oletetaan, että sinulla on API-funktio, joka hakee työntekijän tunnit
-import { getEmployeeHours } from '../api/employeeApi';
+// import { getEmployeeHours } from '../api/employeeApi';
+
+// TODO: Temporary mock data
+const getEmployeeHours = async () => {
+  return [
+    { date: '2021-09-01', hours: 8 },
+    { date: '2021-09-02', hours: 8 },
+    { date: '2021-09-03', hours: 8 },
+    { date: '2021-09-04', hours: 8 },
+    { date: '2021-09-05', hours: 8 },
+  ];
+};
 
 const ReportPage = () => {
   const [hours, setHours] = useState([]);
@@ -42,10 +54,7 @@ const ReportPage = () => {
         </div>
       </div>
 
-      {/* Footerin navigointi */}
-      <footer className={styles.footer}>
-        {/* Footer-navigointielementit */}
-      </footer>
+      <Footer />
     </div>
   );
 };

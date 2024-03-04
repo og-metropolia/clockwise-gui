@@ -4,8 +4,8 @@ const ROUTES = {
   dashboard: '/dashboard',
   resetPassword: '/reset-password',
   settings: '/settings',
-  reportPage: '/report',
-  timeTrackingPage: '/time-tracking',
+  report: '/report',
+  vacation: '/vacation',
 };
 
 export default ROUTES;

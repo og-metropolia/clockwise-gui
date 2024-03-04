@@ -11,4 +11,27 @@ const loginQuery = `
   }
 `;
 
-export { loginQuery };
+const getUserQuery = `
+query User($userId: ID!) {
+  user(id: $userId) {
+    id
+    email
+    password
+    role
+    first_name
+    last_name
+    language
+    job_title
+    phone
+    profile_picture
+    manager {
+      id
+    }
+    company {
+      id
+    }
+  }
+}
+`;
+
+export { loginQuery, getUserQuery };
