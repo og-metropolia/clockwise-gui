@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import styles from './TimeTrackingPage.module.css'; // Oletetaan, että tämä tiedosto on luotu
+import { useState } from 'react';
+import styles from './Vacation.module.css';
+import Footer from '@/components/Footer';
 
-const TimeTrackingPage = () => {
+const VacationPage = () => {
   const [workMatter, setWorkMatter] = useState('sick');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Tässä kohdassa voit käsitellä lomakkeen tietoja, esimerkiksi lähettää ne palvelimelle
     console.log({ workMatter, startDate, endDate, startTime, endTime });
@@ -81,8 +82,10 @@ const TimeTrackingPage = () => {
           Save
         </button>
       </form>
+
+      <Footer />
     </div>
   );
 };
 
-export default TimeTrackingPage;
+export default VacationPage;

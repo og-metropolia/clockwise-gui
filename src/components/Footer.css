@@ -1,0 +1,36 @@
+.footer-container {
+  background-color: #f2f2f2;
+  color: #333;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  border-top: 1px solid #d6d6d6;
+  z-index: 1000;
+}
+
+.icon svg {
+  width: 24px; /* Kuvakkeen leveys */
+  height: 24px; /* Kuvakkeen korkeus */
+  cursor: pointer;
+  transition:
+    box-shadow 0.3s ease-in-out,
+    filter 0.3s ease-in-out; /* Lisää pehmeä siirtymä hohdolle ja suodattimelle */
+}
+
+.active-icon svg {
+  filter: drop-shadow(0 0 5px var(--clockwise-blue))
+    drop-shadow(0 0 10px var(--clockwise-blue))
+    drop-shadow(0 0 15px var(--clockwise-blue));
+  fill: var(--clockwise-blue);
+}
+
+.inactive-icon svg {
+  fill: 0;
+  width: 24px; /* Kuvakkeen leveys */
+  height: 24px; /* Kuvakkeen korkeus */
+}
