@@ -22,7 +22,7 @@ function resetCookie(name: string) {
 }
 
 export const UserContext = createContext({
-  getUser: () => {},
+  getUser: () => null,
   login: async (context: ContextUser) => {
     if (!context) return;
     setCookie('token', context.token, 7);

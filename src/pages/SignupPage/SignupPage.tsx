@@ -4,9 +4,11 @@ import * as Yup from 'yup';
 import styles from './SignupPage.module.css';
 import ROUTES from '@/constants/routes';
 import Logo from '@/components/Logo';
-import { createUserMutation, getCompanyEmails } from '@/graphql/queries';
+import { getCompanyEmails, signup } from '@/graphql/queries';
 import { fetchGraphql } from '@/graphql/fetch';
 import { USER_DEFAULTS } from '@/constants/userDefaults';
+import { useUser } from '@/components/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 // Rekisteröintilomakkeen validointisäännöt Yup-kirjastolla
 const RegisterSchema = Yup.object().shape({
@@ -31,11 +33,9 @@ interface RegisterFormValues {
 }
 
 const SignupPage: React.FC = () => {
+  const { login } = useUser();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(window.location.search);
-  // const companyEmails = fetchGraphql(
-  //   getCompanyEmails,
-  //   searchParams.get('company'),
-  // );
 
   const initialValues: RegisterFormValues = {
     firstName: '',
@@ -53,23 +53,36 @@ const SignupPage: React.FC = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={RegisterSchema}
-        onSubmit={(values, actions) => {
-          const newUser = {
-            company: searchParams.get('company'),
-            manager: searchParams.get('manager'),
-            language: USER_DEFAULTS.language,
-            first_name: values.firstName,
-            last_name: values.lastName,
+        onSubmit={async (values, actions) => {
+          const companyEmails = (
+            await fetchGraphql(getCompanyEmails, {
+              companyId: searchParams.get('company'),
+            })
+          ).company.allowed_emails;
+
+          const user = {
+            input: {
+              company: searchParams.get('company'),
+              manager: searchParams.get('manager'),
+              language: USER_DEFAULTS.language,
+              first_name: values.firstName,
+              last_name: values.lastName,
+              email: values.email,
+              password: values.password,
+            },
             email: values.email,
             password: values.password,
           };
 
-          console.log('form inputs:', values);
-          console.log('newUser:', newUser);
+          const userEmailSuffix = '@' + values.email.split('@')[1];
+          if (!companyEmails.includes(userEmailSuffix)) {
+            alert('Invalid domain for company email.');
+            return;
+          }
 
-          fetchGraphql(createUserMutation, newUser);
-
+          const data = await fetchGraphql(signup, user);
           actions.setSubmitting(false);
+          login(data.login).then(() => navigate(ROUTES.dashboard));
         }}
       >
         {({ errors, touched }) => (
@@ -85,8 +98,8 @@ const SignupPage: React.FC = () => {
             ) : null}
 
             <Field
-              name="lastname"
-              type="lastname"
+              name="lastName"
+              type="lastName"
               placeholder="Last Name"
               className={styles.baseField}
             />
@@ -109,6 +122,7 @@ const SignupPage: React.FC = () => {
               type="password"
               placeholder="Password"
               className={styles.baseField}
+              autocomplete="new-password"
             />
             {errors.password && touched.password ? (
               <div className={styles.error}>{errors.password}</div>
@@ -119,6 +133,7 @@ const SignupPage: React.FC = () => {
               type="password"
               placeholder="Confirm Password"
               className={styles.baseField}
+              autocomplete="new-password"
             />
             {errors.confirmPassword && touched.confirmPassword ? (
               <div className={styles.error}>{errors.confirmPassword}</div>

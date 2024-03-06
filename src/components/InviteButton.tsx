@@ -1,6 +1,5 @@
 const InvitationLinkGenerator = ({ user }: { user: any }) => {
   const generateLink = async () => {
-    console.log(user.user);
     if (!navigator.clipboard || !user.id || !user.company.id) return;
 
     const registrationLink =

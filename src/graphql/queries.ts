@@ -33,19 +33,28 @@ query User($userId: ID!) {
 }
 `;
 
-const createUserMutation = `
-mutation CreateUser($input: UserInput!) {
+const signup = `
+mutation Login($input: UserInput!, $email: String!, $password: String!) {
   createUser(input: $input) {
     id
   }
-}`;
+  login(email: $email, password: $password) {
+    token
+    user {
+      email
+      id
+      role
+    }
+  }
+}
+`;
 
 const getCompanyEmails = `
-query Companies {
-  companies {
+query Company($companyId: ID!) {
+  company(id: $companyId) {
     allowed_emails
   }
 }
 `;
 
-export { loginQuery, getUserQuery, createUserMutation, getCompanyEmails };
+export { loginQuery, getUserQuery, signup, getCompanyEmails };
