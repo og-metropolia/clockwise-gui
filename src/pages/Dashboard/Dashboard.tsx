@@ -10,7 +10,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className={styles.basePage}>
-      <ProfileCard name="Matti Meikäläinen" title="Graphic Designer" />
+      <ProfileCard user={user} />
       <section className={styles.activity}>
         {/* Tähän voisi tulla dynaamista dataa liittyen käyttäjän aktiviteetteihin */}
         <div className={styles.activityItem}>

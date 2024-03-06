@@ -1,5 +1,5 @@
 import { useUser } from '@/components/UserContext';
-import styles from './SettingsPage.module.css'; // Tuo sivukohtaiset tyylit
+import styles from './SettingsPage.module.css';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '@/constants/routes';
 import Footer from '../../components/Footer';
@@ -13,7 +13,7 @@ const SettingsPage = () => {
 
   return (
     <div className={styles.basePage}>
-      <ProfileCard name="Matti Meikäläinen" title="Graphic Designer" />
+      <ProfileCard user={user} />
 
       {/* Asetusvaihtoehdot */}
       <div className={styles.settingsOptions}>

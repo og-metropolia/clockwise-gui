@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import '../../base.css';
 import styles from './ReportPage.module.css'; // Tuo sivukohtaiset tyylit
 import Footer from '@/components/Footer';
+import { useUser } from '@/components/UserContext';
+import ProfileCard from '@/components/ProfileCard';
 
 // Oletetaan, että sinulla on API-funktio, joka hakee työntekijän tunnit
 // import { getEmployeeHours } from '../api/employeeApi';
@@ -18,6 +20,8 @@ const getEmployeeHours = async () => {
 };
 
 const ReportPage = () => {
+  const { getUser } = useUser();
+  const user = getUser();
   const [hours, setHours] = useState([]);
 
   useEffect(() => {
@@ -35,11 +39,7 @@ const ReportPage = () => {
 
   return (
     <div className={styles.basePage}>
-      {/* Profiilin otsikko ja muut tiedot */}
-      <div className={styles.profileSection}>
-        <h1>Matti Meikäläinen</h1>
-        <p>Graphic Designer</p>
-      </div>
+      <ProfileCard user={user} />
 
       {/* Tuntiraportti */}
       <div className={styles.reportSection}>
