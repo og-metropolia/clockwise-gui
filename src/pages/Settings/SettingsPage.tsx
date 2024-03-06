@@ -3,23 +3,17 @@ import styles from './SettingsPage.module.css'; // Tuo sivukohtaiset tyylit
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '@/constants/routes';
 import Footer from '../../components/Footer';
+import InvitationLinkGenerator from '@/components/InviteButton';
+import ProfileCard from '@/components/ProfileCard';
 
 const SettingsPage = () => {
-  const { logout } = useUser();
+  const { logout, getUser } = useUser();
   const navigate = useNavigate();
+  const user = getUser();
 
   return (
     <div className={styles.basePage}>
-      {/* Profiilin otsikko ja kuva */}
-      <div className={styles.profileSection}>
-        <img
-          src="/path/to/profile-picture.png"
-          alt="Profile"
-          className={styles.profilePicture}
-        />
-        <h1 className={styles.profileName}>Matti Meikäläinen</h1>
-        <p className={styles.designation}>Graphic Designer</p>
-      </div>
+      <ProfileCard name="Matti Meikäläinen" title="Graphic Designer" />
 
       {/* Asetusvaihtoehdot */}
       <div className={styles.settingsOptions}>
@@ -56,6 +50,8 @@ const SettingsPage = () => {
         >
           Change Language
         </button>
+
+        <InvitationLinkGenerator user={user} />
       </div>
 
       {/* Linkkejä lisätietoihin */}

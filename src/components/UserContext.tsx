@@ -23,7 +23,13 @@ function resetCookie(name: string) {
 
 export const UserContext = createContext({
   getUser: () => {},
-  login: (_user: ContextUser) => {},
+  login: async (context: ContextUser) => {
+    if (!context) return;
+    setCookie('token', context.token, 7);
+    const user = await fetchGraphql(getUserQuery, { userId: context.user.id });
+    if (!user) return null;
+    localStorage.setItem('user', JSON.stringify(user));
+  },
   logout: () => {},
 });
 
@@ -34,7 +40,7 @@ export const UserProvider = ({ children }: any) => {
     const user = {
       ...JSON.parse(localStorage.getItem('user') ?? '{}'),
     };
-    return user ? user : null;
+    return user ? user.user : null;
   };
 
   const login = async (context: ContextUser) => {

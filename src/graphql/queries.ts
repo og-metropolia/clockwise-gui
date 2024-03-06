@@ -16,7 +16,6 @@ query User($userId: ID!) {
   user(id: $userId) {
     id
     email
-    password
     role
     first_name
     last_name
@@ -34,4 +33,19 @@ query User($userId: ID!) {
 }
 `;
 
-export { loginQuery, getUserQuery };
+const createUserMutation = `
+mutation CreateUser($input: UserInput!) {
+  createUser(input: $input) {
+    id
+  }
+}`;
+
+const getCompanyEmails = `
+query Companies {
+  companies {
+    allowed_emails
+  }
+}
+`;
+
+export { loginQuery, getUserQuery, createUserMutation, getCompanyEmails };

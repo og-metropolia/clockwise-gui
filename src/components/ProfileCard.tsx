@@ -8,10 +8,14 @@ type ProfileCardProps = {
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ name, title, imageUrl }) => {
   return (
-    <div>
-      <h1>{name}</h1>
-      <p>{title}</p>
-      <img src={imageUrl ?? '/profile-picture.png'} alt="profile picture" />
+    <div className={styles.profileSection}>
+      <img
+        src={imageUrl}
+        alt="Profile Picture"
+        className={styles.profilePicture}
+      />
+      <h1 className={styles.profileName}>{name}</h1>
+      <p className={styles.designation}>{title}</p>
     </div>
   );
 };

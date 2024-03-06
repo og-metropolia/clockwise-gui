@@ -1,0 +1,30 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: start;
+}
+
+.day {
+  width: calc(100% / 7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px 0;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.absence {
+  background-color: #FF0000; /* Punainen tausta poissaoloille */
+  color: white;
+}
+
+.otherMonth {
+  color: #757575; /* Harmaa väri muille kuukausille */
+}
+
+.weekend {
+  color: #D2D2D2; /* Vaalea harmaa väri viikonlopuille */
+}
