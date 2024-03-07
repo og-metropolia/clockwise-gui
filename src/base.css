@@ -33,10 +33,6 @@
   outline: none;
 }
 
-.baseField:last-child {
-  margin-bottom: 32px;
-}
-
 .baseForm {
   display: flex;
   flex-direction: column;

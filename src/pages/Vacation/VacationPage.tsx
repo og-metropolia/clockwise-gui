@@ -1,90 +1,76 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import styles from './Vacation.module.css';
-import Footer from '@/components/Footer';
+import Footer from '../../components/Footer';
+import ProfileCard from '@/components/ProfileCard';
+import { useUser } from '@/components/UserContext';
+import Calendar from '@/components/Calendar';
+import { format } from 'date-fns';
 
 const VacationPage = () => {
-  const [workMatter, setWorkMatter] = useState('sick');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const { getUser } = useUser();
+  const user = getUser();
+
+  // State has been explicitly typed here
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
+  const [absences, setAbsences] = useState<Date[]>([]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Tässä kohdassa voit käsitellä lomakkeen tietoja, esimerkiksi lähettää ne palvelimelle
-    console.log({ workMatter, startDate, endDate, startTime, endTime });
+    if (startDate && endDate) {
+      // Ensure both dates are not null
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      let current = start;
+      const newAbsences: Date[] = [];
+
+      while (current <= end) {
+        newAbsences.push(current);
+        current = new Date(current.setDate(current.getDate() + 1));
+      }
+
+      setAbsences([...absences, ...newAbsences]); // Correctly typed array being spread into the state
+    }
   };
 
+  const today = new Date();
+
   return (
-    <div className={styles.basePage}>
-      <div className={styles.baseHeader}>
-        <h1>Matti Meikäläinen</h1>
-        <p>Graphic Designer</p>
-      </div>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <Box className={styles.basePage}>
+        <ProfileCard user={user} />
 
-      {/* Oletetaan, että kalenterikomponentti on määritelty ja tyylitelty */}
-      <div className={styles.calendar}></div>
-
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <label className={styles.label}>
-          Work matter or absence:
-          <select
-            className={styles.select}
-            value={workMatter}
-            onChange={(e) => setWorkMatter(e.target.value)}
-          >
-            <option value="sick">Sick</option>
-            {/* Lisää muita vaihtoehtoja tarpeen mukaan */}
-          </select>
-        </label>
-
-        <label className={styles.label}>
-          Starting date:
-          <input
-            className={styles.input}
-            type="date"
+        {/* Render the Calendar component with correct props */}
+        <Calendar
+          currentYear={startDate?.getFullYear() ?? today.getFullYear()}
+          currentMonth={startDate?.getMonth() ?? today.getMonth()}
+          absences={absences}
+        />
+        <Box component="form" onSubmit={handleSubmit} noValidate>
+          <DatePicker
+            label="Starting date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            onChange={(newDate) => setStartDate(newDate)}
+            renderInput={(params) => <TextField {...params} />}
           />
-        </label>
-
-        <label className={styles.label}>
-          Ending date:
-          <input
-            className={styles.input}
-            type="date"
+          <DatePicker
+            label="Ending date"
             value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            onChange={(newDate) => setEndDate(newDate)}
+            renderInput={(params) => <TextField {...params} />}
           />
-        </label>
-
-        <label className={styles.label}>
-          Starting time:
-          <input
-            className={styles.input}
-            type="time"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-          />
-        </label>
-
-        <label className={styles.label}>
-          Ending time:
-          <input
-            className={styles.input}
-            type="time"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
-          />
-        </label>
-
-        <button className={styles.button} type="submit">
-          Save
-        </button>
-      </form>
-
-      <Footer />
-    </div>
+          <Button type="submit" variant="contained" color="primary">
+            Save
+          </Button>
+        </Box>
+        <Footer />
+      </Box>
+    </LocalizationProvider>
   );
 };
 

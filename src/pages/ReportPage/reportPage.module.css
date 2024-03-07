@@ -1,11 +1,6 @@
 @import '../../base.css';
 @import '../../colors.css';
 
-.profileSection {
-  text-align: center;
-  /* Lisää tarvittaessa tyylejä */
-}
-
 .reportSection {
   width: 100%;
   /* Lisää tarvittaessa tyylejä */

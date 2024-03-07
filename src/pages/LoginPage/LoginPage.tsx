@@ -37,14 +37,13 @@ const LoginPage: React.FC = () => {
         initialValues={initialValues}
         validationSchema={LoginSchema}
         onSubmit={async (values, actions) => {
-          const data = await fetchGraphql(loginQuery, values);
           actions.setSubmitting(false);
+          const data = await fetchGraphql(loginQuery, values);
           if (!data?.login) {
             actions.setErrors({ auth: 'Invalid email or password' });
             return;
           }
-          login(data.login);
-          navigate(ROUTES.dashboard);
+          login(data.login).then(() => navigate(ROUTES.dashboard));
         }}
       >
         {({ errors, touched }) => (

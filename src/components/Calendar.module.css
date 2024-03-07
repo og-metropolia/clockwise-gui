@@ -1,0 +1,24 @@
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+  padding: 10px;
+  border: 2px solid #000; /* Black border around the calendar */
+  margin-bottom: 40px; /* Space between calendar and form */
+}
+
+.day {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+.absence {
+  background-color: rgb(245, 75, 75);
+  color: white;
+}
+
+/* Depending on how the Calendar component is used, you might need to import this CSS module correctly in your component. */
