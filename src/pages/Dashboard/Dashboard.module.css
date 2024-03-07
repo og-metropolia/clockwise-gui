@@ -1,41 +1,12 @@
 @import '../../base.css';
 @import '../../colors.css';
 
-.profileSection {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background-color: #FFF;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.profilePicture {
-  width: 50px;
-  height: 50px;
-  background-color: #DDD;
-  border-radius: 50%;
-  margin-right: 1rem;
-}
-
-.profileName {
-  font-size: 1rem;
-  color: #333;
-}
-
-.designation {
-  font-size: 0.9rem;
-  color: #666;
-}
-
 .activitySection {
   width: 100%;
 }
 
 .activityCard {
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 10px;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -58,7 +29,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #FFF;
+  background-color: #fff;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem;
 }

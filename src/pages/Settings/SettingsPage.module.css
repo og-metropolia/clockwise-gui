@@ -1,29 +1,6 @@
 @import '../../base.css';
 @import '../../colors.css';
 
-.profileSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #ffffff;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.profilePicture {
-  border-radius: 50%;
-  width: 80px; /* Säädä kuvan kokoa */
-  height: 80px; /* Säädä kuvan kokoa */
-  margin-bottom: 1rem;
-  object-fit: cover;
-  background-color: #ddd; /* Väliaikainen taustaväri, kunnes kuva ladataan */
-}
-
-.profileName,
-.designation {
-  margin: 0;
-}
-
 .settingsOptions {
   width: 100%;
 }
