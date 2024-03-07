@@ -1,10 +1,11 @@
 import { fetchGraphql } from '@/graphql/fetch';
 import { getUserQuery } from '@/graphql/queries';
+import { LoginUser } from '@/types/user';
 import { createContext, useContext } from 'react';
 
 export type ContextUser = {
   token: string;
-  user: { email: string; id: string; role: string };
+  user: LoginUser;
 } | null;
 
 function setCookie(name: string, value: string, expireDays: number) {
@@ -17,12 +18,30 @@ function setCookie(name: string, value: string, expireDays: number) {
   document.cookie = name + '=' + (value || '') + expires + '; path=/';
 }
 
+function getCookie(name: string) {
+  const cookies = Object.fromEntries(
+    document.cookie.split(/; /).map((c) => {
+      const [key, v] = c.split('=', 2);
+      return [key, decodeURIComponent(v ?? '')];
+    }),
+  );
+  return cookies[name] || '';
+}
+
 function resetCookie(name: string) {
   document.cookie = name + '=; Max-Age=-99999999;';
 }
 
 export const UserContext = createContext({
-  getUser: () => null,
+  getUser: () => {
+    const context = {
+      ...JSON.parse(localStorage.getItem('user') ?? '{}'),
+    };
+    return context ? context.user : null;
+  },
+  getToken: () => {
+    return getCookie('token');
+  },
   login: async (context: ContextUser) => {
     if (!context) return;
     setCookie('token', context.token, 7);
@@ -31,16 +50,24 @@ export const UserContext = createContext({
     localStorage.setItem('user', JSON.stringify(user));
   },
   logout: () => {},
+  updateUser: (user: LoginUser) => {
+    if (!user) return null;
+    localStorage.setItem('user', JSON.stringify({ user: user }));
+  },
 });
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }: any) => {
   const getUser = () => {
-    const user = {
+    const context = {
       ...JSON.parse(localStorage.getItem('user') ?? '{}'),
     };
-    return user ? user.user : null;
+    return context ? context.user : null;
+  };
+
+  const getToken = () => {
+    return getCookie('token');
   };
 
   const login = async (context: ContextUser) => {
@@ -56,8 +83,15 @@ export const UserProvider = ({ children }: any) => {
     localStorage.removeItem('user');
   };
 
+  const updateUser = (user: LoginUser) => {
+    if (!user) return null;
+    localStorage.setItem('user', JSON.stringify({ user: user }));
+  };
+
   return (
-    <UserContext.Provider value={{ getUser, login, logout }}>
+    <UserContext.Provider
+      value={{ getUser, getToken, login, logout, updateUser }}
+    >
       {children}
     </UserContext.Provider>
   );

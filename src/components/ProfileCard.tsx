@@ -1,13 +1,9 @@
 import styles from './ProfileCard.module.css';
 import DefaultProfilePicture from './icons/DefaultProfilePicture';
+import { LoginUser } from '@/types/user';
 
 type ProfileCardProps = {
-  user: {
-    first_name: string;
-    last_name: string;
-    job_title: string;
-    profile_picture?: string;
-  } | null;
+  user: LoginUser | null;
 };
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {

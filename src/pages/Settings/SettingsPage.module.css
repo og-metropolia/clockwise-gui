@@ -1,13 +1,16 @@
 @import '../../base.css';
 @import '../../colors.css';
 
-.settingsOptions {
+.settingsButtons {
   width: 100%;
 }
 
-.additionalLinks {
-  width: 100%;
-  margin-top: 1rem;
+.languageSelect {
+  background-color: var(--form-gray);
+  color: #fff !important;
+  border-radius: 8px !important;
+  border-color: #000 !important;
+  border: 2px solid #000;
 }
 
 .link {
@@ -23,4 +26,36 @@
   position: absolute;
   bottom: 0;
   background-color: #ffffff;
+}
+
+body .languageContainer {
+  margin-bottom: 18px;
+}
+
+.updateSettingsContainer label {
+  color: var(--clockwise-blue);
+}
+
+.updateSettingsContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.footerContainer {
+  width: 100%;
+}
+
+.footerButtons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.additionalLinks {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
 }

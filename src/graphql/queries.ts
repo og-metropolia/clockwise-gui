@@ -57,4 +57,28 @@ query Company($companyId: ID!) {
 }
 `;
 
-export { loginQuery, getUserQuery, signup, getCompanyEmails };
+const updateUserMutation = `
+mutation UpdateUser($id: ID!, $input: UpdateUser!) {
+  updateUser(id: $id, input: $input) {
+    id
+    email
+    role
+    first_name
+    last_name
+    job_title
+    phone
+    language
+    profile_picture
+    manager
+    company
+  }
+}
+`;
+
+export {
+  loginQuery,
+  getUserQuery,
+  signup,
+  getCompanyEmails,
+  updateUserMutation,
+};

@@ -14,12 +14,12 @@
 }
 
 .icon svg {
-  width: 24px; /* Kuvakkeen leveys */
-  height: 24px; /* Kuvakkeen korkeus */
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   transition:
     box-shadow 0.3s ease-in-out,
-    filter 0.3s ease-in-out; /* Lisää pehmeä siirtymä hohdolle ja suodattimelle */
+    filter 0.3s ease-in-out;
 }
 
 .active-icon svg {
@@ -31,6 +31,6 @@
 
 .inactive-icon svg {
   fill: 0;
-  width: 24px; /* Kuvakkeen leveys */
-  height: 24px; /* Kuvakkeen korkeus */
+  width: 24px;
+  height: 24px;
 }

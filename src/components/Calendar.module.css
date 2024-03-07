@@ -1,30 +1,24 @@
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
   padding: 10px;
-  justify-content: start;
+  border: 2px solid #000; /* Black border around the calendar */
+  margin-bottom: 40px; /* Space between calendar and form */
 }
 
 .day {
-  width: calc(100% / 7);
+  width: 30px;
+  height: 30px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 2px 0;
-  height: 40px;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
+  justify-content: center;
+  margin: 5px;
 }
 
 .absence {
-  background-color: #FF0000; /* Punainen tausta poissaoloille */
+  background-color: rgb(245, 75, 75);
   color: white;
 }
 
-.otherMonth {
-  color: #757575; /* Harmaa väri muille kuukausille */
-}
-
-.weekend {
-  color: #D2D2D2; /* Vaalea harmaa väri viikonlopuille */
-}
+/* Depending on how the Calendar component is used, you might need to import this CSS module correctly in your component. */

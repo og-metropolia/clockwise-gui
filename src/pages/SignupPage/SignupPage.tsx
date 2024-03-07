@@ -10,7 +10,6 @@ import { USER_DEFAULTS } from '@/constants/userDefaults';
 import { useUser } from '@/components/UserContext';
 import { useNavigate } from 'react-router-dom';
 
-// Rekisteröintilomakkeen validointisäännöt Yup-kirjastolla
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().required('Required'),

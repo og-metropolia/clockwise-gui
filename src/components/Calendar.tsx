@@ -8,15 +8,23 @@ import {
 } from 'date-fns';
 import styles from './Calendar.module.css';
 
-const Calendar = ({ currentYear, currentMonth, absences }) => {
+const Calendar = ({
+  currentYear,
+  currentMonth,
+  absences,
+}: {
+  currentYear: number;
+  currentMonth: number;
+  absences: Date[];
+}) => {
   const start = startOfMonth(new Date(currentYear, currentMonth));
   const end = endOfMonth(new Date(currentYear, currentMonth));
   const daysArray = eachDayOfInterval({ start: start, end: end });
 
-  const dayClass = (day) => {
-    const formattedDate = format(day, 'yyyy-MM-dd');
+  const dayClass = (day: Date) => {
     const isAbsent = absences.some(
-      (absenceDate) => absenceDate === formattedDate,
+      (absenceDate: Date) =>
+        format(absenceDate, 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd'),
     );
     const isCurrentMonth = isSameMonth(
       day,

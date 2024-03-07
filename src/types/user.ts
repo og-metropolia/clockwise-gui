@@ -1,5 +1,7 @@
 export type Role = 'EMPLOYEE' | 'MANAGER' | 'ADMIN';
 
+export type Language = 'en' | 'fi' | 'sv';
+
 type User = {
   id: string;
   email: string;
@@ -9,7 +11,7 @@ type User = {
   last_name: string;
   job_title?: string;
   phone?: string;
-  language: string;
+  language: Language;
   profile_picture?: string;
   manager?: string;
   createdAt: Date;

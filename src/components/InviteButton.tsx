@@ -1,3 +1,5 @@
+import styles from './InviteButton.module.css';
+
 const InvitationLinkGenerator = ({ user }: { user: any }) => {
   const generateLink = async () => {
     if (!navigator.clipboard || !user.id || !user.company.id) return;
@@ -12,11 +14,9 @@ const InvitationLinkGenerator = ({ user }: { user: any }) => {
   };
 
   return (
-    <div>
-      <button className="baseField" onClick={generateLink}>
-        Invite to Company
-      </button>
-    </div>
+    <button className={styles.baseField} onClick={generateLink}>
+      Invite to Company
+    </button>
   );
 };
 
