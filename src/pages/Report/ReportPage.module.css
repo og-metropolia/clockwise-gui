@@ -1,5 +1,5 @@
 @import '../../base.css';
-@import '../../colors.css';
+@import '../../colors.module.css';
 
 .reportSection {
   width: 100%;

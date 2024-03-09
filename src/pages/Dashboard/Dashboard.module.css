@@ -1,5 +1,5 @@
 @import '../../base.css';
-@import '../../colors.css';
+@import '../../colors.module.css';
 
 /* Lisää tarvittaessa */
 .checkInOutButton {

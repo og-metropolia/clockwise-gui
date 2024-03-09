@@ -1,6 +1,7 @@
+import { LoginUser } from '@/types/user';
 import styles from './InviteButton.module.css';
 
-const InvitationLinkGenerator = ({ user }: { user: any }) => {
+const InvitationLinkGenerator = ({ user }: { user: LoginUser }) => {
   const generateLink = async () => {
     if (!navigator.clipboard || !user.id || !user.company.id) return;
 
@@ -14,7 +15,7 @@ const InvitationLinkGenerator = ({ user }: { user: any }) => {
   };
 
   return (
-    <button className={styles.baseField} onClick={generateLink}>
+    <button className={styles.baseSecondaryButton} onClick={generateLink}>
       Invite to Company
     </button>
   );

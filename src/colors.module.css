@@ -1,6 +1,7 @@
 :root {
   --clockwise-blue: #3085fe;
   --clockwise-blue-secondary: #3085fe77;
+  --clockwise-green: rgb(95, 181, 112);
   --error-color: #ff0000;
-  --form-gray: #3b3b3b;
+  --warning-color: #ff9900;
 }

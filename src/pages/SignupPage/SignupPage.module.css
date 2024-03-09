@@ -1,16 +1,5 @@
 @import '../../base.css';
-@import '../../colors.css';
-
-.button {
-  background-color: var(--clockwise-blue);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 15px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-}
+@import '../../colors.module.css';
 
 .checkboxContainer {
   color: #333333;

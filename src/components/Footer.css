@@ -22,11 +22,17 @@
     filter 0.3s ease-in-out;
 }
 
-.active-icon svg {
+/* .active-icon svg {
   filter: drop-shadow(0 0 5px var(--clockwise-blue))
     drop-shadow(0 0 10px var(--clockwise-blue))
     drop-shadow(0 0 15px var(--clockwise-blue));
   fill: var(--clockwise-blue);
+} */
+
+.active-icon svg {
+  filter: drop-shadow(0 0 5px var(--clockwise-blue))
+    drop-shadow(0 0 10px var(--clockwise-blue))
+    drop-shadow(0 0 15px var(--clockwise-blue));
 }
 
 .inactive-icon svg {

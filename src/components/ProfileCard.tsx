@@ -22,9 +22,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
         )}
       </div>
       <div className={styles.profileTextContainer}>
-        <h1 className={styles.profileName}>
+        <h2 className={styles.profileName}>
           {user.first_name + ' ' + user.last_name}
-        </h1>
+        </h2>
         <p className={styles.designation}>{user.job_title ?? ''}</p>
       </div>
     </div>

@@ -1,34 +1,78 @@
 @import '../../base.css';
-@import '../../colors.css';
+@import '../../colors.module.css';
 
 .form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 40px); /* leveys huomioon ottaen padding */
+  box-sizing: border-box; /* sisältää paddingit ja borderit leveyteen */
+  max-width: 500px; /* asetetaan max-leveys mobiilinäkymää varten */
+  margin: 0 auto; /* keskitetään formi */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 20px;
+  background-color: white;
 }
 
 .label,
 .select,
 .input,
 .button {
-  margin-bottom: 10px;
+  width: 100%; /* asetetaan kaikille sama leveys */
+  box-sizing: border-box; /* sisältää paddingit ja borderit leveyteen */
+  margin-bottom: 10px; /* yhtenäinen alamarginaali */
 }
 
 .select,
 .input {
   padding: 14px;
   border-radius: 4px;
-  border: 1px solid #ccc; /* Light grey border */
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 .button {
   padding: 10px;
-  background-color: #007bff; /* Blue background */
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+  padding: 10px;
+  border: 2px solid #000;
+  background-color: white;
+  box-sizing: border-box; /* asetetaan box-sizing kaikille lapsielementeille */
+}
+
+.day {
+  width: 100%; /* annetaan päiville täysi leveys */
+  height: auto; /* korkeus asetetaan automaattisesti */
+  padding: 10px 0; /* tasainen padding ylös ja alas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent; /* asetetaan läpinäkyvä borderi, jotta layout ei muutu hoverin aikana */
+  transition:
+    background-color 0.3s,
+    border-color 0.3s; /* animaatio taustalle ja borderille */
+}
+
+.day:hover {
+  background-color: #f0f0f0; /* lisätään hover-efekti päiville */
+  border-color: #ccc; /* lisätään hover-efekti borderille */
+}
+
+.absence {
+  background-color: rgb(245, 75, 75);
+  color: white;
+}
+
+.datePickerMargin {
+  margin-right: 20px;
 }
