@@ -11,10 +11,25 @@ import { USER_DEFAULTS } from '@/constants/userDefaults';
 import * as Yup from 'yup';
 import { fetchGraphql } from '@/graphql/fetch';
 import { updateUserMutation } from '@/graphql/queries';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, MenuItem, Select } from '@mui/material';
 
-const LANGUAGE_OPTIONS = ['en', 'fi', 'sv'];
 const VISUAL_PASSWORD = '********';
+
+// TODO: get from API
+const LANGUAGES = [
+  {
+    value: 'en',
+    label: 'English',
+  },
+  {
+    value: 'fi',
+    label: 'Finnish',
+  },
+  {
+    value: 'sv',
+    label: 'Swedish',
+  },
+];
 
 const UpdateSchema = Yup.object().shape({
   password: Yup.string().required('Required'),
@@ -23,7 +38,9 @@ const UpdateSchema = Yup.object().shape({
     .required('Required'),
   phoneNumber: Yup.string().required('Required'),
   profilePicture: Yup.string().required('Required').url('Invalid URL'),
-  language: Yup.string().required('Required').oneOf(LANGUAGE_OPTIONS),
+  language: Yup.string()
+    .required('Required')
+    .oneOf(LANGUAGES.map((type) => type.value)),
   jobTitle: Yup.string().required('Required'),
 });
 
@@ -36,7 +53,7 @@ type UpdateUserFormValues = {
   language: Language;
 };
 
-const SettingsPage = () => {
+const SettingsPage: React.FC = () => {
   const navigate = useNavigate();
   const { logout, getUser, getToken, updateUser } = useUser();
   const user = getUser();
@@ -54,7 +71,9 @@ const SettingsPage = () => {
     <div className={styles.basePage}>
       <ProfileCard user={user} />
 
-      <div className={styles.updateSettingsContainer}>
+      <h2 className={styles.baseTitle}>Settings</h2>
+
+      <div className={styles.baseFormContainer}>
         <Formik
           initialValues={initialValues}
           validationSchema={UpdateSchema}
@@ -86,19 +105,18 @@ const SettingsPage = () => {
         >
           {({ errors, touched }) => (
             <Form className={styles.baseForm}>
-              <FormControl fullWidth className={styles.languageContainer}>
-                <InputLabel id="language-label">Language</InputLabel>
-                <Field
+              <FormControl fullWidth>
+                <Select
                   name="language"
-                  as={Select}
-                  labelId="language-label"
                   defaultValue={user?.language ?? USER_DEFAULTS.language}
-                  className={styles.languageSelect}
+                  className={styles.baseSelect}
                 >
-                  <MenuItem value="en">English</MenuItem>
-                  <MenuItem value="fi">Finnish</MenuItem>
-                  <MenuItem value="sv">Swedish</MenuItem>
-                </Field>
+                  {LANGUAGES.map((type) => (
+                    <MenuItem key={type.value} value={type.value}>
+                      {type.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
               {errors.language && touched.language ? (
                 <div className={styles.error}>{errors.language}</div>
@@ -156,7 +174,7 @@ const SettingsPage = () => {
                 <div className={styles.error}>{errors.jobTitle}</div>
               ) : null}
 
-              <button type="submit" className={styles.baseField}>
+              <button type="submit" className={styles.basePrimaryButton}>
                 Update Settings
               </button>
             </Form>
@@ -170,7 +188,7 @@ const SettingsPage = () => {
               logout();
               navigate(ROUTES.dashboard);
             }}
-            className={styles.baseField}
+            className={styles.baseSecondaryButton}
           >
             Sign out
           </button>

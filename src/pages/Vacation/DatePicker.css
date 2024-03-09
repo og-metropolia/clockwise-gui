@@ -1,0 +1,31 @@
+@import '../../base.css';
+@import '../../colors.module.css';
+
+.rdp {
+  --rdp-background-color: var(--clockwise-blue) !important;
+}
+
+.rdp-day_today {
+  font-weight: bold;
+  color: var(--clockwise-green);
+}
+
+.calendar-today {
+  font-weight: bold !important;
+  border: 2px solid var(--clockwise-green) !important;
+}
+
+.calendar-selected:not([disabled]) {
+  background-color: var(--clockwise-blue);
+  color: #fff;
+}
+
+.calendar-selected:hover:not([disabled]) {
+  background-color: var(--clockwise-blue);
+  border-color: var(--clockwise-blue);
+}
+
+.calendar-selected:focus:not([disabled]) {
+  background-color: var(--clockwise-blue);
+  border-color: var(--clockwise-blue);
+}
