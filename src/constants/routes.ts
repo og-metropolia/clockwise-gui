@@ -6,6 +6,8 @@ const ROUTES = {
   settings: '/settings',
   report: '/report',
   vacation: '/vacation',
+  managerDashboard: '/manager',
+  visit: '/visit',
 };
 
 export default ROUTES;

@@ -4,4 +4,7 @@
   --clockwise-green: rgb(95, 181, 112);
   --error-color: #ff0000;
   --warning-color: #ff9900;
+  --clockwise-red: #c43e3e;
+  --scrollable-background: #eee;
+  --disabled-button-color: #999;
 }

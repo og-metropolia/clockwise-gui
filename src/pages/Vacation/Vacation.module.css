@@ -18,9 +18,9 @@
 .select,
 .input,
 .button {
-  width: 100%; /* asetetaan kaikille sama leveys */
-  box-sizing: border-box; /* sisältää paddingit ja borderit leveyteen */
-  margin-bottom: 10px; /* yhtenäinen alamarginaali */
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .select,
@@ -41,31 +41,24 @@
 }
 
 .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 5px;
-  padding: 10px;
-  border: 2px solid #000;
-  background-color: white;
-  box-sizing: border-box; /* asetetaan box-sizing kaikille lapsielementeille */
-}
+margin: 0}
 
 .day {
-  width: 100%; /* annetaan päiville täysi leveys */
-  height: auto; /* korkeus asetetaan automaattisesti */
-  padding: 10px 0; /* tasainen padding ylös ja alas */
+  width: 100%;
+  height: auto;
+  padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid transparent; /* asetetaan läpinäkyvä borderi, jotta layout ei muutu hoverin aikana */
+  border: 1px solid transparent;
   transition:
     background-color 0.3s,
-    border-color 0.3s; /* animaatio taustalle ja borderille */
+    border-color 0.3s;
 }
 
 .day:hover {
-  background-color: #f0f0f0; /* lisätään hover-efekti päiville */
-  border-color: #ccc; /* lisätään hover-efekti borderille */
+  background-color: #f0f0f0;
+  border-color: #ccc;
 }
 
 .absence {

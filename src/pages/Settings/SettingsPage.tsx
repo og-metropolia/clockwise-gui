@@ -127,7 +127,7 @@ const SettingsPage: React.FC = () => {
                 type="password"
                 placeholder="Password"
                 className={styles.baseField}
-                autocomplete="new-password"
+                autoComplete="new-password"
               />
               {errors.password && touched.password ? (
                 <div className={styles.error}>{errors.password}</div>
@@ -138,7 +138,7 @@ const SettingsPage: React.FC = () => {
                 type="password"
                 placeholder="Confirm Password"
                 className={styles.baseField}
-                autocomplete="new-password"
+                autoComplete="new-password"
               />
               {errors.confirmPassword && touched.confirmPassword ? (
                 <div className={styles.error}>{errors.confirmPassword}</div>
@@ -184,7 +184,7 @@ const SettingsPage: React.FC = () => {
       <div className={styles.footerContainer}>
         <div className={styles.footerButtons}>
           <button
-            onClick={async () => {
+            onClick={() => {
               logout();
               navigate(ROUTES.dashboard);
             }}

@@ -1,7 +1,7 @@
+import styles from './loginPage.module.css';
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import styles from './loginPage.module.css';
 import ROUTES from '@/constants/routes';
 import Logo from '@/components/Logo';
 import { fetchGraphql } from '@/graphql/fetch';
@@ -27,7 +27,7 @@ const LoginPage: React.FC = () => {
   const initialValues: LoginFormValues = { email: '', password: '', auth: '' };
 
   return (
-    <div className={styles.basePage}>
+    <div className={styles.basePageSecondary}>
       <Logo />
       <h1 className={styles.baseHeader}>
         Welcome Back 👋 to <span className={styles.highlight}>ClockWise</span>
@@ -43,7 +43,11 @@ const LoginPage: React.FC = () => {
               actions.setErrors({ auth: 'Invalid email or password' });
               return;
             }
-            login(data.login).then(() => navigate(ROUTES.dashboard));
+            login(data.login).then(() => {
+              data.login?.user?.role === 'MANAGER'
+                ? navigate(ROUTES.managerDashboard)
+                : navigate(ROUTES.dashboard);
+            });
           }}
         >
           {({ errors, touched }) => (
@@ -82,8 +86,8 @@ const LoginPage: React.FC = () => {
             </Form>
           )}
         </Formik>
+      </div>
     </div>
-  </div>
   );
 };
 

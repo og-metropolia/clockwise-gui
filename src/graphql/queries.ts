@@ -75,10 +75,33 @@ mutation UpdateUser($id: ID!, $input: UpdateUser!) {
 }
 `;
 
+const getEmployeesByCompany = `
+query UsersByCompany($companyId: ID! $role: Role) {
+  usersByCompany(companyId: $companyId role: $role) {
+    id
+    email
+    role
+    first_name
+    last_name
+    language
+    job_title
+    phone
+    profile_picture
+    manager {
+      id
+    }
+    company {
+      id
+    }
+  }
+}
+`;
+
 export {
   loginQuery,
   getUserQuery,
   signup,
   getCompanyEmails,
   updateUserMutation,
+  getEmployeesByCompany,
 };

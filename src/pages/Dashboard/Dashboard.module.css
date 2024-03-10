@@ -1,21 +1,107 @@
 @import '../../base.css';
 @import '../../colors.module.css';
 
-/* Lisää tarvittaessa */
-.checkInOutButton {
-  position: fixed;
-  top: 100px; /* Säädä tämä arvo vastaamaan haluamaasi sijaintia */
-  z-index: 10;
-  margin: 0 auto; /* Keskittää elementin */
+.dashboardFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  gap: 20px;
+}
+
+.checkButtonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.checkButtonSubtitle {
+  font-size: 20px;
+  margin-top: 8px;
+  color: white;
+}
+
+.checkButtonContainer button {
+  border-radius: 8px;
+  border: 2px solid #000;
+  width: 45%;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkInButton[disabled],
+.checkOutButton[disabled] {
+  background-color: var(--disabled-button-color);
+}
+
+.checkInButton {
+  background-color: var(--clockwise-green);
+}
+
+.checkOutButton {
+  background-color: var(--clockwise-red);
 }
 
 .activityHeader {
-  margin-top: 32px; /* Asettaa ylimääräistä tilaa otsikon yläpuolelle */
+  margin: 20px 0px 0px 0px;
+}
+
+.daySwitcher {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.daySwitcher button {
+  margin: 0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.todayText {
+  padding: 5px;
+  margin: 0px;
+  font-size: 20px;
+}
+
+.activityListContainer {
+  background: var(--scrollable-background);
+  border-radius: 10px;
 }
 
 .activityList {
-  max-height: 300px; /* Asettaa kiinteän maksimikorkeuden listalle */
-  overflow-y: auto; /* Lisää vierityspalkki tarvittaessa */
-  width: 100%; /* Asettaa listan leveyden */
-  margin-top: 16px; /* Asettaa väliä listan ja "Check In/Out" -painikkeen välille */
+  height: 240px;
+  width: 90vw;
+  overflow-y: auto;
+  margin-top: 16px;
+  border-radius: 10px;
+}
+
+.activityListHeader p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.separator {
+  border-top: 2px solid #333;
+}
+
+.activityListItem + .activityListItem {
+  border-top: 1px solid #333;
+}
+
+.activityListIcon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }

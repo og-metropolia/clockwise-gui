@@ -3,7 +3,10 @@ import DefaultProfilePicture from './icons/DefaultProfilePicture';
 import { LoginUser } from '@/types/user';
 
 type ProfileCardProps = {
-  user: LoginUser | null;
+  user: Pick<
+    LoginUser,
+    'first_name' | 'last_name' | 'profile_picture' | 'job_title'
+  > | null;
 };
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {

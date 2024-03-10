@@ -5,7 +5,7 @@ import Logo from '@/components/Logo';
 
 const ResetPassword: React.FC = () => {
   return (
-    <div className={styles.basePage}>
+    <div className={styles.basePageSecondary}>
       <Logo />
       <h1 className={styles.baseHeader}>Reset Password</h1>
       <p>Forgot your password? No worries!</p>

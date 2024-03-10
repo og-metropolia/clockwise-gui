@@ -1,15 +1,14 @@
 .profileCard {
-  position: fixed;
-  top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  width: 90%;
+  width: 100%;
   background-color: #eee;
   border-radius: 10px;
   padding-left: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px 0px;
 }
 
 .profilePictureContainer img,
