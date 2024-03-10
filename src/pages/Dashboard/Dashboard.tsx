@@ -1,99 +1,137 @@
 import { useState } from 'react';
-import {
-  Typography,
-  Grid,
-  Button,
-  List,
-  ListItem,
-  Box,
-  ListItemText,
-  Paper
-} from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
-import styles from './Dashboard.module.css';
+import { Typography, List, ListItem, Paper, Box } from '@mui/material';
+import styles from './Dashboard.module.css'; // Oletetaan, että yhteisiä tyylejä on päivitetty tai lisätty
 import ProfileCard from '@/components/ProfileCard';
 import { useUser } from '@/components/UserContext';
 import Footer from '../../components/Footer';
+import CheckInIcon from '../../assets/checkin.png';
+import CheckOutIcon from '../../assets/checkout.png';
 
 const Dashboard = () => {
   const { getUser } = useUser();
   const user = getUser();
-
-  // Tila ajan tallentamiseksi ja aktiviteettien listalle
   const [checkInTime, setCheckInTime] = useState<Dayjs | null>(null);
+  const [checkOutTime, setCheckOutTime] = useState<Dayjs | null>(null);
   const [activities, setActivities] = useState<{ in: Dayjs; out?: Dayjs }[]>(
     [],
   );
+  const [activityDate, setActivityDate] = useState(dayjs());
 
-  // Funktio joka kutsutaan, kun käyttäjä klikkaa 'Check In/Out' -painiketta
   const handleCheckInClick = () => {
     const now = dayjs();
 
-    if (!checkInTime) {
-      setCheckInTime(now); // Aseta 'Check In' aika, jos sitä ei ole vielä asetettu
-    } else {
-      // Lisää 'Check Out' aika ja tallenna aktiviteetti
-      setActivities(activities.concat([{ in: checkInTime, out: now }]));
-      setCheckInTime(null); // Nollaa 'Check In' aika seuraavaa kertaa varten
-    }
+    setCheckInTime(now);
+    setCheckOutTime(null);
   };
-  const today = dayjs().format('dddd, MMMM D');
 
-  // Funktio, joka määrittelee painikkeen värin tilan mukaan
-  const getButtonColor = () => {
-    return checkInTime ? 'success' : 'primary';
+  const handleCheckOutClick = () => {
+    const now = dayjs();
+
+    if (!!checkInTime) {
+      setCheckOutTime(now);
+      setActivities(activities.concat([{ in: checkInTime, out: now }]));
+    }
+    setCheckInTime(null);
   };
+
+  const canNavigateForward = activityDate.isBefore(dayjs(), 'day');
 
   return (
     <div className={styles.basePage}>
       <ProfileCard user={user} />
-      <Grid container spacing={2} alignItems="center" justifyContent="center">
-        <Grid item xs={12} className={styles.checkInOutButton}>
-          <Button
-            variant="contained"
-            color={getButtonColor()}
+      <h2 className={styles.baseTitle}>Time Log</h2>
+      <div className={styles.dashboardFormContainer}>
+        <div className={styles.checkButtonContainer}>
+          <button
+            className={styles.checkInButton}
             onClick={handleCheckInClick}
-            sx={{ height: '100px', width: '100%' }}
+            disabled={!!checkInTime && !checkOutTime}
           >
-            <Box textAlign="center">
-              <Typography variant="h5">
-                {checkInTime ? 'Checked In' : 'Check In/Out'}
-              </Typography>
-              {checkInTime && (
-                <Typography variant="subtitle1" sx={{ mt: 1 }}>
-                  In: {checkInTime.format('HH:mm')}
-                </Typography>
-              )}
+            <Typography variant="h6">
+              {checkInTime ? 'Checked In' : 'Check In'}
+            </Typography>
+            {checkInTime && (
+              <p className={styles.checkButtonSubtitle}>
+                at {checkInTime.format('HH:mm')}
+              </p>
+            )}
+          </button>
+          <button
+            className={styles.checkOutButton}
+            onClick={handleCheckOutClick}
+            disabled={!checkInTime || (!!checkInTime && !!checkOutTime)}
+          >
+            <Typography variant="h6">
+              {checkOutTime ? 'Checked Out' : 'Check Out'}
+            </Typography>
+            {checkOutTime && (
+              <p className={styles.checkButtonSubtitle}>
+                at {checkOutTime.format('HH:mm')}
+              </p>
+            )}
+          </button>
+        </div>
+        <h3 className={styles.activityHeader}>{`Your Activity`}</h3>
+        <div className={styles.daySwitcher}>
+          <button
+            className={styles.baseSecondaryButton}
+            onClick={() => setActivityDate(activityDate.subtract(1, 'day'))}
+          >
+            {'< '}
+          </button>
+          <p className={styles.todayText}>
+            {activityDate.format('dddd, MMMM D')}
+          </p>
+          <button
+            className={styles.baseSecondaryButton}
+            onClick={() => setActivityDate(activityDate.add(1, 'day'))}
+            disabled={!canNavigateForward}
+          >
+            {' >'}
+          </button>
+        </div>
+        <div className={styles.activityListContainer}>
+          <ListItem key={0} className={styles.activityListHeader}>
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="space-between"
+              width="100%"
+            >
+              <img
+                src={CheckInIcon}
+                className={styles.activityListIcon}
+                alt="check in icon"
+              />
+              <img
+                src={CheckOutIcon}
+                className={styles.activityListIcon}
+                alt="check out icon"
+              />
             </Box>
-          </Button>
-        </Grid>
-        <Grid item xs={12} className={styles.activityHeader}>
-          <Typography variant="h6" component="div">
-            Your Activity
-          </Typography>
-          <Typography variant="subtitle1" sx={{ mt: 2 }}>
-            {today}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} className={styles.activityList}>
-          <Paper elevation={3}>
-            <List>
-              {activities.map((activity, index) => (
-                <ListItem key={index}>
-                  <ListItemText
-                    primary={`In: ${activity.in.format('HH:mm')}`}
-                    secondary={
-                      activity.out
-                        ? `Out: ${activity.out.format('HH:mm')}`
-                        : 'Currently In'
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-        </Grid>
-      </Grid>
+          </ListItem>
+          <hr className={styles.separator} />
+          <List className={styles.activityList}>
+            {activities.map((activity, index) => (
+              <ListItem key={index} className={styles.activityListItem}>
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  width="100%"
+                >
+                  <p>{activity.in.format('HH:mm')}</p>
+                  {activity.out && <p>→</p>}
+                  {activity.out && <p>{activity.out.format('HH:mm')}</p>}
+                </Box>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </div>
       <Footer />
     </div>
   );

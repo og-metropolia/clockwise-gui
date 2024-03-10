@@ -14,7 +14,6 @@ import { useUser } from '@/components/UserContext';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { DateRange, DayPicker } from 'react-day-picker';
-import { format } from 'date-fns';
 
 // TODO: get from API
 const ABSENCE_TYPES = [
@@ -73,18 +72,6 @@ const VacationPage: React.FC = () => {
   };
 
   const today = new Date();
-  let footer = <p>Please pick the first day.</p>;
-  if (range?.from) {
-    if (!range.to) {
-      footer = <p>{format(range.from, 'PPP')}</p>;
-    } else if (range.to) {
-      footer = (
-        <p>
-          {format(range.from, 'PPP')}–{format(range.to, 'PPP')}
-        </p>
-      );
-    }
-  }
 
   const handleSelect = (newRange: DateRange | undefined) => {
     if (newRange === range) setRange({ from: undefined, to: undefined });
@@ -99,13 +86,12 @@ const VacationPage: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div className={styles.basePage}>
         <ProfileCard user={user} />
+        <h2 className={styles.baseTitle}>Absences</h2>
         <DayPicker
-          id="test"
           mode="range"
           defaultMonth={today}
           weekStartsOn={1}
           selected={range}
-          footer={footer}
           onSelect={handleSelect}
           modifiersClassNames={{
             selected: 'calendar-selected',

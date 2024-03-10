@@ -1,0 +1,15 @@
+@import '../../base.css';
+@import '../../colors.module.css';
+
+.employeeList {
+  height: 50vh;
+  width: 90vw;
+  overflow-y: auto;
+  margin-top: 16px;
+  border-radius: 10px;
+}
+
+.employeeListContainer {
+  background: var(--scrollable-background);
+  border-radius: 10px;
+}

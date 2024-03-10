@@ -8,7 +8,7 @@ export type ContextUser = {
   user: LoginUser;
 } | null;
 
-function setCookie(name: string, value: string, expireDays: number) {
+export function setCookie(name: string, value: string, expireDays: number) {
   let expires = '';
   if (expireDays) {
     const date = new Date();
@@ -18,7 +18,7 @@ function setCookie(name: string, value: string, expireDays: number) {
   document.cookie = name + '=' + (value || '') + expires + '; path=/';
 }
 
-function getCookie(name: string) {
+export function getCookie(name: string) {
   const cookies = Object.fromEntries(
     document.cookie.split(/; /).map((c) => {
       const [key, v] = c.split('=', 2);
@@ -49,7 +49,10 @@ export const UserContext = createContext({
     if (!user) return null;
     localStorage.setItem('user', JSON.stringify(user));
   },
-  logout: () => {},
+  logout: () => {
+    resetCookie('token');
+    localStorage.removeItem('user');
+  },
   updateUser: (user: LoginUser) => {
     if (!user) return null;
     localStorage.setItem('user', JSON.stringify({ user: user }));

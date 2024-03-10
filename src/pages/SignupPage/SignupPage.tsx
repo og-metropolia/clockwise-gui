@@ -29,6 +29,7 @@ interface RegisterFormValues {
   password: string;
   confirmPassword: string;
   termsAndConditions: boolean;
+  auth: string;
 }
 
 const SignupPage: React.FC = () => {
@@ -47,6 +48,7 @@ const SignupPage: React.FC = () => {
     password: '',
     confirmPassword: '',
     termsAndConditions: false,
+    auth: '',
   };
 
   useEffect(() => {
@@ -56,10 +58,14 @@ const SignupPage: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.basePage}>
+    <div className={styles.basePageSecondary}>
       <Logo />
       <h1 className={styles.baseHeader}>Welcome to ClockWise</h1>
-      {disabled && <p className={styles.warningText}>Please use an invite link to register.</p>}
+      {disabled && (
+        <p className={styles.warningText}>
+          Please use an invite link to register.
+        </p>
+      )}
       <div className={styles.baseFormContainer}>
         <Formik
           initialValues={initialValues}
@@ -90,8 +96,12 @@ const SignupPage: React.FC = () => {
               alert('Invalid domain for company email.');
               return;
             }
-
             const data = await fetchGraphql(signup, user);
+            if (!data?.login) {
+              actions.setErrors({ auth: 'Invalid email or password' });
+              return;
+            }
+
             actions.setSubmitting(false);
             login(data.login).then(() => navigate(ROUTES.dashboard));
           }}
@@ -136,7 +146,7 @@ const SignupPage: React.FC = () => {
                 type="password"
                 placeholder="Password"
                 className={styles.baseField}
-                autocomplete="new-password"
+                autoComplete="new-password"
                 disabled={disabled}
               />
               {errors.password && touched.password ? (
@@ -148,7 +158,7 @@ const SignupPage: React.FC = () => {
                 type="password"
                 placeholder="Confirm Password"
                 className={styles.baseField}
-                autocomplete="new-password"
+                autoComplete="new-password"
                 disabled={disabled}
               />
               {errors.confirmPassword && touched.confirmPassword ? (
@@ -160,7 +170,7 @@ const SignupPage: React.FC = () => {
                   type="checkbox"
                   name="termsAndConditions"
                   className={styles.checkbox}
-disabled={disabled}
+                  disabled={disabled}
                 />
                 <span>
                   I agree to the Terms & Conditions & Privacy Policy set out by
@@ -183,7 +193,9 @@ disabled={disabled}
       </div>
       <div className={styles.footer}>
         Already have an account?{' '}
-        <a href={ROUTES.login} className={styles.link}>Login</a>
+        <a href={ROUTES.login} className={styles.link}>
+          Login
+        </a>
       </div>
     </div>
   );
