@@ -15,31 +15,31 @@ Voit kokeilla Clockwise-sovellusta tästä linkistä: [Käyttöliittymän linkki
 ## Käyttöliittymän Kuvakaappaukset
 
 ### Kirjautumisnäkymä
-![Login Screen](https://github.com/og-metropolia/clockwise-gui/images/login.png)
+![Login Screen](./images/login.png)
 *Kirjautumisnäkymä, jossa käyttäjät voivat kirjautua sisään.*
 
 ### Rekisteröintinäkymä
-![Signup Screen](https://github.com/og-metropolia/clockwise-gui/images/signup.png)
+![Signup Screen](./images/signup.png)
 *Rekisteröintinäkymä uusille käyttäjille.*
 
 ### Salasanan Palautus
-![Reset Password](https://github.com/og-metropolia/clockwise-gui/images/reset-password.png)
+![Reset Password](./images/reset-password.png)
 *Salasanan palautusnäkymä unohtuneita salasanoja varten.*
 
 ### Dashboard
-![Dashboard](https://github.com/og-metropolia/clockwise-gui/images/dashboard.png)
+![Dashboard](./images/dashboard.png)
 *Käyttäjän dashboard, josta voi leimata itsensä sisään ja ulos, sekä näkee päivittäiset aktiviteetit ja työajan kirjaukset.*
 
 ### Raportit
-![Report](https://github.com/og-metropolia/clockwise-gui/images/report.png)
+![Report](./images/report.png)
 *Raporttinäkymä, joka näyttää työtunnit ja mahdolliset ylityöt.*
 
 ### Lomat ja Poissaolot
-![Vacation](https://github.com/og-metropolia/clockwise-gui/images/vacation.png)
+![Vacation](./images/vacation.png)
 *Lomien ja poissaolojen merkintäsivu.*
 
 ### Asetukset
-![Settings](https://github.com/og-metropolia/clockwise-gui/images/settings.png)
+![Settings](./images/settings.png)
 *Asetussivu, jossa käyttäjät voivat muokata omia tietojaan.*
 
 ## Paikallinen Kehitys
