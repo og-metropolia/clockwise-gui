@@ -12,11 +12,37 @@ Clockwise on kehitetty erityisesti pienyritysten tarpeisiin, helpottaen kirjanpi
 
 Voit kokeilla Clockwise-sovellusta tästä linkistä: [Käyttöliittymän linkki] (Lisää linkki tähän)
 
-### Kuvat ja Videot
+## Käyttöliittymän Kuvakaappaukset
 
-(Kuvia tai videoita sovelluksen käytöstä – lisää tarvittaessa)
+### Kirjautumisnäkymä
+![Login Screen](https://github.com/og-metropolia/clockwise-gui/assets/login.png)
+*Kirjautumisnäkymä, jossa käyttäjät voivat kirjautua sisään.*
 
-### Paikallinen Kehitys
+### Rekisteröintinäkymä
+![Signup Screen](https://github.com/og-metropolia/clockwise-gui/assets/signup.png)
+*Rekisteröintinäkymä uusille käyttäjille.*
+
+### Salasanan Palautus
+![Reset Password](https://github.com/og-metropolia/clockwise-gui/assets/reset-password.png)
+*Salasanan palautusnäkymä unohtuneita salasanoja varten.*
+
+### Dashboard
+![Dashboard](https://github.com/og-metropolia/clockwise-gui/assets/dashboard.png)
+*Käyttäjän dashboard, josta voi leimata itsensä sisään ja ulos, sekä näkee päivittäiset aktiviteetit ja työajan kirjaukset.*
+
+### Raportit
+![Report](https://github.com/og-metropolia/clockwise-gui/assets/report.png)
+*Raporttinäkymä, joka näyttää työtunnit ja mahdolliset ylityöt.*
+
+### Lomat ja Poissaolot
+![Vacation](https://github.com/og-metropolia/clockwise-gui/assets/vacation.png)
+*Lomien ja poissaolojen merkintäsivu.*
+
+### Asetukset
+![Settings](https://github.com/og-metropolia/clockwise-gui/assets/settings.png)
+*Asetussivu, jossa käyttäjät voivat muokata omia tietojaan.*
+
+## Paikallinen Kehitys
 
 Jos haluat kehittää sovellusta paikallisesti, noudata seuraavia ohjeita:
 
@@ -25,7 +51,7 @@ Jos haluat kehittää sovellusta paikallisesti, noudata seuraavia ohjeita:
 3. Suorita `pnpm install` asentaaksesi riippuvuudet.
 4. Käynnistä paikallinen palvelin suorittamalla `pnpm run dev`.
 
-### API
+## API
 
 Clockwise-sovelluksen GraphQL API löytyy osoitteesta [og-metropolia/clockwise-api](https://github.com/og-metropolia/clockwise-api).
 
