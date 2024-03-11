@@ -12,7 +12,11 @@
 }
 
 .linkContainer {
+  padding-top: 0;
+  margin: 0 10px;
   text-align: center;
+  text-align: left;
+  align-items: left;
 }
 
 p {
@@ -28,16 +32,29 @@ p {
   cursor: pointer;
 }
 
-.footer {
+.registerNavigation {
+  margin: 0;
+}
+
+.loginFormFooter {
   font-size: 14px;
   text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.loginFormFooterBottomPart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .highlight {
   color: var(--clockwise-blue);
 }
 
-/* Lisää tarvittaessa responsiivisia tyylejä */
 @media (max-width: 600px) {
   .header {
     font-size: 20px;

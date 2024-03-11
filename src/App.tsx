@@ -13,6 +13,7 @@ import SignupPage from '@/pages/SignupPage/SignupPage';
 import Dashboard from '@/pages/Dashboard/Dashboard';
 import ManagerDashboard from '@/pages/ManagerDashboard/ManagerDashboard';
 import ReportPage from './pages/Report/ReportPage';
+import './i18n';
 
 import 'react-day-picker/dist/style.css';
 import VisitPage from './pages/Visit/VisitPage';

@@ -1,25 +1,29 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next'; // Tuodaan useTranslation
 import ROUTES from '@/constants/routes';
 import styles from './ResetPassword.module.css';
 import Logo from '@/components/Logo';
 
 const ResetPassword: React.FC = () => {
+  const { t } = useTranslation(); // Käytetään useTranslation hookia
+
   return (
     <div className={styles.basePageSecondary}>
       <Logo />
-      <h1 className={styles.baseHeader}>Reset Password</h1>
-      <p>Forgot your password? No worries!</p>
+      <h1 className={styles.baseHeader}>{t('resetPassword.title')}</h1>
+      <p>{t('resetPassword.description')}</p>
       <p>
-        Call our helpdesk at <a href="tel:+358 40 456 7890">+358 40 456 7890</a>{' '}
-        or email us at{' '}
-        <a href="mailto:support@clockwise.com">support@clockwise.com</a> for
-        assistance in resetting your password.
+        {t('resetPassword.helpText')}{' '}
+        <a href="tel:+358 40 456 7890">{t('resetPassword.phoneNumber')}</a>{' '}
+        {t('resetPassword.or')}{' '}
+        <a href="mailto:support@clockwise.com">{t('resetPassword.email')}</a>{' '}
+        {t('resetPassword.forAssistance')}.
       </p>
       <div>
         <p>
-          Back to{' '}
+          {t('resetPassword.backTo')}{' '}
           <a href={ROUTES.login} className={styles.link}>
-            Login
+            {t('resetPassword.loginLink')}
           </a>
         </p>
       </div>

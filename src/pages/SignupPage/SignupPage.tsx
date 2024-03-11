@@ -9,6 +9,8 @@ import { fetchGraphql } from '@/graphql/fetch';
 import { USER_DEFAULTS } from '@/constants/userDefaults';
 import { useUser } from '@/components/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -35,6 +37,7 @@ interface RegisterFormValues {
 const SignupPage: React.FC = () => {
   const { login } = useUser();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [disabled, setDisabled] = React.useState(false);
   const searchParams = new URLSearchParams(window.location.search);
 
@@ -60,11 +63,9 @@ const SignupPage: React.FC = () => {
   return (
     <div className={styles.basePageSecondary}>
       <Logo />
-      <h1 className={styles.baseHeader}>Welcome to ClockWise</h1>
+      <h1 className={styles.baseHeader}>{t('signup.title.welcome')}</h1>
       {disabled && (
-        <p className={styles.warningText}>
-          Please use an invite link to register.
-        </p>
+        <p className={styles.warningText}>{t('signup.warning.inviteOnly')}</p>
       )}
       <div className={styles.baseFormContainer}>
         <Formik
@@ -172,10 +173,7 @@ const SignupPage: React.FC = () => {
                   className={styles.checkbox}
                   disabled={disabled}
                 />
-                <span>
-                  I agree to the Terms & Conditions & Privacy Policy set out by
-                  this site.
-                </span>
+                <span>{t('signup.form.checkbox.termsAndConditions')}</span>
               </label>
               {errors.termsAndConditions && touched.termsAndConditions ? (
                 <div className={styles.error}>{errors.termsAndConditions}</div>
@@ -185,17 +183,26 @@ const SignupPage: React.FC = () => {
                 className={styles.basePrimaryButton}
                 disabled={disabled}
               >
-                Register
+                {t('signup.form.button.register')}
               </button>
+              {errors.auth && touched.auth ? (
+                <div className={styles.error}>{errors.auth}</div>
+              ) : null}
+
+              <div className={styles.registerFormFooter}>
+                <div className={styles.registerFormFooterBottomPart}>
+                  <LanguageSwitcher />
+                  <p className={styles.loginNavigation}>
+                    {t('signup.form.footer.prompt')}
+                    <a href={ROUTES.login} className={styles.link}>
+                      {t('signup.form.footer.loginLink')}
+                    </a>
+                  </p>
+                </div>
+              </div>
             </Form>
           )}
         </Formik>
-      </div>
-      <div className={styles.footer}>
-        Already have an account?{' '}
-        <a href={ROUTES.login} className={styles.link}>
-          Login
-        </a>
       </div>
     </div>
   );
