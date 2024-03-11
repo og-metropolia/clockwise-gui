@@ -4,25 +4,30 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ROUTES from '@/constants/routes';
 import Logo from '@/components/Logo';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { fetchGraphql } from '@/graphql/fetch';
 import { loginQuery } from '@/graphql/queries';
 import { useUser } from '@/components/UserContext';
 import { useNavigate } from 'react-router-dom';
-
-const LoginFormSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().required('Required'),
-});
-
-interface LoginFormValues {
-  email: string;
-  password: string;
-  auth: string;
-}
+import { useTranslation } from 'react-i18next';
 
 const LoginPage: React.FC = () => {
   const { login } = useUser();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const LoginFormSchema = Yup.object().shape({
+    email: Yup.string()
+      .email(t('login.form.error.invalidEmail'))
+      .required(t('login.form.error.required')),
+    password: Yup.string().required(t('login.form.error.required')),
+  });
+
+  interface LoginFormValues {
+    email: string;
+    password: string;
+    auth: string;
+  }
 
   const initialValues: LoginFormValues = { email: '', password: '', auth: '' };
 
@@ -30,7 +35,8 @@ const LoginPage: React.FC = () => {
     <div className={styles.basePageSecondary}>
       <Logo />
       <h1 className={styles.baseHeader}>
-        Welcome Back 👋 to <span className={styles.highlight}>ClockWise</span>
+        {t('login.title.welcome')}
+        <span className={styles.highlight}>{t('login.title.companyName')}</span>
       </h1>
       <div className={styles.baseFormContainer}>
         <Formik
@@ -40,7 +46,9 @@ const LoginPage: React.FC = () => {
             actions.setSubmitting(false);
             const data = await fetchGraphql(loginQuery, values);
             if (!data?.login) {
-              actions.setErrors({ auth: 'Invalid email or password' });
+              actions.setErrors({
+                auth: t('login.form.error.invalidCredentials'),
+              });
               return;
             }
             login(data.login).then(() => {
@@ -55,33 +63,37 @@ const LoginPage: React.FC = () => {
               <Field
                 name="email"
                 type="email"
-                placeholder="Email Address"
+                placeholder={t('login.form.placeholder.email')}
                 className={styles.baseField}
               />
               <Field
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t('login.form.placeholder.password')}
                 className={styles.baseField}
               />
               <button type="submit" className={styles.button}>
-                Login
+                {t('login.form.button.login')}
               </button>
-              {errors && touched ? (
+              {errors.auth && touched.auth ? (
                 <div className={styles.error}>{errors.auth}</div>
               ) : null}
-              <div className={styles.linkContainer}>
-                <a href={ROUTES.resetPassword} className={styles.link}>
-                  Forgot Password?
-                </a>
-              </div>
-              <div className={styles.footer}>
-                <p>
-                  Don't have an account?{' '}
-                  <a href={ROUTES.signup} className={styles.link}>
-                    Register
+
+              <div className={styles.loginFormFooter}>
+                <p className={styles.linkContainer}>
+                  <a href={ROUTES.resetPassword} className={styles.link}>
+                    {t('login.form.link.forgotPassword')}
                   </a>
                 </p>
+                <div className={styles.loginFormFooterBottomPart}>
+                  <LanguageSwitcher />
+                  <p className={styles.registerNavigation}>
+                    {t('login.form.footer.prompt')}
+                    <a href={ROUTES.signup} className={styles.link}>
+                      {t('login.form.link.register')}
+                    </a>
+                  </p>
+                </div>
               </div>
             </Form>
           )}

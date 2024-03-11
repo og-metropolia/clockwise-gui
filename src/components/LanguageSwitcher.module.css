@@ -1,0 +1,25 @@
+@import '../base.css';
+@import '../colors.module.css';
+
+.languageSwitcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.languageSwitcherContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.languageSwitcherButton {
+  background-color: #f0f0f0;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  border: var(--clockwise-blue) 2px solid;
+}

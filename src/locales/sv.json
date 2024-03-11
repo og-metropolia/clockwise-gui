@@ -1,0 +1,62 @@
+{
+  "login": {
+    "title": {
+      "welcome": "Välkommen tillbaka 👋 till ",
+      "companyName": "ClockWise"
+    },
+    "form": {
+      "error": {
+        "invalidEmail": "Ogiltig e-post",
+        "required": "Krävs",
+        "invalidCredentials": "Ogiltig e-post eller lösenord"
+      },
+      "placeholder": {
+        "email": "E-postadress",
+        "password": "Lösenord"
+      },
+      "button": {
+        "login": "Logga in"
+      },
+      "link": {
+        "forgotPassword": "Glömt lösenord?",
+        "register": "Registrera dig"
+      },
+      "footer": {
+        "prompt": "Har du inget konto? "
+      }
+    }
+  },
+  "signup": {
+    "title": {
+      "welcome": "Välkommen till ClockWise"
+    },
+    "warning": {
+      "inviteOnly": "Vänligen använd en inbjudningslänk för att registrera dig."
+    },
+    "form": {
+      "error": {
+        "invalidEmail": "Ogiltig e-post",
+        "required": "Krävs",
+        "passwordsMustMatch": "Lösenorden måste matcha",
+        "termsAndConditions": "Du måste acceptera användarvillkoren"
+      },
+      "placeholder": {
+        "firstName": "Förnamn",
+        "lastName": "Efternamn",
+        "email": "E-post",
+        "password": "Lösenord",
+        "confirmPassword": "Bekräfta lösenord"
+      },
+      "button": {
+        "register": "Registrera"
+      },
+      "checkbox": {
+        "termsAndConditions": "Jag godkänner villkoren och integritetspolicyn."
+      },
+      "footer": {
+        "prompt": "Har du redan ett konto?",
+        "loginLink": "Logga in"
+      }
+    }
+  }
+}

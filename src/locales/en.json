@@ -1,0 +1,73 @@
+{
+  "login": {
+    "title": {
+      "welcome": "Welcome Back 👋 to ",
+      "companyName": "ClockWise"
+    },
+    "form": {
+      "error": {
+        "invalidEmail": "Invalid email",
+        "required": "Required",
+        "invalidCredentials": "Invalid email or password"
+      },
+      "placeholder": {
+        "email": "Email Address",
+        "password": "Password"
+      },
+      "button": {
+        "login": "Login"
+      },
+      "link": {
+        "forgotPassword": "Forgot Password?",
+        "register": "Register"
+      },
+      "footer": {
+        "prompt": "Don't have an account? "
+      }
+    }
+  },
+  "signup": {
+    "title": {
+      "welcome": "Welcome to ClockWise"
+    },
+    "warning": {
+      "inviteOnly": "Please use an invite link to register."
+    },
+    "form": {
+      "error": {
+        "invalidEmail": "Invalid email",
+        "required": "Required",
+        "passwordsMustMatch": "Passwords must match",
+        "termsAndConditions": "You must accept the terms and conditions"
+      },
+      "placeholder": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+      },
+      "button": {
+        "register": "Register"
+      },
+      "checkbox": {
+        "termsAndConditions": "I agree to the Terms of Service & Privacy Policy."
+      },
+      "footer": {
+        "prompt": "Already have an account? ",
+        "loginLink": "Login"
+      }
+    }
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "description": "Forgot your password? No worries!",
+    "helpText": "Call our helpdesk at",
+    "phoneNumber": "+358 40 456 7890",
+    "or": "or email us at",
+    "email": "support@clockwise.com",
+    "forAssistance": "for assistance in resetting your password.",
+    "backTo": "Back to",
+    "loginLink": "Login"
+  }
+}
