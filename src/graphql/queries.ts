@@ -97,6 +97,45 @@ query UsersByCompany($companyId: ID! $role: Role) {
 }
 `;
 
+const getEntriesByType = `
+query EntriesByType($type: String!) {
+  entriesByType(type: $type) {
+    id
+    user_id
+    type
+    start_timestamp
+    end_timestamp
+  }
+}
+`;
+
+const createEntryMutation = `
+mutation CreateEntry($input: InputEntry) {
+  createEntry(input: $input) {
+    id
+  }
+}
+`;
+
+const updateEntryMutation = `
+mutation UpdateEntry($id: ID!, $input: UpdateEntry) {
+  updateEntry(id: $id, input: $input) {
+    id
+  }
+}
+`;
+
+const getLatestModifiedEntry = `
+query EntryLatestModified($input: InputEntryTypeOnly) {
+  entryLatestModified(input: $input) {
+    id
+    type
+    start_timestamp
+    end_timestamp
+  }
+}
+`;
+
 export {
   loginQuery,
   getUserQuery,
@@ -104,4 +143,8 @@ export {
   getCompanyEmails,
   updateUserMutation,
   getEmployeesByCompany,
+  getEntriesByType,
+  createEntryMutation,
+  updateEntryMutation,
+  getLatestModifiedEntry,
 };
