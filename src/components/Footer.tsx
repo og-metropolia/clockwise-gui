@@ -8,6 +8,7 @@ import VacationIcon from './icons/VacationIcon.tsx';
 import SettingsIcon from './icons/SettingsIcon.tsx';
 import ROUTES from '../constants/routes';
 import { useUser } from './UserContext.tsx';
+import AddCompanyIcon from './icons/AddCompanyIcon.tsx';
 
 const setActive = ({ isActive }: { isActive: boolean }) => {
   return isActive ? 'active-icon' : 'inactive-icon';
@@ -18,7 +19,7 @@ const Footer: React.FC = () => {
   const role = getUser().role;
   return (
     <div className="footer-container">
-      {role === 'EMPLOYEE' ? (
+      {role === 'EMPLOYEE' && (
         <>
           <NavLink to={ROUTES.dashboard} className={setActive}>
             <DashboardIcon />
@@ -33,13 +34,29 @@ const Footer: React.FC = () => {
             <SettingsIcon />
           </NavLink>
         </>
-      ) : (
+      )}
+
+      {role === 'MANAGER' && (
         <>
           <NavLink to={ROUTES.managerDashboard} className={setActive}>
             <HomeIcon />
           </NavLink>
           <NavLink to={ROUTES.visit} className={setActive}>
             <ReportIcon />
+          </NavLink>
+          <NavLink to={ROUTES.settings} className={setActive}>
+            <SettingsIcon />
+          </NavLink>
+        </>
+      )}
+
+      {role === 'ADMIN' && (
+        <>
+          <NavLink to={ROUTES.adminDashboard} className={setActive}>
+            <HomeIcon />
+          </NavLink>
+          <NavLink to={ROUTES.companySignup} className={setActive}>
+            <AddCompanyIcon />
           </NavLink>
           <NavLink to={ROUTES.settings} className={setActive}>
             <SettingsIcon />

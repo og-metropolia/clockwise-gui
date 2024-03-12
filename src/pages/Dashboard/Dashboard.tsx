@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import { Typography, List, ListItem, Paper, Box } from '@mui/material';
-import styles from './Dashboard.module.css'; // Oletetaan, että yhteisiä tyylejä on päivitetty tai lisätty
+import { Typography, List, ListItem, Box } from '@mui/material';
+import styles from './Dashboard.module.css';
 import ProfileCard from '@/components/ProfileCard';
 import { useUser } from '@/components/UserContext';
 import Footer from '../../components/Footer';
