@@ -98,8 +98,8 @@ query UsersByCompany($companyId: ID! $role: Role) {
 `;
 
 const getEntriesByType = `
-query EntriesByType($type: String!) {
-  entriesByType(type: $type) {
+query EntriesByType($input: InputEntryByTypeAndTimestamp) {
+  entriesByType(input: $input) {
     id
     user_id
     type

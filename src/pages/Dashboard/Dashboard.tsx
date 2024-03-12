@@ -38,18 +38,20 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    fetchGraphql(getEntriesByType, { type: 'working' }, getToken()).then(
-      (results) => {
-        setEntries(
-          results?.entriesByType
-            .filter((entry: any) => !!entry)
-            .map((entry: any) => ({
-              in: dayjs(entry.start_timestamp),
-              out: dayjs(entry.end_timestamp),
-            })),
-        );
-      },
-    );
+    fetchGraphql(
+      getEntriesByType,
+      { input: { type: 'working' } },
+      getToken(),
+    ).then((results) => {
+      setEntries(
+        results?.entriesByType
+          .filter((entry: any) => !!entry)
+          .map((entry: any) => ({
+            in: dayjs(entry.start_timestamp),
+            out: dayjs(entry.end_timestamp),
+          })),
+      );
+    });
   }, []);
 
   const handleCheckInClick = async () => {
@@ -95,6 +97,31 @@ const Dashboard = () => {
     setEntryId(null);
   };
 
+  const handleDateChange = (date: Dayjs) => {
+    setActivityDate(date);
+
+    fetchGraphql(
+      getEntriesByType,
+      {
+        input: {
+          type: 'working',
+          min_timestamp: date.startOf('day').toISOString(),
+          max_timestamp: date.endOf('day').toISOString(),
+        },
+      },
+      getToken(),
+    ).then((results) => {
+      setEntries(
+        results?.entriesByType
+          .filter((entry: any) => !!entry)
+          .map((entry: any) => ({
+            in: dayjs(entry.start_timestamp),
+            out: dayjs(entry.end_timestamp),
+          })),
+      );
+    });
+  };
+
   const canNavigateForward = activityDate.isBefore(dayjs(), 'day');
 
   return (
@@ -136,7 +163,7 @@ const Dashboard = () => {
         <div className={styles.daySwitcher}>
           <button
             className={styles.baseSecondaryButton}
-            onClick={() => setActivityDate(activityDate.subtract(1, 'day'))}
+            onClick={() => handleDateChange(activityDate.subtract(1, 'day'))}
           >
             {'< '}
           </button>
@@ -145,7 +172,7 @@ const Dashboard = () => {
           </p>
           <button
             className={styles.baseSecondaryButton}
-            onClick={() => setActivityDate(activityDate.add(1, 'day'))}
+            onClick={() => handleDateChange(activityDate.add(1, 'day'))}
             disabled={!canNavigateForward}
           >
             {' >'}
