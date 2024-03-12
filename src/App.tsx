@@ -13,15 +13,17 @@ import SignupPage from '@/pages/SignupPage/SignupPage';
 import Dashboard from '@/pages/Dashboard/Dashboard';
 import ManagerDashboard from '@/pages/ManagerDashboard/ManagerDashboard';
 import ReportPage from './pages/Report/ReportPage';
+import CompanySignUpPage from './pages/CompanySignUp/CompanySignUpPage';
 import './i18n';
 
 import 'react-day-picker/dist/style.css';
 import VisitPage from './pages/Visit/VisitPage';
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>Error</div>,
+    element: <div>Redirecting...</div>,
     loader: () => redirect(ROUTES.dashboard),
   },
   {
@@ -46,7 +48,9 @@ const router = createBrowserRouter([
       isAuth()
         ? isManager()
           ? redirect(ROUTES.managerDashboard)
-          : null
+          : isAdmin()
+            ? redirect(ROUTES.companySignup)
+            : null
         : redirect(ROUTES.login),
   },
   {
@@ -94,6 +98,26 @@ const router = createBrowserRouter([
           : null
         : redirect(ROUTES.login),
   },
+  {
+    path: ROUTES.companySignup,
+    element: <CompanySignUpPage />,
+    loader: () =>
+      isAuth()
+        ? !isAdmin()
+          ? redirect(ROUTES.dashboard)
+          : null
+        : redirect(ROUTES.login),
+  },
+  {
+    path: ROUTES.adminDashboard,
+    element: <AdminDashboard />,
+    loader: () =>
+      isAuth()
+        ? !isAdmin()
+          ? redirect(ROUTES.dashboard)
+          : null
+        : redirect(ROUTES.login),
+  },
 ]);
 
 function App() {
@@ -118,6 +142,13 @@ function isManager() {
     ...JSON.parse(localStorage.getItem('user') ?? '{}'),
   };
   return context?.user?.role === 'MANAGER';
+}
+
+function isAdmin() {
+  const context = {
+    ...JSON.parse(localStorage.getItem('user') ?? '{}'),
+  };
+  return context?.user?.role === 'ADMIN';
 }
 
 export default App;

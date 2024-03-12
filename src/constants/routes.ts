@@ -8,6 +8,8 @@ const ROUTES = {
   vacation: '/vacation',
   managerDashboard: '/manager',
   visit: '/visit',
+  adminDashboard: '/admin',
+  companySignup: '/company-signup',
 };
 
 export default ROUTES;

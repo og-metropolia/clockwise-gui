@@ -1,38 +1,125 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import { Typography, List, ListItem, Paper, Box } from '@mui/material';
-import styles from './Dashboard.module.css'; // Oletetaan, että yhteisiä tyylejä on päivitetty tai lisätty
+import { Typography, List, ListItem, Box } from '@mui/material';
+import styles from './Dashboard.module.css';
 import ProfileCard from '@/components/ProfileCard';
 import { useUser } from '@/components/UserContext';
 import Footer from '../../components/Footer';
 import CheckInIcon from '../../assets/checkin.png';
 import CheckOutIcon from '../../assets/checkout.png';
+import { fetchGraphql } from '@/graphql/fetch';
+import {
+  createEntryMutation,
+  getEntriesByType,
+  getLatestModifiedEntry,
+  updateEntryMutation,
+} from '@/graphql/queries';
 
 const Dashboard = () => {
-  const { getUser } = useUser();
+  const { getUser, getToken } = useUser();
   const user = getUser();
   const [checkInTime, setCheckInTime] = useState<Dayjs | null>(null);
   const [checkOutTime, setCheckOutTime] = useState<Dayjs | null>(null);
-  const [activities, setActivities] = useState<{ in: Dayjs; out?: Dayjs }[]>(
-    [],
-  );
+  const [entries, setEntries] = useState<{ in: Dayjs; out?: Dayjs }[]>([]);
   const [activityDate, setActivityDate] = useState(dayjs());
+  const [entryId, setEntryId] = useState<string | null>(null);
 
-  const handleCheckInClick = () => {
+  useEffect(() => {
+    fetchGraphql(
+      getLatestModifiedEntry,
+      { input: { type: 'working' } },
+      getToken(),
+    ).then((result) => {
+      if (!result?.entryLatestModified?.end_timestamp) {
+        setEntryId(result?.entryLatestModified?.id);
+        setCheckInTime(dayjs(result?.entryLatestModified?.start_timestamp));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchGraphql(
+      getEntriesByType,
+      { input: { type: 'working' } },
+      getToken(),
+    ).then((results) => {
+      setEntries(
+        results?.entriesByType
+          .filter((entry: any) => !!entry)
+          .map((entry: any) => ({
+            in: dayjs(entry.start_timestamp),
+            out: dayjs(entry.end_timestamp),
+          })),
+      );
+    });
+  }, []);
+
+  const handleCheckInClick = async () => {
     const now = dayjs();
 
     setCheckInTime(now);
     setCheckOutTime(null);
+
+    const result = await fetchGraphql(
+      createEntryMutation,
+      {
+        input: {
+          type: 'working',
+          start_timestamp: now.toISOString(),
+        },
+      },
+      getToken(),
+    );
+
+    setEntryId(result?.createEntry?.id);
   };
 
-  const handleCheckOutClick = () => {
+  const handleCheckOutClick = async () => {
     const now = dayjs();
 
     if (!!checkInTime) {
       setCheckOutTime(now);
-      setActivities(activities.concat([{ in: checkInTime, out: now }]));
+      setEntries(entries.concat([{ in: checkInTime, out: now }]));
     }
     setCheckInTime(null);
+
+    await fetchGraphql(
+      updateEntryMutation,
+      {
+        id: entryId,
+        input: {
+          end_timestamp: now.toISOString(),
+        },
+      },
+      getToken(),
+    );
+
+    setEntryId(null);
+  };
+
+  const handleDateChange = (date: Dayjs) => {
+    setActivityDate(date);
+
+    fetchGraphql(
+      getEntriesByType,
+      {
+        input: {
+          type: 'working',
+          min_timestamp: date.startOf('day').toISOString(),
+          max_timestamp: date.endOf('day').toISOString(),
+        },
+      },
+      getToken(),
+    ).then((results) => {
+      setEntries(
+        results?.entriesByType
+          .filter((entry: any) => !!entry)
+          .map((entry: any) => ({
+            in: dayjs(entry.start_timestamp),
+            out: dayjs(entry.end_timestamp),
+          })),
+      );
+    });
   };
 
   const canNavigateForward = activityDate.isBefore(dayjs(), 'day');
@@ -76,7 +163,7 @@ const Dashboard = () => {
         <div className={styles.daySwitcher}>
           <button
             className={styles.baseSecondaryButton}
-            onClick={() => setActivityDate(activityDate.subtract(1, 'day'))}
+            onClick={() => handleDateChange(activityDate.subtract(1, 'day'))}
           >
             {'< '}
           </button>
@@ -85,7 +172,7 @@ const Dashboard = () => {
           </p>
           <button
             className={styles.baseSecondaryButton}
-            onClick={() => setActivityDate(activityDate.add(1, 'day'))}
+            onClick={() => handleDateChange(activityDate.add(1, 'day'))}
             disabled={!canNavigateForward}
           >
             {' >'}
@@ -114,7 +201,7 @@ const Dashboard = () => {
           </ListItem>
           <hr className={styles.separator} />
           <List className={styles.activityList}>
-            {activities.map((activity, index) => (
+            {entries.map((activity, index) => (
               <ListItem key={index} className={styles.activityListItem}>
                 <Box
                   display="flex"
