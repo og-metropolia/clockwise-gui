@@ -30,7 +30,11 @@ const Dashboard = () => {
       { input: { type: 'working' } },
       getToken(),
     ).then((result) => {
-      if (!result?.entryLatestModified?.end_timestamp) {
+      if (
+        dayjs(result?.entryLatestModified?.start_timestamp) >
+          activityDate.startOf('day') &&
+        !result?.entryLatestModified?.end_timestamp
+      ) {
         setEntryId(result?.entryLatestModified?.id);
         setCheckInTime(dayjs(result?.entryLatestModified?.start_timestamp));
       }
@@ -40,7 +44,13 @@ const Dashboard = () => {
   useEffect(() => {
     fetchGraphql(
       getEntriesByType,
-      { input: { type: 'working' } },
+      {
+        input: {
+          type: 'working',
+          min_timestamp: activityDate.startOf('day').toISOString(),
+          max_timestamp: activityDate.endOf('day').toISOString(),
+        },
+      },
       getToken(),
     ).then((results) => {
       setEntries(
@@ -56,7 +66,6 @@ const Dashboard = () => {
 
   const handleCheckInClick = async () => {
     const now = dayjs();
-
     setCheckInTime(now);
     setCheckOutTime(null);
 

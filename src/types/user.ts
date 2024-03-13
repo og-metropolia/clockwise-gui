@@ -1,3 +1,5 @@
+import { Company } from './company';
+
 export type Role = 'EMPLOYEE' | 'MANAGER' | 'ADMIN';
 
 export type Language = 'en' | 'fi' | 'sv';
@@ -44,15 +46,6 @@ export type Entry = {
   end_timestamp: Date;
   type: EntryType;
   description?: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-export type Company = {
-  id: string;
-  name: string;
-  allowed_emails: string[];
-  business_identity_code: string;
   createdAt: Date;
   updatedAt: Date;
 };
