@@ -41,7 +41,11 @@ const Footer: React.FC = () => {
           <NavLink to={ROUTES.managerDashboard} className={setActive}>
             <HomeIcon />
           </NavLink>
-          <NavLink to={ROUTES.visit} className={setActive}>
+          <NavLink
+            to={ROUTES.visit}
+            className={setActive}
+            hidden={window.location.pathname !== ROUTES.visit}
+          >
             <ReportIcon />
           </NavLink>
           <NavLink to={ROUTES.settings} className={setActive}>

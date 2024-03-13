@@ -14,11 +14,10 @@ import Dashboard from '@/pages/Dashboard/Dashboard';
 import ManagerDashboard from '@/pages/ManagerDashboard/ManagerDashboard';
 import ReportPage from './pages/Report/ReportPage';
 import CompanySignUpPage from './pages/CompanySignUp/CompanySignUpPage';
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import './i18n';
-
 import 'react-day-picker/dist/style.css';
 import VisitPage from './pages/Visit/VisitPage';
-import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 
 const router = createBrowserRouter([
   {

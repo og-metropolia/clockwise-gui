@@ -14,20 +14,33 @@ import { useUser } from '@/components/UserContext';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { DateRange, DayPicker } from 'react-day-picker';
+import { fetchGraphql } from '@/graphql/fetch';
+import { createEntryMutation } from '@/graphql/queries';
 
-// TODO: get from API
 const ABSENCE_TYPES = [
   {
-    value: 'sick',
-    label: 'Sick',
+    value: 'sick_leave',
+    label: 'Sick leave',
   },
   {
-    value: 'unpaid',
+    value: 'sick_child',
+    label: 'Sick child',
+  },
+  {
+    value: 'holiday_leave',
+    label: 'Holiday leave',
+  },
+  {
+    value: 'special_leave',
+    label: 'Special leave',
+  },
+  {
+    value: 'unpaid_leave',
     label: 'Unpaid leave',
   },
   {
-    value: 'agreed',
-    label: 'Agreed absence',
+    value: 'other',
+    label: 'Other',
   },
 ];
 
@@ -42,11 +55,11 @@ interface VacationFormValues {
 }
 
 const VacationPage: React.FC = () => {
-  const { getUser } = useUser();
+  const { getUser, getToken } = useUser();
   const user = getUser();
   const [range, setRange] = useState<DateRange>({
-    from: undefined,
-    to: undefined,
+    from: new Date(),
+    to: new Date(),
   });
   const [absences, setAbsences] = useState<Date[]>([]);
   const [reason, setReason] = useState('');
@@ -56,6 +69,7 @@ const VacationPage: React.FC = () => {
   };
 
   const handleSubmit = async (_values: any, _actions: any) => {
+    console.log('handleSubmit', range, reason);
     if (range.from && range.to) {
       const start = new Date(range.from);
       const end = new Date(range.to);
@@ -68,6 +82,24 @@ const VacationPage: React.FC = () => {
       }
 
       setAbsences([...absences, ...newAbsences]);
+
+      console.log('Submitting', range, reason);
+
+      fetchGraphql(
+        createEntryMutation,
+        {
+          input: {
+            type: reason,
+            start_timestamp: start.toISOString(),
+            end_timestamp: end.toISOString(),
+          },
+        },
+        getToken(),
+      ).then((response) => {
+        console.log(response);
+        setRange({ from: undefined, to: undefined });
+        setReason('');
+      });
     }
   };
 
@@ -107,14 +139,9 @@ const VacationPage: React.FC = () => {
           >
             {({ errors, touched }) => (
               <Form className={styles.baseForm}>
-                {errors && touched ? (
-                  <div className={styles.error}>{errors.absenceType}</div>
-                ) : null}
-
                 <DatePicker
                   label="Starting date"
                   value={range?.from}
-                  maxDate={range?.to}
                   className={styles.baseSelect}
                   onChange={(newDate) =>
                     setRange({ ...range, from: newDate ?? undefined })
@@ -134,6 +161,7 @@ const VacationPage: React.FC = () => {
                 <FormControl fullWidth>
                   <InputLabel id="reason-label">Reason for absence</InputLabel>
                   <Select
+                    name="absenceType"
                     labelId="reason-label"
                     label="Reason for absence"
                     value={reason}
@@ -146,6 +174,10 @@ const VacationPage: React.FC = () => {
                       </MenuItem>
                     ))}
                   </Select>
+
+                  {!reason && errors && touched ? (
+                    <div className={styles.error}>{errors.absenceType}</div>
+                  ) : null}
                 </FormControl>
                 <button type="submit" className={styles.basePrimaryButton}>
                   Save

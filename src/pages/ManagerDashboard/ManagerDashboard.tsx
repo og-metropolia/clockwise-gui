@@ -4,7 +4,7 @@ import styles from './ManagerDashboard.module.css';
 import ProfileCard from '@/components/ProfileCard';
 import ROUTES from '@/constants/routes';
 import { fetchGraphql } from '@/graphql/fetch';
-import { getEmployeesByCompany } from '@/graphql/queries';
+import { getUsersByCompany } from '@/graphql/queries';
 import { useUser } from '@/components/UserContext';
 import { LoginUser } from '@/types/user';
 import Footer from '@/components/Footer';
@@ -18,9 +18,9 @@ const ManagerDashboard = () => {
   const [employees, setEmployees] = useState<LoginUser[]>([]);
 
   useEffect(() => {
-    fetchGraphql(getEmployeesByCompany, {
+    fetchGraphql(getUsersByCompany, {
       companyId: user?.company?.id,
-      role: 'EMPLOYEE',
+      roles: ['EMPLOYEE'],
     }).then((data: any) => {
       const employees = (data?.usersByCompany ?? []) as LoginUser[];
       setEmployees(employees);

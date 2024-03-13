@@ -12,6 +12,8 @@ import * as Yup from 'yup';
 import { fetchGraphql } from '@/graphql/fetch';
 import { updateUserMutation } from '@/graphql/queries';
 import { FormControl, MenuItem, Select } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 
 const VISUAL_PASSWORD = '********';
 
@@ -55,8 +57,13 @@ type UpdateUserFormValues = {
 
 const SettingsPage: React.FC = () => {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
   const { logout, getUser, getToken, updateUser } = useUser();
   const user = getUser();
+
+  const handleLanguageChange = (newLanguage: Language) => {
+    i18n.changeLanguage(newLanguage);
+  };
 
   const initialValues: UpdateUserFormValues = {
     password: VISUAL_PASSWORD,
@@ -110,9 +117,11 @@ const SettingsPage: React.FC = () => {
                   name="language"
                   defaultValue={user?.language ?? USER_DEFAULTS.language}
                   className={styles.baseSelect}
+                  onChange={(event) => handleLanguageChange(event.target.value)}
                 >
                   {LANGUAGES.map((type) => (
                     <MenuItem key={type.value} value={type.value}>
+                      {' '}
                       {type.label}
                     </MenuItem>
                   ))}

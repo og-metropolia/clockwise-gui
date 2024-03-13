@@ -75,9 +75,9 @@ mutation UpdateUser($id: ID!, $input: UpdateUser!) {
 }
 `;
 
-const getEmployeesByCompany = `
-query UsersByCompany($companyId: ID! $role: Role) {
-  usersByCompany(companyId: $companyId role: $role) {
+const getUsersByCompany = `
+query UsersByCompany($companyId: ID! $roles: [Role]) {
+  usersByCompany(companyId: $companyId roles: $roles) {
     id
     email
     role
@@ -136,15 +136,44 @@ query EntryLatestModified($input: InputEntryTypeOnly) {
 }
 `;
 
+const getCompanies = `
+query Companies {
+  companies {
+    id
+    name
+    business_identity_code
+    allowed_emails
+    employees {
+      id
+      first_name
+      last_name
+      job_title
+      profile_picture
+      manager {
+        id
+      }
+    }
+    managers {
+      id
+      first_name
+      last_name
+      job_title
+      profile_picture
+    }
+  }
+}
+`;
+
 export {
   loginQuery,
   getUserQuery,
   signup,
   getCompanyEmails,
   updateUserMutation,
-  getEmployeesByCompany,
+  getUsersByCompany ,
   getEntriesByType,
   createEntryMutation,
   updateEntryMutation,
   getLatestModifiedEntry,
+  getCompanies,
 };

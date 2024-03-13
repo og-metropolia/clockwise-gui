@@ -98,7 +98,7 @@ const CompanySignUpPage: React.FC = () => {
                 )}
 
               <button type="submit" className={styles.basePrimaryButton}>
-                Sign Up
+                Create Company
               </button>
 
               {((errors.managerEmail && touched.managerEmail) ||

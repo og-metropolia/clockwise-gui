@@ -14,7 +14,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().required('Required'),
+  password: Yup.string().min(8, 'Too Short!').required('Required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')], 'Passwords must match')
     .required('Required'),
