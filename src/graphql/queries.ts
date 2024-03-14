@@ -164,16 +164,19 @@ query Companies {
 }
 `;
 
+const createManagerAndCompany = ``;
+
 export {
   loginQuery,
   getUserQuery,
   signup,
   getCompanyEmails,
   updateUserMutation,
-  getUsersByCompany ,
+  getUsersByCompany,
   getEntriesByType,
   createEntryMutation,
   updateEntryMutation,
   getLatestModifiedEntry,
   getCompanies,
+  createManagerAndCompany,
 };

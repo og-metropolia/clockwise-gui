@@ -69,5 +69,56 @@
     "forAssistance": "saadaksesi apua salasanan nollaamiseen.",
     "backTo": "Takaisin",
     "loginLink": "Kirjaudu sisään"
+  },
+  "settings": {
+    "title": "Asetukset",
+    "updateButton": "Päivitä Asetukset",
+    "signOutButton": "Kirjaudu Ulos",
+    "reportProblem": "Ilmoita Ongelmasta",
+    "termsOfUse": "Käyttöehdot",
+    "privacyPolicy": "Tietosuojakäytäntö",
+    "form": {
+      "placeholder": {
+        "password": "Salasana",
+        "confirmPassword": "Vahvista Salasana",
+        "phoneNumber": "Puhelinnumero",
+        "profilePicture": "Profiilikuva URL",
+        "jobTitle": "Työnimike"
+      },
+      "error": {
+        "passwordRequired": "Salasana vaaditaan",
+        "confirmPasswordRequired": "Salasanan vahvistus vaaditaan",
+        "phoneNumberRequired": "Puhelinnumero vaaditaan",
+        "profilePictureRequired": "Profiilikuvan URL vaaditaan",
+        "jobTitleRequired": "Työnimike vaaditaan",
+        "passwordsMustMatch": "Salasanojen on täsmättävä",
+        "invalidURL": "URL on virheellinen"
+      }
+    }
+  },
+  "absences": {
+    "title": "Poissaolot",
+    "startingDate": "Alkamispäivä",
+    "endingDate": "Päättymispäivä",
+    "reasonForAbsence": "Poissaolon syy",
+    "saveButton": "Tallenna",
+    "absenceTypes": {
+      "sickLeave": "Sairausloma",
+      "sickChild": "Sairas lapsi",
+      "holidayLeave": "Lomapäivä",
+      "specialLeave": "Erikoisloma",
+      "unpaidLeave": "Palkaton loma",
+      "other": "Muu"
+    },
+    "errors": {
+      "required": "Pakollinen"
+    }
+  },
+  "report": {
+    "title": "Raportti"
+  },
+  "dashboard": {
+    "timeLog": "Työaikakirjanpito",
+    "yourActivity": "Toimintasi"
   }
 }

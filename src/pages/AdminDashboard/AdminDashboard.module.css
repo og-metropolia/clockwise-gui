@@ -2,7 +2,7 @@
 @import '../../colors.module.css';
 
 .companyList {
-  height: 50vh;
+  height: 70vh;
   width: 90vw;
   overflow-y: auto;
   margin-top: 16px;
@@ -15,9 +15,19 @@
 }
 
 .expandableSection {
-  max-height: 300px; /* Muokkaa korkeutta tarpeen mukaan */
-  overflow-y: auto; /* Sallii sisällön vierittämisen */
+  max-height: 300px;
+  overflow-y: auto;
   margin-top: 10px;
-  border: 1px solid #ccc; /* Kevyt kehys laajennettavalle alueelle */
-  border-radius: 4px; /* Pyöristetyt kulmat */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.peopleList {
+  display: flex;
+  flex-direction: column;
+}
+
+.peopleTitle {
+  font-weight: bold !important;
+  text-decoration: underline !important;
 }

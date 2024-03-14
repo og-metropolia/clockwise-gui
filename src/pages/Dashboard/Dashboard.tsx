@@ -46,10 +46,10 @@ const Dashboard = () => {
       getEntriesByType,
       {
         input: {
+          user_id: user.id,
           type: 'working',
           min_timestamp: activityDate.startOf('day').toISOString(),
           max_timestamp: activityDate.endOf('day').toISOString(),
-          user_id: user.id,
         },
       },
       getToken(),
@@ -114,6 +114,7 @@ const Dashboard = () => {
       getEntriesByType,
       {
         input: {
+          user_id: user.id,
           type: 'working',
           min_timestamp: date.startOf('day').toISOString(),
           max_timestamp: date.endOf('day').toISOString(),

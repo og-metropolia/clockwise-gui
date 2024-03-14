@@ -16,7 +16,7 @@ const setActive = ({ isActive }: { isActive: boolean }) => {
 
 const Footer: React.FC = () => {
   const { getUser } = useUser();
-  const role = getUser().role;
+  const role = getUser()?.role;
 
   return (
     <div className="footer-container">

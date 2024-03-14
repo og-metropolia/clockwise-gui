@@ -69,5 +69,62 @@
     "forAssistance": "for assistance in resetting your password.",
     "backTo": "Back to",
     "loginLink": "Login"
+  },
+  "settings": {
+    "title": "Settings",
+    "updateButton": "Update Settings",
+    "signOutButton": "Sign out",
+    "reportProblem": "Report Problem",
+    "termsOfUse": "Terms of Use",
+    "privacyPolicy": "Privacy Policy",
+    "form": {
+      "placeholder": {
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "phoneNumber": "Phone Number",
+        "profilePicture": "Profile Picture URL",
+        "jobTitle": "Job Title"
+      },
+      "error": {
+        "passwordRequired": "Password is required",
+        "confirmPasswordRequired": "Confirm Password is required",
+        "phoneNumberRequired": "Phone Number is required",
+        "profilePictureRequired": "Profile Picture URL is required",
+        "jobTitleRequired": "Job Title is required",
+        "passwordsMustMatch": "Passwords must match",
+        "invalidURL": "Invalid URL"
+      }
+    },
+    "languages": {
+      "title": "Language",
+      "english": "English",
+      "finnish": "Finnish",
+      "swedish": "Swedish"
+    }
+  },
+  "absences": {
+    "title": "Absences",
+    "startingDate": "Starting date",
+    "endingDate": "Ending date",
+    "reasonForAbsence": "Reason for absence",
+    "saveButton": "Save",
+    "absenceTypes": {
+      "sickLeave": "Sick leave",
+      "sickChild": "Sick child",
+      "holidayLeave": "Holiday leave",
+      "specialLeave": "Special leave",
+      "unpaidLeave": "Unpaid leave",
+      "other": "Other"
+    },
+    "errors": {
+      "required": "Required"
+    }
+  },
+  "report": {
+    "title": "Report"
+  },
+  "dashboard": {
+    "timeLog": "Time Log",
+    "yourActivity": "Your Activity"
   }
 }
