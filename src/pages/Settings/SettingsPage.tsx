@@ -13,6 +13,7 @@ import { fetchGraphql } from '@/graphql/fetch';
 import { updateUserMutation } from '@/graphql/queries';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 const VISUAL_PASSWORD = '********';
 
@@ -58,9 +59,13 @@ const SettingsPage: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { getUser, getToken, updateUser, logout } = useUser();
   const user = getUser();
+  const [language, setLanguage] = useState<Language>(
+    user?.language ?? USER_DEFAULTS.language,
+  );
 
   const handleLanguageChange = (newLanguage: Language) => {
     i18n.changeLanguage(newLanguage);
+    setLanguage(newLanguage);
   };
 
   const initialValues: UpdateUserFormValues = {
@@ -75,9 +80,7 @@ const SettingsPage: React.FC = () => {
   return (
     <div className={styles.basePage}>
       <ProfileCard user={user} />
-
       <h2 className={styles.baseTitle}>{t('settings.title')}</h2>
-
       <div className={styles.baseFormContainer}>
         <Formik
           initialValues={initialValues}
@@ -92,7 +95,7 @@ const SettingsPage: React.FC = () => {
                     : values.password,
                 phone: values.phoneNumber,
                 profile_picture: values.profilePicture,
-                language: values.language,
+                language: language,
                 job_title: values.jobTitle,
               },
             };
@@ -106,7 +109,11 @@ const SettingsPage: React.FC = () => {
             if (data.updateUser) {
               updateUser(data.updateUser);
               actions.setSubmitting(false);
-              navigate(ROUTES.settings);
+              alert(t('settings.alert.success'))
+              window.location.reload();
+            } else {
+              actions.setSubmitting(false);
+              alert(t('settings.alert.error'))
             }
           }}
         >
@@ -115,7 +122,7 @@ const SettingsPage: React.FC = () => {
               <FormControl fullWidth>
                 <Select
                   name="language"
-                  value={initialValues.language}
+                  value={language}
                   onChange={(event) =>
                     handleLanguageChange(event.target.value as Language)
                   }

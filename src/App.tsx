@@ -18,6 +18,8 @@ import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import './i18n';
 import 'react-day-picker/dist/style.css';
 import VisitPage from './pages/Visit/VisitPage';
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -120,6 +122,17 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
+
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const language = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') ?? '{}')?.user?.language : 'en';
+    i18n.changeLanguage(language);
+  }, [i18n]);
+
+
+
   return (
     <div className="App">
       <UserProvider>
