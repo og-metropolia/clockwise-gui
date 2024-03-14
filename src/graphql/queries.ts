@@ -164,7 +164,17 @@ query Companies {
 }
 `;
 
-const createManagerAndCompany = ``;
+const createCompany = `
+mutation CreateCompany($input: InputCompany) {
+  createCompany(input: $input) { id }
+}
+`;
+
+const createManager = `
+mutation CreateManager($input: InputUser) {
+  createUser(input: $input) { id }
+}
+`;
 
 export {
   loginQuery,
@@ -178,5 +188,6 @@ export {
   updateEntryMutation,
   getLatestModifiedEntry,
   getCompanies,
-  createManagerAndCompany,
+  createCompany,
+  createManager,
 };

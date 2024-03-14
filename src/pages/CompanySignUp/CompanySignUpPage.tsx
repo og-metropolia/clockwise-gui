@@ -4,6 +4,8 @@ import styles from './CompanySignUpPage.module.css';
 import ProfileCard from '@/components/ProfileCard';
 import { useUser } from '@/components/UserContext';
 import Footer from '@/components/Footer';
+import { fetchGraphql } from '@/graphql/fetch';
+import { createCompany, createManager } from '@/graphql/queries';
 
 const SignUpSchema = Yup.object().shape({
   companyName: Yup.string().required('Required'),
@@ -14,6 +16,8 @@ const SignUpSchema = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')], 'Passwords must match')
     .required('Required'),
+  firstName: Yup.string().required('Required'),
+  lastName: Yup.string().required('Required'),
 });
 
 type SignUpFormValues = {
@@ -23,6 +27,9 @@ type SignUpFormValues = {
   managerEmail: string;
   password: string;
   confirmPassword: string;
+  firstName: string;
+  lastName: string;
+  auth: string;
 };
 
 const CompanySignUpPage: React.FC = () => {
@@ -35,6 +42,9 @@ const CompanySignUpPage: React.FC = () => {
     managerEmail: '',
     password: '',
     confirmPassword: '',
+    firstName: '',
+    lastName: '',
+    auth: '',
   };
 
   return (
@@ -46,9 +56,61 @@ const CompanySignUpPage: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={SignUpSchema}
-          onSubmit={(values, actions) => {
-            console.log(values);
+          onSubmit={async (values, actions) => {
+            const allowedEmails = values.allowedEmails
+              .split(',')
+              .map((email) => {
+                return '@' + email.trim();
+              });
+
+            if (
+              !allowedEmails.includes('@' + values.managerEmail.split('@')[1])
+            ) {
+              actions.setErrors({
+                auth: 'Manager email must match allowed emails.',
+              });
+              return;
+            }
+
+            const company = await fetchGraphql(
+              createCompany,
+              {
+                input: {
+                  name: values.companyName,
+                  business_identity_code: values.businessId,
+                  allowed_emails: allowedEmails,
+                },
+              },
+              user.token,
+            );
+
+            if (!company) {
+              actions.setErrors({ auth: 'Invalid company details.' });
+              return;
+            }
+
+            const manager = await fetchGraphql(
+              createManager,
+              {
+                input: {
+                  email: values.managerEmail,
+                  password: values.password,
+                  first_name: values.firstName,
+                  last_name: values.lastName,
+                  language: 'en',
+                  company_id: company.createCompany.id,
+                },
+              },
+              user.token,
+            );
+
+            if (!manager) {
+              actions.setErrors({ auth: 'Invalid manager details.' });
+              return;
+            }
+
             actions.setSubmitting(false);
+            window.location.reload();
           }}
         >
           {({ errors, touched }) => (
@@ -70,6 +132,18 @@ const CompanySignUpPage: React.FC = () => {
                 type="text"
                 className={styles.baseField}
                 placeholder="example.com, example.org"
+              />
+              <Field
+                name="firstName"
+                type="text"
+                className={styles.baseField}
+                placeholder="Matti"
+              />
+              <Field
+                name="lastName"
+                type="text"
+                className={styles.baseField}
+                placeholder="Meikäläinen"
               />
               <Field
                 name="managerEmail"
@@ -100,6 +174,10 @@ const CompanySignUpPage: React.FC = () => {
               <button type="submit" className={styles.basePrimaryButton}>
                 Create Company
               </button>
+
+              {errors.auth && touched.auth ? (
+                <div className={styles.error}>{errors.auth}</div>
+              ) : null}
 
               {((errors.managerEmail && touched.managerEmail) ||
                 (errors.businessId && touched.businessId) ||
