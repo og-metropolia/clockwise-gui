@@ -33,7 +33,8 @@ const ManagerDashboard = () => {
 
   return (
     <div className={styles.basePage}>
-      <h1 className={styles.title}>Management</h1>
+      <ProfileCard user={user} />
+      <h2 className={styles.baseTitle}>Management</h2>
       <div className={styles.employeeListContainer}>
         <List className={styles.employeeList}>
           {employees.map((employee) => (

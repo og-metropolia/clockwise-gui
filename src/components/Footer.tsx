@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Footer.css';
 import { NavLink } from 'react-router-dom';
 import DashboardIcon from './icons/DashboardIcon.tsx';
@@ -17,6 +17,12 @@ const setActive = ({ isActive }: { isActive: boolean }) => {
 const Footer: React.FC = () => {
   const { getUser } = useUser();
   const role = getUser().role;
+  const [isReportIconActive, setIsReportIconActive] = useState(false);
+
+  const activateReportIcon = () => {
+    setIsReportIconActive(true);
+  };
+
   return (
     <div className="footer-container">
       {role === 'EMPLOYEE' && (
@@ -42,9 +48,8 @@ const Footer: React.FC = () => {
             <HomeIcon />
           </NavLink>
           <NavLink
-            to={ROUTES.visit}
-            className={setActive}
-            hidden={window.location.pathname !== ROUTES.visit}
+            to={window.location.href}
+            className={`link ${window.location.pathname.includes(ROUTES.visit) ? 'active-link' : 'disabled-link'}`}
           >
             <ReportIcon />
           </NavLink>

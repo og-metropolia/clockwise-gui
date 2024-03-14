@@ -88,7 +88,7 @@ const router = createBrowserRouter([
         : redirect(ROUTES.login),
   },
   {
-    path: ROUTES.visit,
+    path: ROUTES.visit + '/:employeeId',
     element: <VisitPage />,
     loader: () =>
       isAuth()
@@ -151,3 +151,4 @@ function isAdmin() {
 }
 
 export default App;
+path: ROUTES.visit + '/:id';

@@ -40,3 +40,13 @@
   width: 24px;
   height: 24px;
 }
+
+.active-link {
+  filter: drop-shadow(0 0 5px var(--clockwise-blue))
+    drop-shadow(0 0 10px var(--clockwise-blue))
+    drop-shadow(0 0 15px var(--clockwise-blue));
+}
+
+.disabled-link {
+  opacity: 0.5;
+}
