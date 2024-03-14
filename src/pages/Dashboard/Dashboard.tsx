@@ -49,6 +49,7 @@ const Dashboard = () => {
           type: 'working',
           min_timestamp: activityDate.startOf('day').toISOString(),
           max_timestamp: activityDate.endOf('day').toISOString(),
+          user_id: user.id,
         },
       },
       getToken(),
