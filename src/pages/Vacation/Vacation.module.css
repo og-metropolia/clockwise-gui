@@ -4,10 +4,10 @@
 .form {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 40px); /* leveys huomioon ottaen padding */
-  box-sizing: border-box; /* sisältää paddingit ja borderit leveyteen */
-  max-width: 500px; /* asetetaan max-leveys mobiilinäkymää varten */
-  margin: 0 auto; /* keskitetään formi */
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+  max-width: 500px;
+  margin: 0 auto;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 20px;

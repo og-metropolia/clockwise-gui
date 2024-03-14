@@ -13,7 +13,6 @@ import { fetchGraphql } from '@/graphql/fetch';
 import { updateUserMutation } from '@/graphql/queries';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { t } from 'i18next';
 
 const VISUAL_PASSWORD = '********';
 

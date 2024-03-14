@@ -68,8 +68,7 @@ const VacationPage: React.FC = () => {
     absenceType: '',
   };
 
-  const handleSubmit = async (_values: any, _actions: any) => {
-    console.log('handleSubmit', range, reason);
+  const handleSubmit = async () => {
     if (range.from && range.to) {
       const start = new Date(range.from);
       const end = new Date(range.to);
@@ -83,8 +82,6 @@ const VacationPage: React.FC = () => {
 
       setAbsences([...absences, ...newAbsences]);
 
-      console.log('Submitting', range, reason);
-
       fetchGraphql(
         createEntryMutation,
         {
@@ -95,10 +92,8 @@ const VacationPage: React.FC = () => {
           },
         },
         getToken(),
-      ).then((response) => {
-        console.log(response);
-        setRange({ from: undefined, to: undefined });
-        setReason('');
+      ).then(() => {
+        window.location.reload();
       });
     }
   };
@@ -179,7 +174,11 @@ const VacationPage: React.FC = () => {
                     <div className={styles.error}>{errors.absenceType}</div>
                   ) : null}
                 </FormControl>
-                <button type="submit" className={styles.basePrimaryButton}>
+                <button
+                  type="submit"
+                  className={styles.basePrimaryButton}
+                  onClick={handleSubmit}
+                >
                   Save
                 </button>
               </Form>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Footer.css';
 import { NavLink } from 'react-router-dom';
 import DashboardIcon from './icons/DashboardIcon.tsx';
@@ -17,11 +17,6 @@ const setActive = ({ isActive }: { isActive: boolean }) => {
 const Footer: React.FC = () => {
   const { getUser } = useUser();
   const role = getUser().role;
-  const [isReportIconActive, setIsReportIconActive] = useState(false);
-
-  const activateReportIcon = () => {
-    setIsReportIconActive(true);
-  };
 
   return (
     <div className="footer-container">
