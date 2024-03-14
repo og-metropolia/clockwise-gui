@@ -74,9 +74,9 @@
     "title": "Asetukset",
     "updateButton": "Päivitä Asetukset",
     "signOutButton": "Kirjaudu Ulos",
-    "reportProblem": "Ilmoita Ongelmasta",
+    "reportProblem": "Ilmoita Ongelma",
     "termsOfUse": "Käyttöehdot",
-    "privacyPolicy": "Tietosuojakäytäntö",
+    "privacyPolicy": "Yksityisyys",
     "form": {
       "placeholder": {
         "password": "Salasana",
@@ -94,6 +94,16 @@
         "passwordsMustMatch": "Salasanojen on täsmättävä",
         "invalidURL": "URL on virheellinen"
       }
+    },
+    "alert": {
+      "success": "Käyttäjä päivitetty.",
+      "error": "Virhe käyttäjän päivityksessä."
+    },
+    "languages": {
+      "title": "Kieli",
+      "english": "Englanti",
+      "finnish": "Suomi",
+      "swedish": "Ruotsi"
     }
   },
   "absences": {

@@ -95,6 +95,10 @@
         "invalidURL": "Invalid URL"
       }
     },
+    "alert": {
+      "success": "User updated.",
+      "error": "Failed to update user."
+    },
     "languages": {
       "title": "Language",
       "english": "English",

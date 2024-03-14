@@ -74,9 +74,9 @@
     "title": "Inställningar",
     "updateButton": "Uppdatera Inställningar",
     "signOutButton": "Logga Ut",
-    "reportProblem": "Rapportera Problem",
+    "reportProblem": "Rapportera Fel",
     "termsOfUse": "Användarvillkor",
-    "privacyPolicy": "Integritetspolicy",
+    "privacyPolicy": "Integritet",
     "form": {
       "placeholder": {
         "password": "Lösenord",
@@ -94,6 +94,16 @@
         "passwordsMustMatch": "Lösenorden måste matcha",
         "invalidURL": "Ogiltig URL"
       }
+    },
+    "languages": {
+      "title": "Språk",
+      "english": "Engelska",
+      "finnish": "Finska",
+      "swedish": "Svenska"
+    },
+    "alert": {
+      "success": "Användaren uppdaterad.",
+      "error": "Det gick inte att uppdatera användaren."
     }
   },
   "absences": {
