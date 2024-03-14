@@ -117,7 +117,6 @@
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
-  margin-top: 20px;
 }
 
 .baseFormContainer {
@@ -198,8 +197,29 @@
   }
 }
 
-/* Erittäin pienet näytöt (<= 400px) */
-@media (max-width: 400px) {
+@media (max-width: 500px) {
+  .baseTitle {
+    font-size: 18px;
+    margin: 0;
+  }
+  .baseHeader {
+    font-size: 18px;
+  }
+  .baseField,
+  .basePrimaryButton,
+  .baseSecondaryButton {
+    padding: 13px 14px;
+    font-size: 14px;
+  }
+}
+
+/* Erittäin pienet näytöt (<= 380px) */
+@media (max-width: 380px) {
+  .baseTitle {
+    font-size: 18px;
+    margin: 0;
+    padding: 8px 0;
+  }
   .baseHeader {
     font-size: 18px;
   }
@@ -208,5 +228,17 @@
   .baseSecondaryButton {
     padding: 10px 14px;
     font-size: 14px;
+  }
+  .baseField {
+    margin-bottom: 5px;
+  }
+  .baseSelect {
+    margin-bottom: 5px !important;
+  }
+  .baseFormContainer {
+    margin: 0;
+  }
+  .basePage {
+    min-height: 115vh;
   }
 }

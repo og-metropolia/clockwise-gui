@@ -29,3 +29,13 @@
   background-color: var(--clockwise-blue);
   border-color: var(--clockwise-blue);
 }
+
+.rdp {
+  margin: 0 !important;
+}
+
+@media (max-width: 380px) {
+  .rdp {
+    display: none;
+  }
+}
