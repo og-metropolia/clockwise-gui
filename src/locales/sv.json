@@ -58,5 +58,67 @@
         "loginLink": "Logga in"
       }
     }
+  },
+  "resetPassword": {
+    "title": "Återställ Lösenord",
+    "description": "Glömt ditt lösenord? Ingen fara!",
+    "helpText": "Ring vår hjälpdesk på",
+    "phoneNumber": "+358 40 456 7890",
+    "or": "eller maila oss på",
+    "email": "support@clockwise.com",
+    "forAssistance": "för hjälp med att återställa ditt lösenord.",
+    "backTo": "Tillbaka till",
+    "loginLink": "Logga in"
+  },
+  "settings": {
+    "title": "Inställningar",
+    "updateButton": "Uppdatera Inställningar",
+    "signOutButton": "Logga Ut",
+    "reportProblem": "Rapportera Problem",
+    "termsOfUse": "Användarvillkor",
+    "privacyPolicy": "Integritetspolicy",
+    "form": {
+      "placeholder": {
+        "password": "Lösenord",
+        "confirmPassword": "Bekräfta Lösenord",
+        "phoneNumber": "Telefonnummer",
+        "profilePicture": "Profilbild URL",
+        "jobTitle": "Jobbtitel"
+      },
+      "error": {
+        "passwordRequired": "Lösenord krävs",
+        "confirmPasswordRequired": "Bekräftelse av lösenord krävs",
+        "phoneNumberRequired": "Telefonnummer krävs",
+        "profilePictureRequired": "URL för profilbild krävs",
+        "jobTitleRequired": "Jobbtitel krävs",
+        "passwordsMustMatch": "Lösenorden måste matcha",
+        "invalidURL": "Ogiltig URL"
+      }
+    }
+  },
+  "absences": {
+    "title": "Frånvaron",
+    "startingDate": "Startdatum",
+    "endingDate": "Slutdatum",
+    "reasonForAbsence": "Orsak till frånvaro",
+    "saveButton": "Spara",
+    "absenceTypes": {
+      "sickLeave": "Sjukfrånvaro",
+      "sickChild": "Vård av sjukt barn",
+      "holidayLeave": "Semester",
+      "specialLeave": "Specialledighet",
+      "unpaidLeave": "Obetald ledighet",
+      "other": "Annat"
+    },
+    "errors": {
+      "required": "Krävs"
+    }
+  },
+  "report": {
+    "title": "Rapport"
+  },
+  "dashboard": {
+    "timeLog": "Tidlogg",
+    "yourActivity": "Din Aktivitet"
   }
 }

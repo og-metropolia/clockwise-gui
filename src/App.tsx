@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         ? isManager()
           ? redirect(ROUTES.managerDashboard)
           : isAdmin()
-            ? redirect(ROUTES.companySignup)
+            ? redirect(ROUTES.adminDashboard)
             : null
         : redirect(ROUTES.login),
   },
@@ -152,3 +152,4 @@ function isAdmin() {
 
 export default App;
 path: ROUTES.visit + '/:id';
+

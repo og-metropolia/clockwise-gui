@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 import InvitationLinkGenerator from '@/components/InviteButton';
 import ProfileCard from '@/components/ProfileCard';
 import { Field, Form, Formik } from 'formik';
-import { Language, LoginUser } from '@/types/user';
+import { Language } from '@/types/user';
 import { USER_DEFAULTS } from '@/constants/userDefaults';
 import * as Yup from 'yup';
 import { fetchGraphql } from '@/graphql/fetch';
@@ -16,7 +16,6 @@ import { useTranslation } from 'react-i18next';
 
 const VISUAL_PASSWORD = '********';
 
-// TODO: get from API
 const LANGUAGES = [
   {
     value: 'en',
@@ -56,8 +55,8 @@ type UpdateUserFormValues = {
 
 const SettingsPage: React.FC = () => {
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
-  const { logout, getUser, getToken, updateUser } = useUser();
+  const { t, i18n } = useTranslation();
+  const { getUser, getToken, updateUser, logout } = useUser();
   const user = getUser();
 
   const handleLanguageChange = (newLanguage: Language) => {
@@ -77,7 +76,7 @@ const SettingsPage: React.FC = () => {
     <div className={styles.basePage}>
       <ProfileCard user={user} />
 
-      <h2 className={styles.baseTitle}>Settings</h2>
+      <h2 className={styles.baseTitle}>{t('settings.title')}</h2>
 
       <div className={styles.baseFormContainer}>
         <Formik
@@ -98,15 +97,17 @@ const SettingsPage: React.FC = () => {
               },
             };
 
-            const data = (await fetchGraphql(
+            const data = await fetchGraphql(
               updateUserMutation,
               updatedUser,
               getToken(),
-            )) as { updateUser: LoginUser };
+            );
 
-            updateUser(data.updateUser);
-            actions.setSubmitting(false);
-            navigate(ROUTES.settings);
+            if (data.updateUser) {
+              updateUser(data.updateUser);
+              actions.setSubmitting(false);
+              navigate(ROUTES.settings);
+            }
           }}
         >
           {({ errors, touched }) => (
@@ -114,14 +115,16 @@ const SettingsPage: React.FC = () => {
               <FormControl fullWidth>
                 <Select
                   name="language"
-                  defaultValue={user?.language ?? USER_DEFAULTS.language}
+                  value={initialValues.language}
+                  onChange={(event) =>
+                    handleLanguageChange(event.target.value as Language)
+                  }
+                  displayEmpty
                   className={styles.baseSelect}
-                  onChange={(event) => handleLanguageChange(event.target.value)}
                 >
-                  {LANGUAGES.map((type) => (
-                    <MenuItem key={type.value} value={type.value}>
-                      {' '}
-                      {type.label}
+                  {LANGUAGES.map((lang) => (
+                    <MenuItem key={lang.value} value={lang.value}>
+                      {t(`settings.languages.${lang.label.toLowerCase()}`)}
                     </MenuItem>
                   ))}
                 </Select>
@@ -129,61 +132,53 @@ const SettingsPage: React.FC = () => {
               {errors.language && touched.language ? (
                 <div className={styles.error}>{errors.language}</div>
               ) : null}
-
               <Field
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t('settings.form.placeholder.password')}
                 className={styles.baseField}
-                autoComplete="new-password"
               />
               {errors.password && touched.password ? (
                 <div className={styles.error}>{errors.password}</div>
               ) : null}
-
               <Field
                 name="confirmPassword"
                 type="password"
-                placeholder="Confirm Password"
+                placeholder={t('settings.form.placeholder.confirmPassword')}
                 className={styles.baseField}
-                autoComplete="new-password"
               />
               {errors.confirmPassword && touched.confirmPassword ? (
                 <div className={styles.error}>{errors.confirmPassword}</div>
               ) : null}
-
               <Field
                 name="phoneNumber"
                 type="tel"
-                placeholder="Phone Number"
+                placeholder={t('settings.form.placeholder.phoneNumber')}
                 className={styles.baseField}
               />
               {errors.phoneNumber && touched.phoneNumber ? (
                 <div className={styles.error}>{errors.phoneNumber}</div>
               ) : null}
-
               <Field
                 name="profilePicture"
                 type="url"
-                placeholder="Profile Picture"
+                placeholder={t('settings.form.placeholder.profilePicture')}
                 className={styles.baseField}
               />
               {errors.profilePicture && touched.profilePicture ? (
                 <div className={styles.error}>{errors.profilePicture}</div>
               ) : null}
-
               <Field
                 name="jobTitle"
                 type="text"
-                placeholder="Job Title"
+                placeholder={t('settings.form.placeholder.jobTitle')}
                 className={styles.baseField}
               />
               {errors.jobTitle && touched.jobTitle ? (
                 <div className={styles.error}>{errors.jobTitle}</div>
               ) : null}
-
               <button type="submit" className={styles.basePrimaryButton}>
-                Update Settings
+                {t('settings.updateButton')}
               </button>
             </Form>
           )}
@@ -198,22 +193,20 @@ const SettingsPage: React.FC = () => {
             }}
             className={styles.baseSecondaryButton}
           >
-            Sign out
+            {t('settings.signOutButton')}
           </button>
-          {user?.role === 'MANAGER' ? (
-            <InvitationLinkGenerator user={user} />
-          ) : null}
+          {user?.role === 'MANAGER' && <InvitationLinkGenerator user={user} />}
         </div>
 
         <div className={styles.additionalLinks}>
           <a href="mailto:support@clockwise.com" className={styles.link}>
-            Report Problem
+            {t('settings.reportProblem')}
           </a>
           <a href="/terms" className={styles.link}>
-            Terms of Use
+            {t('settings.termsOfUse')}
           </a>
           <a href="/privacy" className={styles.link}>
-            Privacy Policy
+            {t('settings.privacyPolicy')}
           </a>
         </div>
         <Footer />

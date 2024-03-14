@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import styles from './CompanySignUpPage.module.css';
 import ProfileCard from '@/components/ProfileCard';
 import { useUser } from '@/components/UserContext';
-import Footer from '../../components/Footer';
+import Footer from '@/components/Footer';
 
 const SignUpSchema = Yup.object().shape({
   companyName: Yup.string().required('Required'),
@@ -69,7 +69,7 @@ const CompanySignUpPage: React.FC = () => {
                 name="allowedEmails"
                 type="text"
                 className={styles.baseField}
-                placeholder="Allowed Emails (comma separated)"
+                placeholder="example.com, example.org"
               />
               <Field
                 name="managerEmail"
