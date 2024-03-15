@@ -10,7 +10,7 @@
         "required": "Krävs",
         "invalidCredentials": "Ogiltig e-post eller lösenord"
       },
-      "placeholder": {
+      "label": {
         "email": "E-postadress",
         "password": "Lösenord"
       },
@@ -37,8 +37,18 @@
       "error": {
         "invalidEmail": "Ogiltig e-post",
         "required": "Krävs",
+        "shortPassword": "Lösenordet måste vara minst 8 tecken långt",
         "passwordsMustMatch": "Lösenorden måste matcha",
-        "termsAndConditions": "Du måste acceptera användarvillkoren"
+        "termsAndConditions": "Du måste acceptera användarvillkoren",
+        "invalidCredentials": "Ogiltig e-post eller lösenord",
+        "notAllowedEmail": "Din e-postadress är inte tillåten att registrera sig."
+      },
+      "label": {
+        "firstName": "Förnamn",
+        "lastName": "Efternamn",
+        "email": "E-postadress",
+        "password": "Lösenord",
+        "confirmPassword": "Bekräfta lösenord"
       },
       "placeholder": {
         "firstName": "Förnamn",
@@ -54,7 +64,7 @@
         "termsAndConditions": "Jag godkänner villkoren och integritetspolicyn."
       },
       "footer": {
-        "prompt": "Har du redan ett konto?",
+        "prompt": "Har du redan ett konto? ",
         "loginLink": "Logga in"
       }
     }
@@ -86,6 +96,7 @@
         "jobTitle": "Jobbtitel"
       },
       "error": {
+        "languageRequired": "Språk krävs",
         "passwordRequired": "Lösenord krävs",
         "confirmPasswordRequired": "Bekräftelse av lösenord krävs",
         "phoneNumberRequired": "Telefonnummer krävs",
@@ -93,6 +104,17 @@
         "jobTitleRequired": "Jobbtitel krävs",
         "passwordsMustMatch": "Lösenorden måste matcha",
         "invalidURL": "Ogiltig URL"
+      },
+      "label": {
+        "language": "Språk",
+        "password": "Lösenord",
+        "confirmPassword": "Bekräfta Lösenord",
+        "phoneNumber": "Telefonnummer",
+        "profilePicture": "Profilbild URL",
+        "jobTitle": "Jobbtitel"
+      },
+      "inviteButton": {
+        "invite": "Bjud in till Företaget"
       }
     },
     "languages": {
@@ -125,10 +147,42 @@
     }
   },
   "report": {
-    "title": "Rapport"
+    "title": "Rapport",
+    "totalHours": "Totalt: %s timmar"
   },
   "dashboard": {
     "timeLog": "Tidlogg",
-    "yourActivity": "Din Aktivitet"
+    "yourActivity": "Din Aktivitet",
+    "checkIn": "Checka In",
+    "checkOut": "Checka Ut",
+    "checkedAt": "Tid",
+    "checkedIn": "Incheckad",
+    "checkedOut": "Utcheckad"
+  },
+  "managerDashboard": {
+    "title": "Förvaltning",
+    "employeeListTitle": "Anställd Lista",
+    "viewReport": "Visa Rapport"
+  },
+  "visit": {
+    "title": "Översikt Över Anställda"
+  },
+  "companySignUpPage": {
+    "createCompanyTitle": "Skapa Företag",
+    "companyNamePlaceholder": "Företagsnamn",
+    "businessIdPlaceholder": "Organisationsnummer",
+    "allowedEmailsPlaceholder": "exempel.com, exempel.org",
+    "createCompanyButton": "Skapa Företag",
+    "addManagerTitle": "Lägg Till Chef",
+    "firstNamePlaceholder": "Förnamn",
+    "lastNamePlaceholder": "Efternamn",
+    "managerEmailPlaceholder": "Chefens E-postadress",
+    "passwordPlaceholder": "Lösenord",
+    "confirmPasswordPlaceholder": "Bekräfta Lösenord",
+    "addManagerButton": "Lägg Till Chef",
+    "emptyFieldsError": "Du har ofyllda obligatoriska fält",
+    "invalidCompanyDetails": "Ogiltiga företagsuppgifter.",
+    "invalidManagerDetails": "Ogiltiga chefuppgifter.",
+    "managerEmailMustMatch": "Chefens e-post måste matcha tillåtna e-post."
   }
 }

@@ -16,39 +16,7 @@ import * as Yup from 'yup';
 import { DateRange, DayPicker } from 'react-day-picker';
 import { fetchGraphql } from '@/graphql/fetch';
 import { createEntryMutation } from '@/graphql/queries';
-
-const ABSENCE_TYPES = [
-  {
-    value: 'sick_leave',
-    label: 'Sick leave',
-  },
-  {
-    value: 'sick_child',
-    label: 'Sick child',
-  },
-  {
-    value: 'holiday_leave',
-    label: 'Holiday leave',
-  },
-  {
-    value: 'special_leave',
-    label: 'Special leave',
-  },
-  {
-    value: 'unpaid_leave',
-    label: 'Unpaid leave',
-  },
-  {
-    value: 'other',
-    label: 'Other',
-  },
-];
-
-const VacationFormSchema = Yup.object().shape({
-  absenceType: Yup.string()
-    .required('Required')
-    .oneOf(ABSENCE_TYPES.map((type) => type.value)),
-});
+import { useTranslation } from 'react-i18next';
 
 interface VacationFormValues {
   absenceType: string;
@@ -63,6 +31,40 @@ const VacationPage: React.FC = () => {
   });
   const [absences, setAbsences] = useState<Date[]>([]);
   const [reason, setReason] = useState('');
+  const { t } = useTranslation();
+
+  const ABSENCE_TYPES = [
+    {
+      value: 'sick_leave',
+      label: t('absences.absenceTypes.sickLeave'),
+    },
+    {
+      value: 'sick_child',
+      label: t('absences.absenceTypes.sickChild'),
+    },
+    {
+      value: 'holiday_leave',
+      label: t('absences.absenceTypes.holidayLeave'),
+    },
+    {
+      value: 'special_leave',
+      label: t('absences.absenceTypes.specialLeave'),
+    },
+    {
+      value: 'unpaid_leave',
+      label: t('absences.absenceTypes.unpaidLeave'),
+    },
+    {
+      value: 'other',
+      label: t('absences.absenceTypes.other'),
+    },
+  ];
+
+  const VacationFormSchema = Yup.object().shape({
+    absenceType: Yup.string()
+      .required(t('absences.errors.required'))
+      .oneOf(ABSENCE_TYPES.map((type) => type.value)),
+  });
 
   const initialValues: VacationFormValues = {
     absenceType: '',
@@ -113,7 +115,7 @@ const VacationPage: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div className={styles.basePage}>
         <ProfileCard user={user} />
-        <h2 className={styles.baseTitle}>Absences</h2>
+        <h2 className={styles.baseTitle}>{t('absences.title')}</h2>
         <DayPicker
           mode="range"
           defaultMonth={today}
@@ -134,8 +136,10 @@ const VacationPage: React.FC = () => {
           >
             {({ errors, touched }) => (
               <Form className={styles.baseForm}>
+                <label htmlFor="fromDate" className={styles.baseFormLabel}>
+                  {t('absences.startingDate')}
+                </label>
                 <DatePicker
-                  label="Starting date"
                   value={range?.from}
                   className={styles.baseSelect}
                   onChange={(newDate) =>
@@ -143,8 +147,10 @@ const VacationPage: React.FC = () => {
                   }
                   renderInput={(params) => <TextField {...params} />}
                 />
+                <label htmlFor="endDate" className={styles.baseFormLabel}>
+                  {t('absences.endingDate')}
+                </label>
                 <DatePicker
-                  label="Ending date"
                   value={range?.to}
                   minDate={range?.from}
                   className={styles.baseSelect}
@@ -154,7 +160,9 @@ const VacationPage: React.FC = () => {
                   renderInput={(params) => <TextField {...params} />}
                 />
                 <FormControl fullWidth>
-                  <InputLabel id="reason-label">Reason for absence</InputLabel>
+                  <InputLabel id="reason-label">
+                    {t('absences.reasonForAbsence')}
+                  </InputLabel>
                   <Select
                     name="absenceType"
                     labelId="reason-label"
@@ -179,7 +187,7 @@ const VacationPage: React.FC = () => {
                   className={styles.basePrimaryButton}
                   onClick={handleSubmit}
                 >
-                  Save
+                  {t('absences.saveButton')}
                 </button>
               </Form>
             )}

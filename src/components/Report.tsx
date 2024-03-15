@@ -8,16 +8,24 @@ import DateIcon from '@/assets/date.png';
 import { fetchGraphql } from '@/graphql/fetch';
 import { getEntriesByType } from '@/graphql/queries';
 import { Entry } from '@/types/user';
+import { useTranslation } from 'react-i18next';
 
 type EmployeeHours = {
   date: Dayjs;
   hours: number;
 };
 
-const Report = ({ userId, token }: { userId: string|undefined; token: string }) => {
+const Report = ({
+  userId,
+  token,
+}: {
+  userId: string | undefined;
+  token: string;
+}) => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [hours, setHours] = useState<EmployeeHours[]>([]);
   const [month, setMonth] = useState(dayjs());
+  const { t } = useTranslation();
 
   useEffect(() => {
     const currentMonth = dayjs();
@@ -93,7 +101,7 @@ const Report = ({ userId, token }: { userId: string|undefined; token: string }) 
         >
           {'< '}
         </button>
-        <p className={styles.monthText}>{month.format('MMMM YYYY')}</p>
+        <p className={styles.monthText}>{month.format('MM/YYYY')}</p>
         <button
           className={styles.baseSecondaryButton}
           onClick={() => handleMonthChange(month.add(1, 'month'))}
@@ -103,7 +111,7 @@ const Report = ({ userId, token }: { userId: string|undefined; token: string }) 
         </button>
       </div>
       <div className={styles.totalHours}>
-        <p>Total: {formatHours(totalHours)} hours</p>
+        <p> {t('report.totalHours').replace('%s', formatHours(totalHours))}</p>
       </div>
       <div className={styles.hoursListContainer}>
         <ListItem key={0} className={styles.hoursListHeader}>
@@ -137,7 +145,7 @@ const Report = ({ userId, token }: { userId: string|undefined; token: string }) 
                 justifyContent="space-between"
                 width="100%"
               >
-                <p>{formatDateWithSuffix(date.date)}</p>
+                <p>{date.date.format('DD.MM.YYYY')}</p>
                 <p>{formatHours(date.hours)}</p>
               </Box>
             </ListItem>

@@ -1,7 +1,10 @@
 import { LoginUser } from '@/types/user';
 import styles from './InviteButton.module.css';
+import { useTranslation } from 'react-i18next';
 
 const InvitationLinkGenerator = ({ user }: { user: LoginUser }) => {
+  const { t } = useTranslation();
+
   const generateLink = async () => {
     if (!navigator.clipboard || !user.id || !user.company.id) return;
 
@@ -16,7 +19,7 @@ const InvitationLinkGenerator = ({ user }: { user: LoginUser }) => {
 
   return (
     <button className={styles.baseSecondaryButton} onClick={generateLink}>
-      Invite to Company
+      {t('settings.form.inviteButton.invite')}
     </button>
   );
 };

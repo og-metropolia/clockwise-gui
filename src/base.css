@@ -44,7 +44,7 @@
   border: 1px solid #000;
   border-radius: 10px;
   padding: 15px 20px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-size: 16px;
   background-color: #fff;
   color: #000;
@@ -62,10 +62,11 @@
 .baseSelect {
   height: 50px !important;
   border-radius: 10px !important;
-  margin-bottom: 16px !important;
+  margin-bottom: 15px !important;
   font-size: 16px !important;
   background-color: #fff !important;
   color: #000 !important;
+  margin-top: 5px !important;
 }
 
 .baseSelect:focus {
@@ -82,6 +83,12 @@
   border-radius: 8px;
   margin: 20px auto;
   background: #f7f7f7;
+}
+
+.baseFormLabel {
+  font-size: 11px;
+  margin-bottom: 2px;
+  color: var(--clockwise-blue);
 }
 
 .baseHeader {
@@ -197,7 +204,7 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   .baseTitle {
     font-size: 18px;
     margin: 0;
@@ -210,6 +217,51 @@
   .baseSecondaryButton {
     padding: 13px 14px;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .baseTitle {
+    font-size: 15px;
+    margin: 0;
+  }
+  .baseHeader {
+    font-size: 15px;
+  }
+  .baseField,
+  .basePrimaryButton,
+  .baseSecondaryButton {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 391px) {
+  .baseTitle {
+    font-size: 18px;
+    margin: 0;
+    padding: 8px 0;
+  }
+  .baseHeader {
+    font-size: 18px;
+  }
+  .baseField,
+  .basePrimaryButton,
+  .baseSecondaryButton {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  .baseField {
+    margin-bottom: 5px;
+  }
+  .baseSelect {
+    margin-bottom: 5px !important;
+  }
+  .baseFormContainer {
+    margin: 0;
+  }
+  .basePage {
+    min-height: 100vh;
   }
 }
 

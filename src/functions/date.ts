@@ -1,4 +1,4 @@
-import { Dayjs } from "dayjs";
+import { Dayjs } from 'dayjs';
 
 function formatHours(hours: number): string {
   const hourString = Math.floor(hours);
@@ -14,4 +14,4 @@ function formatDateWithSuffix(date: Dayjs) {
   return `${date.format('dddd D')}th`;
 }
 
-export { formatHours, formatDateWithSuffix}
+export { formatHours, formatDateWithSuffix };

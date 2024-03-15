@@ -8,6 +8,7 @@ import Footer from '../../components/Footer';
 import CheckInIcon from '../../assets/checkin.png';
 import CheckOutIcon from '../../assets/checkout.png';
 import { fetchGraphql } from '@/graphql/fetch';
+import { useTranslation } from 'react-i18next';
 import {
   createEntryMutation,
   getEntriesByType,
@@ -23,6 +24,7 @@ const Dashboard = () => {
   const [entries, setEntries] = useState<{ in: Dayjs; out?: Dayjs }[]>([]);
   const [activityDate, setActivityDate] = useState(dayjs());
   const [entryId, setEntryId] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchGraphql(
@@ -138,7 +140,7 @@ const Dashboard = () => {
   return (
     <div className={styles.basePage}>
       <ProfileCard user={user} />
-      <h2 className={styles.baseTitle}>Time Log</h2>
+      <h2 className={styles.baseTitle}> {t('dashboard.timeLog')}</h2>
       <div className={styles.dashboardFormContainer}>
         <div className={styles.checkButtonContainer}>
           <button
@@ -147,11 +149,11 @@ const Dashboard = () => {
             disabled={!!checkInTime && !checkOutTime}
           >
             <Typography variant="h6">
-              {checkInTime ? 'Checked In' : 'Check In'}
+              {checkInTime ? t('dashboard.checkedIn') : t('dashboard.checkIn')}
             </Typography>
             {checkInTime && (
               <p className={styles.checkButtonSubtitle}>
-                at {checkInTime.format('HH:mm')}
+                {t('dashboard.checkedAt')} {checkInTime.format('HH:mm')}
               </p>
             )}
           </button>
@@ -161,16 +163,18 @@ const Dashboard = () => {
             disabled={!checkInTime || (!!checkInTime && !!checkOutTime)}
           >
             <Typography variant="h6">
-              {checkOutTime ? 'Checked Out' : 'Check Out'}
+              {checkOutTime
+                ? t('dashboard.checkedOut')
+                : t('dashboard.checkOut')}
             </Typography>
             {checkOutTime && (
               <p className={styles.checkButtonSubtitle}>
-                at {checkOutTime.format('HH:mm')}
+                {t('dashboard.checkedAt')} {checkOutTime.format('HH:mm')}
               </p>
             )}
           </button>
         </div>
-        <h3 className={styles.activityHeader}>{`Your Activity`}</h3>
+        <h3 className={styles.activityHeader}>{t('dashboard.yourActivity')}</h3>
         <div className={styles.daySwitcher}>
           <button
             className={styles.baseSecondaryButton}
@@ -179,7 +183,7 @@ const Dashboard = () => {
             {'< '}
           </button>
           <p className={styles.todayText}>
-            {activityDate.format('dddd, MMMM D')}
+            {activityDate.format('DD.MM.YYYY')}
           </p>
           <button
             className={styles.baseSecondaryButton}

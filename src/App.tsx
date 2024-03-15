@@ -20,6 +20,7 @@ import 'react-day-picker/dist/style.css';
 import VisitPage from './pages/Visit/VisitPage';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import ManagerSignUpPage from './pages/ManagerSignUp.tsx/ManagerSignupPage';
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,16 @@ const router = createBrowserRouter([
         : redirect(ROUTES.login),
   },
   {
+    path: ROUTES.adminDashboard,
+    element: <AdminDashboard />,
+    loader: () =>
+      isAuth()
+        ? !isAdmin()
+          ? redirect(ROUTES.dashboard)
+          : null
+        : redirect(ROUTES.login),
+  },
+  {
     path: ROUTES.companySignup,
     element: <CompanySignUpPage />,
     loader: () =>
@@ -110,8 +121,8 @@ const router = createBrowserRouter([
         : redirect(ROUTES.login),
   },
   {
-    path: ROUTES.adminDashboard,
-    element: <AdminDashboard />,
+    path: ROUTES.managerSignup,
+    element: <ManagerSignUpPage />,
     loader: () =>
       isAuth()
         ? !isAdmin()
@@ -122,16 +133,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
-
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    const language = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') ?? '{}')?.user?.language : 'en';
+    const language = localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user') ?? '{}')?.user?.language
+      : 'en';
     i18n.changeLanguage(language);
   }, [i18n]);
-
-
 
   return (
     <div className="App">
@@ -165,4 +174,3 @@ function isAdmin() {
 
 export default App;
 path: ROUTES.visit + '/:id';
-

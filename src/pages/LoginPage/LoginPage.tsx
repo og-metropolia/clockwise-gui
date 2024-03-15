@@ -60,44 +60,57 @@ const LoginPage: React.FC = () => {
         >
           {({ errors, touched }) => (
             <Form className={styles.baseForm}>
+              <label htmlFor="email" className={styles.baseFormLabel}>
+                {t('login.form.label.email')}
+              </label>
               <Field
+                id="email"
                 name="email"
                 type="email"
-                placeholder={t('login.form.placeholder.email')}
+                placeholder={'matti@clockwisee.me'}
                 className={styles.baseField}
               />
+              {errors.email && touched.email ? (
+                <div className={styles.error}>{errors.email}</div>
+              ) : null}
+              <label htmlFor="password" className={styles.baseFormLabel}>
+                {t('login.form.label.password')}
+              </label>
               <Field
+                id="password"
                 name="password"
                 type="password"
-                placeholder={t('login.form.placeholder.password')}
+                placeholder={'*******'}
                 className={styles.baseField}
               />
+              {errors.password && touched.password ? (
+                <div className={styles.error}>{errors.password}</div>
+              ) : null}
               <button type="submit" className={styles.button}>
                 {t('login.form.button.login')}
               </button>
               {errors.auth && touched.auth ? (
                 <div className={styles.error}>{errors.auth}</div>
               ) : null}
-
               <div className={styles.loginFormFooter}>
                 <p className={styles.linkContainer}>
                   <a href={ROUTES.resetPassword} className={styles.link}>
                     {t('login.form.link.forgotPassword')}
                   </a>
                 </p>
-                <div className={styles.loginFormFooterBottomPart}>
-                  <LanguageSwitcher />
-                  <p className={styles.registerNavigation}>
-                    {t('login.form.footer.prompt')}
-                    <a href={ROUTES.signup} className={styles.link}>
-                      {t('login.form.link.register')}
-                    </a>
-                  </p>
-                </div>
               </div>
             </Form>
           )}
         </Formik>
+      </div>
+      <div className={styles.loginFormFooterBottomPart}>
+        <LanguageSwitcher />
+        <p className={styles.registerNavigation}>
+          {t('login.form.footer.prompt')}
+          <a href={ROUTES.signup} className={styles.link}>
+            {t('login.form.link.register')}
+          </a>
+        </p>
       </div>
     </div>
   );
