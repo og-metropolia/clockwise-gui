@@ -172,7 +172,7 @@
     "createCompanyTitle": "Create Company",
     "companyNamePlaceholder": "Company Name",
     "businessIdPlaceholder": "Business ID",
-    "allowedEmailsPlaceholder": "example.com, example.org",
+    "allowedEmailsPlaceholder": "Allowed Emails",
     "createCompanyButton": "Create Company",
     "addManagerTitle": "Add Manager",
     "firstNamePlaceholder": "First Name",
@@ -182,6 +182,8 @@
     "confirmPasswordPlaceholder": "Confirm Password",
     "addManagerButton": "Add Manager",
     "emptyFieldsError": "You have empty required fields",
+    "invalidManager": "Invalid manager",
+    "invalidCompany": "Invalid company",
     "invalidCompanyDetails": "Invalid company details.",
     "invalidManagerDetails": "Invalid manager details.",
     "managerEmailMustMatch": "Manager email must match allowed emails."

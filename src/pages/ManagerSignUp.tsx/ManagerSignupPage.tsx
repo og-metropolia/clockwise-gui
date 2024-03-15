@@ -6,17 +6,7 @@ import { useUser } from '@/components/UserContext';
 import Footer from '@/components/Footer';
 import { fetchGraphql } from '@/graphql/fetch';
 import { createManager, getCompanyByBic } from '@/graphql/queries';
-
-const ManagerSignUpSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(8, 'Too Short!').required('Required'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required('Required'),
-  firstName: Yup.string().required('Required'),
-  lastName: Yup.string().required('Required'),
-  businessId: Yup.string().required('Required'),
-});
+import { useTranslation } from 'react-i18next';
 
 type ManagerSignUpFormValues = {
   email: string;
@@ -31,6 +21,18 @@ type ManagerSignUpFormValues = {
 const ManagerSignUpPage: React.FC = () => {
   const { getUser, getToken } = useUser();
   const user = getUser();
+  const { t } = useTranslation();
+
+  const ManagerSignUpSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Required'),
+    password: Yup.string().min(8, 'Too Short!').required('Required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'Passwords must match')
+      .required('Required'),
+    firstName: Yup.string().required('Required'),
+    lastName: Yup.string().required('Required'),
+    businessId: Yup.string().required('Required'),
+  });
 
   const managerInitialValues: ManagerSignUpFormValues = {
     email: '',
@@ -61,14 +63,16 @@ const ManagerSignUpPage: React.FC = () => {
             )?.companiesByBic;
 
             if (!company) {
-              actions.setErrors({ auth: 'Invalid company.' });
+              actions.setErrors({
+                auth: t('companySignUpPage.invalidCompany'),
+              });
               return;
             }
 
             const allowedEmails = company?.allowed_emails;
             if (!allowedEmails.includes('@' + values.email.split('@')[1])) {
               actions.setErrors({
-                auth: 'Manager email must match allowed emails.',
+                auth: t('companySignUpPage.managerEmailMustMatch'),
               });
               return;
             }
@@ -89,7 +93,9 @@ const ManagerSignUpPage: React.FC = () => {
             );
 
             if (!manager) {
-              actions.setErrors({ auth: 'Invalid manager details.' });
+              actions.setErrors({
+                auth: t('companySignUpPage.invalidManager'),
+              });
               return;
             }
 
@@ -100,7 +106,7 @@ const ManagerSignUpPage: React.FC = () => {
           {({ errors, touched }) => (
             <Form className={styles.baseForm}>
               <label htmlFor="businessId" className={styles.baseFormLabel}>
-                Business Identity Code
+                {t('companySignUpPage.businessIdPlaceholder')}
               </label>
               <Field
                 id="businessId"
@@ -110,7 +116,7 @@ const ManagerSignUpPage: React.FC = () => {
                 placeholder="00000000000"
               />
               <label htmlFor="firstName" className={styles.baseFormLabel}>
-                First Name
+                {t('companySignUpPage.firstNamePlaceholder')}
               </label>
               <Field
                 id="firstName"
@@ -120,7 +126,7 @@ const ManagerSignUpPage: React.FC = () => {
                 placeholder="Matti"
               />
               <label htmlFor="lastName" className={styles.baseFormLabel}>
-                Last Name
+                {t('companySignUpPage.lastNamePlaceholder')}
               </label>
               <Field
                 id="lastName"
@@ -130,7 +136,7 @@ const ManagerSignUpPage: React.FC = () => {
                 placeholder="Meikäläinen"
               />
               <label htmlFor="email" className={styles.baseFormLabel}>
-                Email
+                {t('companySignUpPage.managerEmailPlaceholder')}
               </label>
               <Field
                 id="email"
@@ -140,7 +146,7 @@ const ManagerSignUpPage: React.FC = () => {
                 placeholder="matti@clockwisee.me"
               />
               <label htmlFor="password" className={styles.baseFormLabel}>
-                Password
+                {t('companySignUpPage.passwordPlaceholder')}
               </label>
               <Field
                 id="password"
@@ -155,7 +161,7 @@ const ManagerSignUpPage: React.FC = () => {
               )}
 
               <label htmlFor="confirmPassword" className={styles.baseFormLabel}>
-                Confirm Password
+                {t('companySignUpPage.confirmPasswordPlaceholder')}
               </label>
               <Field
                 id="confirmPassword"
@@ -172,7 +178,7 @@ const ManagerSignUpPage: React.FC = () => {
                 )}
 
               <button type="submit" className={styles.basePrimaryButton}>
-                Add Manager
+                {t('companySignUpPage.addManagerButton')}
               </button>
 
               {errors.auth && touched.auth ? (
@@ -184,7 +190,7 @@ const ManagerSignUpPage: React.FC = () => {
                 (errors.firstName && touched.firstName) ||
                 (errors.lastName && touched.firstName)) && (
                 <div className={styles.error}>
-                  {'You have empty required fields'}
+                  {t('companySignUpPage.emptyFieldsError')}
                 </div>
               )}
             </Form>

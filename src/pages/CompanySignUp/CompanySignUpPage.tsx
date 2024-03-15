@@ -6,12 +6,7 @@ import { useUser } from '@/components/UserContext';
 import Footer from '@/components/Footer';
 import { fetchGraphql } from '@/graphql/fetch';
 import { createCompany } from '@/graphql/queries';
-
-const CompanySignUpSchema = Yup.object().shape({
-  companyName: Yup.string().required('Required'),
-  businessId: Yup.string().required('Required'),
-  allowedEmails: Yup.string().required('Required'),
-});
+import { useTranslation } from 'react-i18next';
 
 type CompanySignUpFormValues = {
   companyName: string;
@@ -23,6 +18,8 @@ type CompanySignUpFormValues = {
 const CompanySignUpPage: React.FC = () => {
   const { getUser, getToken } = useUser();
   const user = getUser();
+  const { t } = useTranslation();
+
   const companyInitialValues: CompanySignUpFormValues = {
     companyName: '',
     businessId: '',
@@ -30,10 +27,18 @@ const CompanySignUpPage: React.FC = () => {
     auth: '',
   };
 
+  const CompanySignUpSchema = Yup.object().shape({
+    companyName: Yup.string().required('Required'),
+    businessId: Yup.string().required('Required'),
+    allowedEmails: Yup.string().required('Required'),
+  });
+
   return (
     <div className={styles.basePage}>
       <ProfileCard user={user} />
-      <h2 className={styles.baseTitle}>Create Company</h2>
+      <h2 className={styles.baseTitle}>
+        {t('companySignUpPage.createCompanyTitle')}
+      </h2>
 
       <div className={styles.baseFormContainer}>
         <Formik
@@ -61,7 +66,9 @@ const CompanySignUpPage: React.FC = () => {
             );
 
             if (!company) {
-              actions.setErrors({ auth: 'Invalid company details.' });
+              actions.setErrors({
+                auth: t('companySignUpPage.invalidCompanyDetails'),
+              });
               return;
             }
 
@@ -71,19 +78,31 @@ const CompanySignUpPage: React.FC = () => {
         >
           {({ errors, touched }) => (
             <Form className={styles.baseForm}>
+              <label htmlFor="companyName" className={styles.baseFormLabel}>
+                {t('companySignUpPage.companyNamePlaceholder')}
+              </label>
               <Field
+                id="companyName"
                 name="companyName"
                 type="text"
                 className={styles.baseField}
-                placeholder="Company Name"
+                placeholder="ClockWise Inc."
               />
+              <label htmlFor="businessId" className={styles.baseFormLabel}>
+                {t('companySignUpPage.businessIdPlaceholder')}
+              </label>
               <Field
+                id="businessId"
                 name="businessId"
                 type="text"
                 className={styles.baseField}
-                placeholder="Business ID"
+                placeholder="1234567-8"
               />
+              <label htmlFor="allowedEmails" className={styles.baseFormLabel}>
+                {t('companySignUpPage.allowedEmailsPlaceholder')}
+              </label>
               <Field
+                id="allowedEmails"
                 name="allowedEmails"
                 type="text"
                 className={styles.baseField}
@@ -91,7 +110,7 @@ const CompanySignUpPage: React.FC = () => {
               />
 
               <button type="submit" className={styles.basePrimaryButton}>
-                Create Company
+                {t('companySignUpPage.createCompanyButton')}
               </button>
 
               {errors.auth && touched.auth ? (
@@ -102,7 +121,7 @@ const CompanySignUpPage: React.FC = () => {
                 (errors.allowedEmails && touched.allowedEmails) ||
                 (errors.companyName && touched.companyName)) && (
                 <div className={styles.error}>
-                  {'You have empty required fields'}
+                  {t('companySignUpPage.emptyFieldsError')}
                 </div>
               )}
             </Form>

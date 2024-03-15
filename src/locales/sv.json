@@ -171,7 +171,7 @@
     "createCompanyTitle": "Skapa Företag",
     "companyNamePlaceholder": "Företagsnamn",
     "businessIdPlaceholder": "Organisationsnummer",
-    "allowedEmailsPlaceholder": "exempel.com, exempel.org",
+    "allowedEmailsPlaceholder": "Tillåtna E-postadresser",
     "createCompanyButton": "Skapa Företag",
     "addManagerTitle": "Lägg Till Chef",
     "firstNamePlaceholder": "Förnamn",
@@ -181,6 +181,8 @@
     "confirmPasswordPlaceholder": "Bekräfta Lösenord",
     "addManagerButton": "Lägg Till Chef",
     "emptyFieldsError": "Du har ofyllda obligatoriska fält",
+    "invalidManager": "Ogiltig chef",
+    "invalidCompany": "Ogiltigt företagsnamn",
     "invalidCompanyDetails": "Ogiltiga företagsuppgifter.",
     "invalidManagerDetails": "Ogiltiga chefuppgifter.",
     "managerEmailMustMatch": "Chefens e-post måste matcha tillåtna e-post."
