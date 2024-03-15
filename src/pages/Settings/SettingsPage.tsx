@@ -51,18 +51,20 @@ const SettingsPage: React.FC = () => {
   );
 
   const UpdateSchema = Yup.object().shape({
-    password: Yup.string().required(t('settings.error.passwordRequired')),
+    password: Yup.string().required(t('settings.form.error.passwordRequired')),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password')], t('settings.error.passwordsMustMatch'))
-      .required(t('settings.error.confirmPasswordRequired')),
-    phoneNumber: Yup.string().required(t('settings.error.phoneNumberRequired')),
+      .oneOf([Yup.ref('password')], t('settings.form.error.passwordsMustMatch'))
+      .required(t('settings.form.error.confirmPasswordRequired')),
+    phoneNumber: Yup.string().required(
+      t('settings.form.error.phoneNumberRequired'),
+    ),
     profilePicture: Yup.string()
       .required('Required')
-      .url(t('settings.error.invalidURL')),
+      .url(t('settings.form.error.invalidURL')),
     language: Yup.string()
-      .required(t('settings.error.languageRequired'))
+      .required(t('settings.form.error.languageRequired'))
       .oneOf(LANGUAGES.map((type) => type.value)),
-    jobTitle: Yup.string().required(t('settings.error.jobTitleRequired')),
+    jobTitle: Yup.string().required(t('settings.form.error.jobTitleRequired')),
   });
 
   const handleLanguageChange = (newLanguage: Language) => {
