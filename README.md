@@ -49,6 +49,8 @@ Esimerkiksi logistiikka-alalla, missä ruokakuljetusyritykset kohtaavat haasteit
 
 <https://clockwisee.me>
 
+![QR-koodi](./images/qr.png)
+
 ### Kirjautumisnäkymä
 
 ![Login Screen](./images/login.png)
