@@ -47,7 +47,7 @@ const ManagerSignUpPage: React.FC = () => {
   return (
     <div className={styles.basePage}>
       <ProfileCard user={user} />
-      <h2 className={styles.baseTitle}>Add Manager</h2>
+      <h2 className={styles.baseTitle}>{t('managerSignup.title')}</h2>
 
       <div className={styles.baseFormContainer}>
         <Formik

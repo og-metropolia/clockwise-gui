@@ -14,6 +14,7 @@ import { updateUserMutation } from '@/graphql/queries';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { isAdmin } from '@/App';
 
 const VISUAL_PASSWORD = '********';
 
@@ -51,18 +52,20 @@ const SettingsPage: React.FC = () => {
   );
 
   const UpdateSchema = Yup.object().shape({
-    password: Yup.string().required(t('settings.error.passwordRequired')),
+    password: Yup.string().required(t('settings.form.error.passwordRequired')),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password')], t('settings.error.passwordsMustMatch'))
-      .required(t('settings.error.confirmPasswordRequired')),
-    phoneNumber: Yup.string().required(t('settings.error.phoneNumberRequired')),
+      .oneOf([Yup.ref('password')], t('settings.form.error.passwordsMustMatch'))
+      .required(t('settings.form.error.confirmPasswordRequired')),
+    phoneNumber: Yup.string().required(
+      t('settings.form.error.phoneNumberRequired'),
+    ),
     profilePicture: Yup.string()
       .required('Required')
-      .url(t('settings.error.invalidURL')),
+      .url(t('settings.form.error.invalidURL')),
     language: Yup.string()
-      .required(t('settings.error.languageRequired'))
+      .required(t('settings.form.error.languageRequired'))
       .oneOf(LANGUAGES.map((type) => type.value)),
-    jobTitle: Yup.string().required(t('settings.error.jobTitleRequired')),
+    jobTitle: Yup.string().required(t('settings.form.error.jobTitleRequired')),
   });
 
   const handleLanguageChange = (newLanguage: Language) => {
@@ -88,6 +91,12 @@ const SettingsPage: React.FC = () => {
           initialValues={initialValues}
           validationSchema={UpdateSchema}
           onSubmit={async (values, actions) => {
+            if (isAdmin()) {
+              actions.setSubmitting(false);
+              alert('ADMIN UPDATE NOT ALLOWED IN DEMO VERSION.');
+              return;
+            }
+
             const updatedUser = {
               id: user?.id,
               input: {
@@ -204,9 +213,15 @@ const SettingsPage: React.FC = () => {
               {errors.jobTitle && touched.jobTitle ? (
                 <div className={styles.error}>{errors.jobTitle}</div>
               ) : null}
-              <button type="submit" className={styles.basePrimaryButton}>
-                {t('settings.updateButton')}
-              </button>
+              {isAdmin() ? (
+                <button className={styles.basePrimaryButton} disabled={true}>
+                  ADMIN UPDATE NOT ALLOWED IN DEMO VERSION
+                </button>
+              ) : (
+                <button type="submit" className={styles.basePrimaryButton}>
+                  {t('settings.updateButton')}
+                </button>
+              )}
             </Form>
           )}
         </Formik>

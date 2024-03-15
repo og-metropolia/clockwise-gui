@@ -164,6 +164,9 @@
     "employeeListTitle": "Employee List",
     "viewReport": "View Report"
   },
+  "managerSignup": {
+    "title": "Add Manager"
+  },
 
   "visit": {
     "title": "Employee Overview"
