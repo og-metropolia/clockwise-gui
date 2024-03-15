@@ -1,6 +1,6 @@
 # Clockwise GUI
 
-Ryhmän jäesenet: Adrian Gashi, Yamir Haque, Leo Härkönen
+Ryhmän jäsenet: Adrian Gashi, Yamir Haque, Leo Härkönen
 
 Clockwise on innovatiivinen mobiilisovellus, joka tuo työaikaseurannan nykyaikaan digitalisoimalla ja automatisoimalla perinteiset prosessit. Se minimoi inhimillisiä virheitä ja vapauttaa arvokasta aikaa, jonka yritykset voivat suunnata tuottavampaan työhön. Sovellus sisältää monipuoliset hallintatyökalut, jotka eivät ainoastaan tehosta työajan seurantaa vaan myös tarjoavat yksityiskohtaisen analyysin työajankäytöstä, auttaen näin yrityksiä optimoimaan resurssiensa käyttöä
 
@@ -25,7 +25,7 @@ Esimerkiksi logistiikka-alalla, missä ruokakuljetusyritykset kohtaavat haasteit
 
 ### Kokeile Sovellusta
 
-Voit kokeilla Clockwise-sovellusta tästä linkistä: [Käyttöliittymän linkki] (Lisää linkki tähän)
+Voit kokeilla Clockwise-sovellusta tästä linkistä: **[Käyttöliittymä](https://clockwisee.me/)**
 
 ## Käyttöliittymän Kuvakaappaukset
 
@@ -77,23 +77,24 @@ Tässä ovat yksityiskohtaiset ja selkeät ohjeet kolmelle roolille: Admin, Mana
 ### Admin
 
 - **Kirjaudu sisään Adminina.**
-  - Käytä admin-käyttäjätunnuksiasi kirjautuaksesi sovellukseen mobiililaitteellasi.
+  - Käytä sähköpostia `admin@clockwisee.me` ja salasanaa `12345` kirjautuaksesi sovellukseen mobiililaitteellasi osoitteessa: <https://clockwisee.me/login>
 - **Yrityksen ja Managerin Luominen.**
-  - Navigoi sovelluksen alaosan keskimmäisestä valikosta "Create company" -välilehdelle.
-  - Täytä vaaditut tiedot yrityksen ja managerin käyttäjätunnuksen luomiseksi.
+  - Luo yritys "Create Company" -välilehdestä.
+  - Luo manager "Add Manager" -välilehdestä. Otathan managerin sähköpostin ja salasanan talteen! Käytäthän samaa yritys tunnusta kuin aikaisemmassa vaiheessa!
+  - Jaa managerin tunnukset sille henkilölle joka testaa kyseistä roolia käyttäen jotain viestintäkanavaa.
 - **Adminin Asetusten Muuttaminen.**
   - Siirry footerin oikeassa alakulmassa sijaitsevaan "Settings" -välilehteen.
-  - Tässä osiossa voit muokata admin-käyttäjän asetuksia. 
+  - Asetusten muokkaaminen on estetty tässä versiossa, jotta voimme taata kaikille hyvän testauskokemuksen. Asetusten muokkaamista voi testata manager ja työntekijä roolin käyttäjillä.
 
 ### Manager
 
-- **Kirjaudutaan sisään Managerina.**
-  - Käytä manager-käyttäjätunnuksiasi kirjautuaksesi sovellukseen.
+- **Kirjaudu sisään Managerina.**
+  - Käytä adminin antamia tunnuksia kirjautuaksesi sovellukseen osoitteessa: <https://clockwisee.me/login>
 - **Navigoi asetuksiin.**
   - Siirry sovelluksen oikeasta alakulmasta "Settings"-kohtaan, joka löytyy ukko-ikonin kautta.
-- **Kutsulinkin lähetys.**
+- **Lähetä kutsulinkki.**
   - Kopioi "Invite to company" -linkki oikeasta alakulmasta.
-  - Lähetä kutsulinkki Työntekijälle sähköpostitse tai muulla viestintäkanavalla.
+  - Lähetä kutsulinkki henkilölle joka testaa työntekijä roolia käyttäen jotain viestintäkanavaa.
 - **Muuta Managerin tietoja.**
   - Tässä näkymässä voit muuttaa Managerin henkilökohtaisia tietoja ja sovelluksen kieltä.
 
