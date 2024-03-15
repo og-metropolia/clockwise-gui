@@ -10,6 +10,7 @@ const ROUTES = {
   visit: '/visit',
   adminDashboard: '/admin',
   companySignup: '/company-signup',
+  managerSignup: '/manager-signup',
 };
 
 export default ROUTES;

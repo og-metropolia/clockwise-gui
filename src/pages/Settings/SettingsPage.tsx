@@ -20,30 +20,17 @@ const VISUAL_PASSWORD = '********';
 const LANGUAGES = [
   {
     value: 'en',
-    label: 'English',
+    id: 'english',
   },
   {
     value: 'fi',
-    label: 'Finnish',
+    id: 'finnish',
   },
   {
     value: 'sv',
-    label: 'Swedish',
+    id: 'swedish',
   },
 ];
-
-const UpdateSchema = Yup.object().shape({
-  password: Yup.string().required('Required'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required('Required'),
-  phoneNumber: Yup.string().required('Required'),
-  profilePicture: Yup.string().required('Required').url('Invalid URL'),
-  language: Yup.string()
-    .required('Required')
-    .oneOf(LANGUAGES.map((type) => type.value)),
-  jobTitle: Yup.string().required('Required'),
-});
 
 type UpdateUserFormValues = {
   password: string;
@@ -62,6 +49,21 @@ const SettingsPage: React.FC = () => {
   const [language, setLanguage] = useState<Language>(
     user?.language ?? USER_DEFAULTS.language,
   );
+
+  const UpdateSchema = Yup.object().shape({
+    password: Yup.string().required(t('settings.error.passwordRequired')),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], t('settings.error.passwordsMustMatch'))
+      .required(t('settings.error.confirmPasswordRequired')),
+    phoneNumber: Yup.string().required(t('settings.error.phoneNumberRequired')),
+    profilePicture: Yup.string()
+      .required('Required')
+      .url(t('settings.error.invalidURL')),
+    language: Yup.string()
+      .required(t('settings.error.languageRequired'))
+      .oneOf(LANGUAGES.map((type) => type.value)),
+    jobTitle: Yup.string().required(t('settings.error.jobTitleRequired')),
+  });
 
   const handleLanguageChange = (newLanguage: Language) => {
     i18n.changeLanguage(newLanguage);
@@ -109,16 +111,19 @@ const SettingsPage: React.FC = () => {
             if (data.updateUser) {
               updateUser(data.updateUser);
               actions.setSubmitting(false);
-              alert(t('settings.alert.success'))
+              alert(t('settings.alert.success'));
               window.location.reload();
             } else {
               actions.setSubmitting(false);
-              alert(t('settings.alert.error'))
+              alert(t('settings.alert.error'));
             }
           }}
         >
           {({ errors, touched }) => (
             <Form className={styles.baseForm}>
+              <label htmlFor="language" className={styles.baseFormLabel}>
+                {t('settings.form.label.language')}
+              </label>
               <FormControl fullWidth>
                 <Select
                   name="language"
@@ -131,7 +136,7 @@ const SettingsPage: React.FC = () => {
                 >
                   {LANGUAGES.map((lang) => (
                     <MenuItem key={lang.value} value={lang.value}>
-                      {t(`settings.languages.${lang.label.toLowerCase()}`)}
+                      {t(`settings.languages.${lang.id}`)}
                     </MenuItem>
                   ))}
                 </Select>
@@ -139,46 +144,61 @@ const SettingsPage: React.FC = () => {
               {errors.language && touched.language ? (
                 <div className={styles.error}>{errors.language}</div>
               ) : null}
+              <label htmlFor="password" className={styles.baseFormLabel}>
+                {t('settings.form.label.password')}
+              </label>
               <Field
                 name="password"
                 type="password"
-                placeholder={t('settings.form.placeholder.password')}
+                placeholder={'*******'}
                 className={styles.baseField}
               />
               {errors.password && touched.password ? (
                 <div className={styles.error}>{errors.password}</div>
               ) : null}
+              <label htmlFor="confirmPassword" className={styles.baseFormLabel}>
+                {t('settings.form.label.confirmPassword')}
+              </label>
               <Field
                 name="confirmPassword"
                 type="password"
-                placeholder={t('settings.form.placeholder.confirmPassword')}
+                placeholder={'******'}
                 className={styles.baseField}
               />
               {errors.confirmPassword && touched.confirmPassword ? (
                 <div className={styles.error}>{errors.confirmPassword}</div>
               ) : null}
+              <label htmlFor="phoneNumber" className={styles.baseFormLabel}>
+                {t('settings.form.label.phoneNumber')}
+              </label>
               <Field
                 name="phoneNumber"
                 type="tel"
-                placeholder={t('settings.form.placeholder.phoneNumber')}
+                placeholder={'+358 00 000 0000'}
                 className={styles.baseField}
               />
               {errors.phoneNumber && touched.phoneNumber ? (
                 <div className={styles.error}>{errors.phoneNumber}</div>
               ) : null}
+              <label htmlFor="profilePicture" className={styles.baseFormLabel}>
+                {t('settings.form.label.profilePicture')}
+              </label>
               <Field
                 name="profilePicture"
                 type="url"
-                placeholder={t('settings.form.placeholder.profilePicture')}
+                placeholder={'https://clockwise.me/image.jpg'}
                 className={styles.baseField}
               />
               {errors.profilePicture && touched.profilePicture ? (
                 <div className={styles.error}>{errors.profilePicture}</div>
               ) : null}
+              <label htmlFor="jobTitle" className={styles.baseFormLabel}>
+                {t('settings.form.label.jobTitle')}
+              </label>
               <Field
                 name="jobTitle"
                 type="text"
-                placeholder={t('settings.form.placeholder.jobTitle')}
+                placeholder={'Designer'}
                 className={styles.baseField}
               />
               {errors.jobTitle && touched.jobTitle ? (

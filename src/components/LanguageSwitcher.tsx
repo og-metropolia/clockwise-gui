@@ -6,7 +6,7 @@ import { Language } from '@/types/user';
 import LanguageIcon from '@/components/icons/LanguageIcon';
 
 function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event: any) => {
@@ -30,9 +30,17 @@ function LanguageSwitcher() {
         </button>
       </div>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={() => changeLanguage('en')}>English</MenuItem>
-        <MenuItem onClick={() => changeLanguage('fi')}>Finnish</MenuItem>
-        <MenuItem onClick={() => changeLanguage('sv')}>Swedish</MenuItem>
+        <MenuItem onClick={() => changeLanguage('en')}>
+          {t('settings.languages.english')}
+        </MenuItem>
+        <MenuItem onClick={() => changeLanguage('fi')}>
+          {' '}
+          {t('settings.languages.finnish')}
+        </MenuItem>
+        <MenuItem onClick={() => changeLanguage('sv')}>
+          {' '}
+          {t('settings.languages.swedish')}
+        </MenuItem>
       </Menu>
     </div>
   );

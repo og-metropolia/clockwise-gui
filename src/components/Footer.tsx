@@ -6,6 +6,7 @@ import ReportIcon from './icons/ReportIcon.tsx';
 import HomeIcon from './icons/HomeIcon.tsx';
 import VacationIcon from './icons/VacationIcon.tsx';
 import SettingsIcon from './icons/SettingsIcon.tsx';
+import AddManagerIcon from './icons/AddManagerIcon.tsx';
 import ROUTES from '../constants/routes';
 import { useUser } from './UserContext.tsx';
 import AddCompanyIcon from './icons/AddCompanyIcon.tsx';
@@ -61,6 +62,9 @@ const Footer: React.FC = () => {
           </NavLink>
           <NavLink to={ROUTES.companySignup} className={setActive}>
             <AddCompanyIcon />
+          </NavLink>
+          <NavLink to={ROUTES.managerSignup} className={setActive}>
+            <AddManagerIcon />
           </NavLink>
           <NavLink to={ROUTES.settings} className={setActive}>
             <SettingsIcon />

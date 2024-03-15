@@ -1,11 +1,12 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next'; // Tuodaan useTranslation
+import { useTranslation } from 'react-i18next';
 import ROUTES from '@/constants/routes';
 import styles from './ResetPassword.module.css';
 import Logo from '@/components/Logo';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const ResetPassword: React.FC = () => {
-  const { t } = useTranslation(); // Käytetään useTranslation hookia
+  const { t } = useTranslation();
 
   return (
     <div className={styles.basePageSecondary}>
@@ -26,6 +27,7 @@ const ResetPassword: React.FC = () => {
             {t('resetPassword.loginLink')}
           </a>
         </p>
+        <LanguageSwitcher />
       </div>
     </div>
   );

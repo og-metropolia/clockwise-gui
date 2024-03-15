@@ -9,11 +9,13 @@ import { useUser } from '@/components/UserContext';
 import { LoginUser } from '@/types/user';
 import Footer from '@/components/Footer';
 import { List, ListItem, Box } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const ManagerDashboard = () => {
   const navigate = useNavigate();
   const { getUser } = useUser();
   const user = getUser();
+  const { t } = useTranslation();
 
   const [employees, setEmployees] = useState<LoginUser[]>([]);
 
@@ -34,7 +36,7 @@ const ManagerDashboard = () => {
   return (
     <div className={styles.basePage}>
       <ProfileCard user={user} />
-      <h2 className={styles.baseTitle}>Management</h2>
+      <h2 className={styles.baseTitle}>{t('managerDashboard.title')}</h2>
       <div className={styles.employeeListContainer}>
         <List className={styles.employeeList}>
           {employees.map((employee) => (

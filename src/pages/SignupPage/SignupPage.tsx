@@ -12,17 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
-const RegisterSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(8, 'Too Short!').required('Required'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required('Required'),
-  termsAndConditions: Yup.bool().oneOf(
-    [true],
-    'You must accept the terms and conditions',
-  ),
-});
 
 interface RegisterFormValues {
   firstName: string;
@@ -43,6 +32,22 @@ const SignupPage: React.FC = () => {
 
   const companyId = searchParams.get('company');
   const managerId = searchParams.get('manager');
+
+  const RegisterSchema = Yup.object().shape({
+    email: Yup.string()
+      .email(t('signup.form.error.invalidEmail'))
+      .required(t('signup.form.error.required')),
+    password: Yup.string()
+      .min(8, t('signup.form.error.shortPassword'))
+      .required(t('signup.form.error.required')),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], t('signup.form.error.passwordsMustMatch'))
+      .required(t('signup.form.error.required')),
+    termsAndConditions: Yup.bool().oneOf(
+      [true],
+      t('signup.form.error.termsAndConditions'),
+    ),
+  });
 
   const initialValues: RegisterFormValues = {
     firstName: '',
@@ -94,12 +99,14 @@ const SignupPage: React.FC = () => {
 
             const userEmailSuffix = '@' + values.email.split('@')[1];
             if (!companyEmails.includes(userEmailSuffix)) {
-              alert('Invalid domain for company email.');
+              alert(t('signup.form.error.notAllowedEmail'));
               return;
             }
             const data = await fetchGraphql(signup, user);
             if (!data?.login) {
-              actions.setErrors({ auth: 'Invalid email or password' });
+              actions.setErrors({
+                auth: t('signup.form.error.invalidCredentials'),
+              });
               return;
             }
 
@@ -109,10 +116,14 @@ const SignupPage: React.FC = () => {
         >
           {({ errors, touched }) => (
             <Form className={styles.baseForm}>
+              <label htmlFor="firstName" className={styles.baseFormLabel}>
+                {t('signup.form.label.firstName')}
+              </label>
               <Field
+                id="firstName"
                 name="firstName"
                 type="firstName"
-                placeholder="First Name"
+                placeholder="Matti"
                 className={styles.baseField}
                 disabled={disabled}
               />
@@ -120,10 +131,14 @@ const SignupPage: React.FC = () => {
                 <div className={styles.error}>{errors.firstName}</div>
               ) : null}
 
+              <label htmlFor="lastName" className={styles.baseFormLabel}>
+                {t('signup.form.label.lastName')}
+              </label>
               <Field
+                id="lastName"
                 name="lastName"
                 type="lastName"
-                placeholder="Last Name"
+                placeholder="Meikäläinen"
                 className={styles.baseField}
                 disabled={disabled}
               />
@@ -131,10 +146,14 @@ const SignupPage: React.FC = () => {
                 <div className={styles.error}>{errors.lastName}</div>
               ) : null}
 
+              <label htmlFor="email" className={styles.baseFormLabel}>
+                {t('signup.form.label.email')}
+              </label>
               <Field
+                id="email"
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder="matti@clockwisee.me"
                 className={styles.baseField}
                 disabled={disabled}
               />
@@ -142,7 +161,11 @@ const SignupPage: React.FC = () => {
                 <div className={styles.error}>{errors.email}</div>
               ) : null}
 
+              <label htmlFor="password" className={styles.baseFormLabel}>
+                {t('signup.form.label.password')}
+              </label>
               <Field
+                id="password"
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -154,7 +177,11 @@ const SignupPage: React.FC = () => {
                 <div className={styles.error}>{errors.password}</div>
               ) : null}
 
+              <label htmlFor="confirmPassword" className={styles.baseFormLabel}>
+                {t('signup.form.label.confirmPassword')}
+              </label>
               <Field
+                id="confirmPassword"
                 name="confirmPassword"
                 type="password"
                 placeholder="Confirm Password"

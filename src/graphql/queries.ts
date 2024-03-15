@@ -171,8 +171,17 @@ mutation CreateCompany($input: InputCompany) {
 `;
 
 const createManager = `
-mutation CreateManager($input: InputUser) {
+mutation CreateManager($input: UserInput!) {
   createUser(input: $input) { id }
+}
+`;
+
+const getCompanyByBic = `
+query CompaniesByBic($business_identity_code: String!) {
+  companiesByBic(business_identity_code: $business_identity_code) {
+    id
+    allowed_emails
+  }
 }
 `;
 
@@ -190,4 +199,5 @@ export {
   getCompanies,
   createCompany,
   createManager,
+  getCompanyByBic,
 };

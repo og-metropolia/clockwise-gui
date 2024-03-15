@@ -8,11 +8,11 @@
   gap: 15px;
   margin-bottom: 20px;
   cursor: pointer;
- }
+}
 
- .checkboxContainer span {
+.checkboxContainer span {
   font-size: 12px;
- }
+}
 
 .linkContainer {
   text-align: center;
@@ -41,6 +41,11 @@
   margin-top: 10px;
 }
 
+.warningText {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
 .registerFormFooterBottomPart {
   display: flex;
   flex-direction: row;
@@ -54,6 +59,21 @@
 
   .logo {
     width: 100px;
+  }
+
+  .form {
+    margin: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  .logo {
+    width: 80px;
   }
 
   .form {

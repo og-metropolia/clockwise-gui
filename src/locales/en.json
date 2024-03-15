@@ -10,8 +10,8 @@
         "required": "Required",
         "invalidCredentials": "Invalid email or password"
       },
-      "placeholder": {
-        "email": "Email Address",
+      "label": {
+        "email": "Email",
         "password": "Password"
       },
       "button": {
@@ -37,8 +37,18 @@
       "error": {
         "invalidEmail": "Invalid email",
         "required": "Required",
+        "shortPassword": "Too short",
         "passwordsMustMatch": "Passwords must match",
-        "termsAndConditions": "You must accept the terms and conditions"
+        "termsAndConditions": "You must accept the terms and conditions",
+        "invalidCredentials": "Email and password do not match",
+        "notAllowedEmail": "Email is not allowed within the company"
+      },
+      "label": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
       },
       "placeholder": {
         "firstName": "First Name",
@@ -86,6 +96,7 @@
         "jobTitle": "Job Title"
       },
       "error": {
+        "languageRequired": "Language is required",
         "passwordRequired": "Password is required",
         "confirmPasswordRequired": "Confirm Password is required",
         "phoneNumberRequired": "Phone Number is required",
@@ -93,6 +104,17 @@
         "jobTitleRequired": "Job Title is required",
         "passwordsMustMatch": "Passwords must match",
         "invalidURL": "Invalid URL"
+      },
+      "label": {
+        "language": "Language",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "phoneNumber": "Phone Number",
+        "profilePicture": "Profile Picture URL",
+        "jobTitle": "Job Title"
+      },
+      "inviteButton": {
+        "invite": "Invite to Company"
       }
     },
     "alert": {
@@ -125,10 +147,43 @@
     }
   },
   "report": {
-    "title": "Report"
+    "title": "Report",
+    "totalHours": "Total: %s hours"
   },
   "dashboard": {
     "timeLog": "Time Log",
-    "yourActivity": "Your Activity"
+    "yourActivity": "Your Activity",
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "checkedAt": "At",
+    "checkedIn": "Checked In",
+    "checkedOut": "Checked Out"
+  },
+  "managerDashboard": {
+    "title": "Management",
+    "employeeListTitle": "Employee List",
+    "viewReport": "View Report"
+  },
+
+  "visit": {
+    "title": "Employee Overview"
+  },
+  "companySignUpPage": {
+    "createCompanyTitle": "Create Company",
+    "companyNamePlaceholder": "Company Name",
+    "businessIdPlaceholder": "Business ID",
+    "allowedEmailsPlaceholder": "example.com, example.org",
+    "createCompanyButton": "Create Company",
+    "addManagerTitle": "Add Manager",
+    "firstNamePlaceholder": "First Name",
+    "lastNamePlaceholder": "Last Name",
+    "managerEmailPlaceholder": "Manager's Email Address",
+    "passwordPlaceholder": "Password",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "addManagerButton": "Add Manager",
+    "emptyFieldsError": "You have empty required fields",
+    "invalidCompanyDetails": "Invalid company details.",
+    "invalidManagerDetails": "Invalid manager details.",
+    "managerEmailMustMatch": "Manager email must match allowed emails."
   }
 }
