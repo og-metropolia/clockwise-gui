@@ -164,6 +164,9 @@
     "employeeListTitle": "Työntekijälista",
     "viewReport": "Näytä Raportti"
   },
+  "managerSignup": {
+    "title": "Lisää Päällikkö"
+  },
 
   "visit": {
     "title": "Työntekijän Raportti"

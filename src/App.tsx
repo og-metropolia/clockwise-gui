@@ -165,7 +165,7 @@ function isManager() {
   return context?.user?.role === 'MANAGER';
 }
 
-function isAdmin() {
+export function isAdmin() {
   const context = {
     ...JSON.parse(localStorage.getItem('user') ?? '{}'),
   };

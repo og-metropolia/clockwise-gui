@@ -164,6 +164,9 @@
     "employeeListTitle": "Anställd Lista",
     "viewReport": "Visa Rapport"
   },
+  "managerSignup": {
+    "title": "Registrera Chef"
+  },
   "visit": {
     "title": "Översikt Över Anställda"
   },

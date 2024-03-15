@@ -14,6 +14,7 @@ import { updateUserMutation } from '@/graphql/queries';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { isAdmin } from '@/App';
 
 const VISUAL_PASSWORD = '********';
 
@@ -90,6 +91,12 @@ const SettingsPage: React.FC = () => {
           initialValues={initialValues}
           validationSchema={UpdateSchema}
           onSubmit={async (values, actions) => {
+            if (isAdmin()) {
+              actions.setSubmitting(false);
+              alert('ADMIN UPDATE NOT ALLOWED IN DEMO VERSION.');
+              return;
+            }
+
             const updatedUser = {
               id: user?.id,
               input: {
@@ -206,9 +213,15 @@ const SettingsPage: React.FC = () => {
               {errors.jobTitle && touched.jobTitle ? (
                 <div className={styles.error}>{errors.jobTitle}</div>
               ) : null}
-              <button type="submit" className={styles.basePrimaryButton}>
-                {t('settings.updateButton')}
-              </button>
+              {isAdmin() ? (
+                <button className={styles.basePrimaryButton} disabled={true}>
+                  ADMIN UPDATE NOT ALLOWED IN DEMO VERSION
+                </button>
+              ) : (
+                <button type="submit" className={styles.basePrimaryButton}>
+                  {t('settings.updateButton')}
+                </button>
+              )}
             </Form>
           )}
         </Formik>
