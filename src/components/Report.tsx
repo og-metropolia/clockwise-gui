@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './Report.module.css';
-import { formatHours, formatDateWithSuffix } from '@/functions/date';
+import { formatHours } from '@/functions/date';
 import dayjs, { Dayjs } from 'dayjs';
 import { Box, List, ListItem } from '@mui/material';
 import HoursIcon from '@/assets/hours.png';
