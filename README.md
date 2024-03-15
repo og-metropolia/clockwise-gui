@@ -1,8 +1,30 @@
 # Clockwise GUI
 
-Ryhmän jäsenet: Adrian Gashi, Yamir Haque, Leo Härkönen
-
-Clockwise on innovatiivinen mobiilisovellus, joka tuo työaikaseurannan nykyaikaan digitalisoimalla ja automatisoimalla perinteiset prosessit. Se minimoi inhimillisiä virheitä ja vapauttaa arvokasta aikaa, jonka yritykset voivat suunnata tuottavampaan työhön. Sovellus sisältää monipuoliset hallintatyökalut, jotka eivät ainoastaan tehosta työajan seurantaa vaan myös tarjoavat yksityiskohtaisen analyysin työajankäytöstä, auttaen näin yrityksiä optimoimaan resurssiensa käyttöä
+* [Kohderyhmä](#kohderyhmä)
+* [Toiminnallisuudet](#toiminnallisuudet)
+* [Sovelluksen Käyttö](#sovelluksen-käyttö)
+  * [Kokeile Sovellusta](#kokeile-sovellusta)
+  * [Kirjautumisnäkymä](#kirjautumisnäkymä)
+  * [Rekisteröintinäkymä](#rekisteröintinäkymä)
+  * [Salasanan Palautus](#salasanan-palautus)
+  * [Dashboard](#dashboard)
+  * [Raportit](#raportit)
+  * [Lomat ja Poissaolot](#lomat-ja-poissaolot)
+  * [Asetukset](#asetukset)
+  * [Manager - Hallintapaneeli](#manager---hallintapaneeli)
+  * [Manager - Tyntekijän vierailu](#manager---tyntekijän-vierailu)
+  * [Manager - Asetukset](#manager---asetukset)
+  * [Admin - Hallinnointipaneeli](#admin---hallinnointipaneeli)
+  * [Admin - Yrityksen luonti](#admin---yrityksen-luonti)
+  * [Admin - Managerin luonti](#admin---managerin-luonti)
+* [API](#api)
+* [Testausohjeet](#testausohjeet)
+  * [Admin](#admin)
+  * [Manager](#manager)
+  * [Työntekijä](#työntekijä)
+  * [Managerin seurantatoiminnot](#managerin-seurantatoiminnot)
+* [Paikallinen Kehitys](#paikallinen-kehitys)
+* [Anna Palautetta](#anna-palautetta)
 
 ## Kohderyhmä
 
@@ -12,63 +34,102 @@ Esimerkiksi logistiikka-alalla, missä ruokakuljetusyritykset kohtaavat haasteit
 
 ## Toiminnallisuudet
 
-  - Työajan Leimaus: Työntekijät voivat leimata työaikansa mobiilisti, simuloimaan perinteisen leimauskortin käyttöä.
-  - Poissaolojen Hallinta: Helppo tapa kirjata lomat, sairauspoissaolot ja muut poissaolot.
-  - Raportointi ja Analytiikka: Automatisoitu raportointi työtunneista ja poissaoloista tiimi- ja yritystasolla.
-  - Kutsujärjestelmä: Managerit voivat lähettää kutsuja uusille työntekijöille ja hallita tiimiään sovelluksessa.
-  - Monikielisyys: Sovellus tukee useita kieliä, mahdollistaen monikulttuurisen käytön.
-  - Käyttäjäprofiilien Hallinta: Mahdollisuus hallita henkilökohtaisia tietoja ja työhistoriaa.
-  - Intuitiivinen Käyttöliittymä: Sujuva käyttäjäkokemus vähemmän teknisesti orientoituneillekin käyttäjille.
-  - Reaaliaikainen Seuranta: Näe työntekijöiden status reaaliajassa, parantaen työn suunnittelua.
+- Työajan Leimaus: Työntekijät voivat leimata työaikansa mobiilisti, simuloimaan perinteisen leimauskortin käyttöä.
+- Poissaolojen Hallinta: Helppo tapa kirjata lomat, sairauspoissaolot ja muut poissaolot.
+- Raportointi ja Analytiikka: Automatisoitu raportointi työtunneista ja poissaoloista tiimi- ja yritystasolla.
+- Kutsujärjestelmä: Managerit voivat lähettää kutsuja uusille työntekijöille ja hallita tiimiään sovelluksessa.
+- Monikielisyys: Sovellus tukee useita kieliä, mahdollistaen monikulttuurisen käytön.
+- Käyttäjäprofiilien Hallinta: Mahdollisuus hallita henkilökohtaisia tietoja ja työhistoriaa.
+- Intuitiivinen Käyttöliittymä: Sujuva käyttäjäkokemus vähemmän teknisesti orientoituneillekin käyttäjille.
+- Reaaliaikainen Seuranta: Näe työntekijöiden status reaaliajassa, parantaen työn suunnittelua.
 
 ## Sovelluksen Käyttö
 
 ### Kokeile Sovellusta
 
-Voit kokeilla Clockwise-sovellusta tästä linkistä: **[Käyttöliittymä](https://clockwisee.me/)**
-
-## Käyttöliittymän Kuvakaappaukset
+<https://clockwisee.me>
 
 ### Kirjautumisnäkymä
+
 ![Login Screen](./images/login.png)
-*Kirjautumisnäkymä, jossa käyttäjät voivat kirjautua sisään.*
+
+_Kirjautumisnäkymä, jossa käyttäjät voivat kirjautua sisään._
 
 ### Rekisteröintinäkymä
+
 ![Signup Screen](./images/signup.png)
-*Rekisteröintinäkymä uusille käyttäjille.*
+
+_Rekisteröintinäkymä uusille käyttäjille._
 
 ### Salasanan Palautus
+
 ![Reset Password](./images/reset-password.png)
-*Salasanan palautusnäkymä unohtuneita salasanoja varten.*
+
+_Salasanan palautusnäkymä unohtuneita salasanoja varten._
 
 ### Dashboard
+
 ![Dashboard](./images/dashboard.png)
-*Käyttäjän dashboard, josta voi leimata itsensä sisään ja ulos, sekä näkee päivittäiset aktiviteetit ja työajan kirjaukset.*
+
+_Käyttäjän dashboard, josta voi leimata itsensä sisään ja ulos, sekä näkee päivittäiset aktiviteetit ja työajan kirjaukset._
 
 ### Raportit
+
 ![Report](./images/report.png)
-*Raporttinäkymä, joka näyttää työtunnit ja mahdolliset ylityöt.*
+
+_Raporttinäkymä, joka näyttää työtunnit ja mahdolliset ylityöt._
 
 ### Lomat ja Poissaolot
+
 ![Vacation](./images/vacation.png)
-*Lomien ja poissaolojen merkintäsivu.*
+
+_Lomien ja poissaolojen merkintäsivu._
 
 ### Asetukset
+
 ![Settings](./images/settings.png)
-*Asetussivu, jossa käyttäjät voivat muokata omia tietojaan.*
 
-## Paikallinen Kehitys
+_Asetussivu, jossa käyttäjät voivat muokata omia tietojaan._
 
-Jos haluat kehittää sovellusta paikallisesti, noudata seuraavia ohjeita:
+### Manager - Hallintapaneeli
 
-1. Kloonaa repositorio paikalliselle koneellesi.
-2. Asenna pnpm käymällä osoitteessa [pnpm installation](https://pnpm.io/installation).
-3. Suorita `pnpm install` asentaaksesi riippuvuudet.
-4. Käynnistä paikallinen palvelin suorittamalla `pnpm run dev`.
+![Manager Dashboard](./images/managerDashboard.png)
+
+_Manager-roolin sivu, josta hän voi vallita työntekijöitään_
+
+### Manager - Tyntekijän vierailu
+
+![Manager Visit](./images/managerVisit.png)
+
+_Manager-roolin sivu, josta hän näkee työntekijän roolintyötunnit_
+
+### Manager - Asetukset
+
+![Manager Settings](./images/managerSettings.png)
+
+_Manager-roolin sivu, josta hän voi muokata asetuksiaan_
+
+### Admin - Hallinnointipaneeli
+
+![Admin Dashboard](./images/adminDashboard.png)
+
+_Admin-roolin sivu, josta hän voi tarkastella kaikkia yrityksiä ja niiden henkilöstöä_
+
+### Admin - Yrityksen luonti
+
+![Admin Create Company](./images/createCompany.png)
+
+_Admin-roolin sivu, josta hän voi luoda uusia yrityksiä_
+
+### Admin - Managerin luonti
+
+![Admin Add Manager](./images/addManager.png)
+
+_Admin-roolin sivu, josta hän voi lisätä managereita_
 
 ## API
 
-Clockwise-sovelluksen GraphQL API löytyy osoitteesta [og-metropolia/clockwise-api](https://github.com/og-metropolia/clockwise-api).
+Clockwise-sovelluksen GraphQL API:n koodikanta löytyy osoitteesta [og-metropolia/clockwise-api](https://github.com/og-metropolia/clockwise-api).
 
 ## Testausohjeet
 
@@ -116,9 +177,17 @@ Tässä ovat yksityiskohtaiset ja selkeät ohjeet kolmelle roolille: Admin, Mana
 
 Testatessa keskittykää erityisesti käyttöliittymän sujuvuuteen ja toiminnallisuuteen mobiililaitteilla, dokumentoikaa kaikki havainnot, ja antakaa yksityiskohtaista palautetta kehittäjille.
 
+## Paikallinen Kehitys
+
+Jos haluat kehittää sovellusta paikallisesti, noudata seuraavia ohjeita:
+
+1. Kloonaa repositorio paikalliselle koneellesi.
+2. Asenna pnpm käymällä osoitteessa [pnpm installation](https://pnpm.io/installation).
+3. Suorita `pnpm install` asentaaksesi riippuvuudet.
+4. Käynnistä paikallinen palvelin suorittamalla `pnpm run dev`.
+
 ## Anna Palautetta
 
 Kutakin tiimiä pyydetään antamaan yksi yhteinen palaute. Muistathan, että formin luojalle näkyy, kuka on vastannut. Käytä alla olevaa linkkiä palautteen antamiseen. Kiitos panoksestanne!
 
 [Palautelomake](https://forms.office.com/Pages/DesignPageV2.aspx?prevorigin=shell&origin=NeoPortalPage&subpage=design&id=12EaTaW2ZE-Hh_B0-HAT7vL9n9KAjfBFlFvZ30PlTgVUQ1VBVjBSUDUwVkU3S00xUE8yQlRDN1NKUy4u&analysis=false)
-
